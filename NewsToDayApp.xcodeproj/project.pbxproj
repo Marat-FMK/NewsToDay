@@ -44,6 +44,8 @@
 		E147883D2CC676FE00752213 /* KeysTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147883C2CC676FE00752213 /* KeysTracker.swift */; };
 		E147883F2CC677E700752213 /* BackBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147883E2CC677E700752213 /* BackBarButton.swift */; };
 		E14788432CC67F1800752213 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788422CC67F1800752213 /* Categories.swift */; };
+		E14788472CC6831800752213 /* Adamina.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E14788442CC6831800752213 /* Adamina.ttf */; };
+		E14788482CC6831800752213 /* InterVariable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E14788452CC6831800752213 /* InterVariable.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +88,8 @@
 		E147883C2CC676FE00752213 /* KeysTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysTracker.swift; sourceTree = "<group>"; };
 		E147883E2CC677E700752213 /* BackBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackBarButton.swift; sourceTree = "<group>"; };
 		E14788422CC67F1800752213 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
+		E14788442CC6831800752213 /* Adamina.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Adamina.ttf; sourceTree = "<group>"; };
+		E14788452CC6831800752213 /* InterVariable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = InterVariable.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +148,8 @@
 		3730B1862CC673BE006AA874 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				E14788462CC6831800752213 /* Fonts */,
+				3730B1892CC673F2006AA874 /* Components */,
 				3730B1872CC673E6006AA874 /* Resources.swift */,
 				E14788322CC674CF00752213 /* DS.swift */,
 			);
@@ -188,14 +194,11 @@
 		374094912CC5306600723D32 /* NewsToDayApp */ = {
 			isa = PBXGroup;
 			children = (
-				3730B1892CC673F2006AA874 /* Components */,
-				3730B1862CC673BE006AA874 /* DesignSystem */,
-				3730B1832CC6738D006AA874 /* Extensions */,
-				3730B17F2CC67364006AA874 /* Managers */,
-				374094AF2CC5455E00723D32 /* Screens */,
-				374094AE2CC5450D00723D32 /* Resources */,
 				374094922CC5306600723D32 /* NewsToDayAppApp.swift */,
 				374094942CC5306600723D32 /* ContentView.swift */,
+				374094AF2CC5455E00723D32 /* Screens */,
+				3730B17F2CC67364006AA874 /* Managers */,
+				374094AE2CC5450D00723D32 /* Resources */,
 				374094982CC5306B00723D32 /* Preview Content */,
 			);
 			path = NewsToDayApp;
@@ -285,6 +288,8 @@
 		374094AE2CC5450D00723D32 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3730B1832CC6738D006AA874 /* Extensions */,
+				3730B1862CC673BE006AA874 /* DesignSystem */,
 				374094962CC5306B00723D32 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -302,6 +307,15 @@
 				374094AC2CC5442600723D32 /* Authentication */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		E14788462CC6831800752213 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E14788442CC6831800752213 /* Adamina.ttf */,
+				E14788452CC6831800752213 /* InterVariable.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,6 +376,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E14788472CC6831800752213 /* Adamina.ttf in Resources */,
+				E14788482CC6831800752213 /* InterVariable.ttf in Resources */,
 				3740949A2CC5306B00723D32 /* Preview Assets.xcassets in Resources */,
 				374094972CC5306B00723D32 /* Assets.xcassets in Resources */,
 			);
