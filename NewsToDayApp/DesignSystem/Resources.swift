@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+enum Resources {
+    enum Text {
+        
+    }
+    
+    enum Image {
+        static let arrowLeft = "arrow.left"
+    }
+}
