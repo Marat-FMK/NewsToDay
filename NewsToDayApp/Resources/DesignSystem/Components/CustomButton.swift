@@ -50,12 +50,12 @@ struct CustomButton: View {
             .padding()
             // MARK: - Button Text and Background Color Handling
             .foregroundStyle(isSelected
-                             ? DS.Colors.whiteAccent
-                             : DS.Colors.buttonText
+                             ? DS.Colors.purpleLighter
+                             : DS.Colors.grayDark
             )
             .background(isSelected
-                        ? DS.Colors.indigoAccent
-                        : DS.Colors.buttonBackground
+                        ? DS.Colors.purplePrimary
+                        : DS.Colors.grayLighter
                         )
             .clipShape(RoundedRectangle(cornerRadius: Drawing.cornerRadius))
         }
