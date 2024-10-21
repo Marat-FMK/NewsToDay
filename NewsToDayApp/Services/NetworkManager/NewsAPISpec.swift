@@ -9,7 +9,6 @@ import Foundation
 
 // MARK: - NewsAPISpec Enum
 enum NewsAPISpec: APIClient.APISpec {
-    
     // API Cases for different news requests
     case getNews
     case getNewsBy(category: String)

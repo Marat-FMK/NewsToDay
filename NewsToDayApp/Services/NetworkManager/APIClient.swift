@@ -8,14 +8,12 @@
 import Foundation
 
 // MARK: - APIClient
-// A simple API client to handle network requests with support for middlewares
 struct APIClient {
     private var baseUrl: URL
     private var URLSession: URLSession
     private(set) var middlewares: [any APIClient.Middleware]
     
     // MARK: - Initializer
-    // Initializes the API client with a base URL, optional middlewares, and a URLSession (default: .shared)
     init(
         baseUrl: URL,
         middlewares: [any APIClient.Middleware] = [],
@@ -27,14 +25,13 @@ struct APIClient {
     }
     
     // MARK: - Sending API Request
-    // Sends an API request based on the provided APISpec, applies middleware, and decodes the response
     func sendRequest(_ apiSpec: APISpec) async throws -> DecodableType {
-        // Construct the full URL from base URL and endpoint
+        // Construct the full URL
         guard let url = URL(string: baseUrl.absoluteString + apiSpec.endpoint) else {
             throw NetworkError.invalidURL
         }
         
-        // Prepare the URL request with method, headers, and body
+        // Prepare the request
         var request = URLRequest(
             url: url,
             cachePolicy: .useProtocolCachePolicy,
@@ -44,60 +41,59 @@ struct APIClient {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = apiSpec.body
         
-        // Apply middlewares to modify the request
-        var updatedRequest = request
+        // Apply middlewares
         for middleware in middlewares {
-            updatedRequest = try await middleware.intercept(updatedRequest)
+            request = try await middleware.intercept(request)
         }
         
-        // Send the request and handle the response
-        var responseData: Data? = nil
+        // Send the request and unwrap the response
         do {
-            let (data, response) = try await URLSession.data(for: updatedRequest)
-            try handleResponse(data, response)
-            responseData = data
+            let (data, response) = try await URLSession.data(for: request)
+            
+            // Unwrap the response using unwrapResponse method
+            let unwrappedResult = unwrapResponse((data, response))
+            switch unwrappedResult {
+            case .success(let responseData):
+                let decoder = JSONDecoder()
+                let decodedData = try decoder.decode(apiSpec.returnType, from: responseData)
+                return decodedData
+            case .failure(let error):
+                throw error
+            }
+            
         } catch {
             throw error
-        }
-        
-        // Decode the response data into the expected return type
-        let decoder = JSONDecoder()
-        do {
-            let decodedData = try decoder.decode(apiSpec.returnType, from: responseData!)
-            return decodedData
-        } catch let error as DecodingError {
-            throw error
-        } catch {
-            throw NetworkError.dataConversionFailure
         }
     }
     
     // MARK: - Response Validation
-    // Checks if the response is valid and the status code is within the 200-299 range
-    func handleResponse(_ data: Data, _ response: URLResponse) throws {
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw NetworkError.invalidResponse
+    // Unwraps and validates the response, returning either data or a failure error
+    func unwrapResponse(_ dataResponse: (Data, URLResponse)) -> Result<Data, Error> {
+        guard let httpResponse = dataResponse.1 as? HTTPURLResponse else {
+            return .failure(NetworkError.invalidResponse)
         }
         
-        guard (200...299).contains(httpResponse.statusCode) else {
-            throw NetworkError.requestFailed(statusCode: httpResponse.statusCode)
-        }
-    }
-    
-    // MARK: - Error Handling Wrapper
-    // A helper method to wrap async calls and propagate errors
-    func wrapCatchingErrors<R>(work: () async throws -> R) async throws -> R {
-        do {
-            return try await work()
-        } catch {
-            throw error
+        switch httpResponse.statusCode {
+        case 200:
+            return .success(dataResponse.0)
+        case 400:
+            return .failure(NetworkError.serverError(statusCode: 400, description: "Bad Request"))
+        case 401:
+            return .failure(NetworkError.serverError(statusCode: 401, description: "Unauthorized"))
+        case 403:
+            return .failure(NetworkError.serverError(statusCode: 403, description: "Forbidden"))
+        case 404:
+            return .failure(NetworkError.serverError(statusCode: 404, description: "Not Found"))
+        case 500:
+            return .failure(NetworkError.serverError(statusCode: 500, description: "Internal Server Error"))
+        default:
+            return .failure(NetworkError.invalidResponse)
         }
     }
 }
 
 // MARK: - APISpec and HttpMethod Definitions
 extension APIClient {
-    // Protocol that defines the specifications for an API request
     protocol APISpec {
         var endpoint: String { get }
         var method: HttpMethod { get }
@@ -105,7 +101,6 @@ extension APIClient {
         var body: Data? { get }
     }
     
-    // Enum for supported HTTP methods
     enum HttpMethod: String, CaseIterable {
         case get = "GET"
         case patch = "PATCH"
@@ -116,22 +111,18 @@ extension APIClient {
 
 // MARK: - Middleware Protocol
 extension APIClient {
-    // Middleware protocol to intercept and modify requests
     protocol Middleware {
         func intercept(_ request: URLRequest) async throws -> URLRequest
     }
 }
 
 // MARK: - DecodableType Protocol
-// Custom protocol to define types that can be decoded
 protocol DecodableType: Decodable {}
 
-// MARK: - Array Conformance to DecodableType
-// Allows arrays of DecodableType to also conform to DecodableType
+// Conform Array to DecodableType where Element is DecodableType
 extension Array: DecodableType where Element: DecodableType {}
 
-// MARK: - URLRequest Extension
-// Adds a method to describe the URLRequest in a more readable format for debugging purposes
+// MARK: - URLRequest Extension for Debugging
 extension URLRequest {
     public var customDescription: String {
         var description = ""
