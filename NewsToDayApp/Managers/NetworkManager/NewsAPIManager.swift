@@ -8,6 +8,24 @@
 import Foundation
 
 final class NewsAPIManager: NetworkManager {
+
+    
+    // MARK: - Initializer
+    init() {
+        // Define base URL for the news API
+        let baseURL = URL(string: "https://newsapi.org/")!
+        
+        // Create middlewares
+        let authorizationMiddleware = AuthorizationMiddleware(token: "2b9cf27ea13e45eb89926c533fb14c6b")
+        
+        // Initialize API client with base URL and middleware
+        let apiClient = APIClient(
+            baseUrl: baseURL,
+            middlewares: [authorizationMiddleware]
+        )
+        
+        super.init(apiClient: apiClient)
+    }
     
     func getNews() async throws -> [ArticleDTO] {
         let apiSpec: NewsAPISpec = .getNews
