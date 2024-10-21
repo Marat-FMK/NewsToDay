@@ -36,6 +36,16 @@
 		E14788292CC64E7500752213 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788282CC64E7500752213 /* NetworkError.swift */; };
 		E147882B2CC6500400752213 /* NewsAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147882A2CC6500400752213 /* NewsAPIManager.swift */; };
 		E147882D2CC65B1200752213 /* AuthorizationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147882C2CC65B1200752213 /* AuthorizationMiddleware.swift */; };
+		E14788312CC6747300752213 /* NewsToDayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788302CC6747300752213 /* NewsToDayButton.swift */; };
+		E14788332CC674CF00752213 /* DS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788322CC674CF00752213 /* DS.swift */; };
+		E14788352CC6752700752213 /* Color + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788342CC6752700752213 /* Color + Ext.swift */; };
+		E14788372CC6766500752213 /* CacheImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788362CC6766400752213 /* CacheImplementation.swift */; };
+		E14788392CC6769D00752213 /* CacheEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788382CC6769D00752213 /* CacheEntry.swift */; };
+		E147883B2CC676DA00752213 /* CacheProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147883A2CC676DA00752213 /* CacheProtocol.swift */; };
+		E147883D2CC676FE00752213 /* KeysTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147883C2CC676FE00752213 /* KeysTracker.swift */; };
+		E147883F2CC677E700752213 /* BackBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147883E2CC677E700752213 /* BackBarButton.swift */; };
+		E14788412CC6780C00752213 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788402CC6780C00752213 /* Resources.swift */; };
+		E14788432CC67F1800752213 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788422CC67F1800752213 /* Categories.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +79,16 @@
 		E14788282CC64E7500752213 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		E147882A2CC6500400752213 /* NewsAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAPIManager.swift; sourceTree = "<group>"; };
 		E147882C2CC65B1200752213 /* AuthorizationMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationMiddleware.swift; sourceTree = "<group>"; };
+		E14788302CC6747300752213 /* NewsToDayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsToDayButton.swift; sourceTree = "<group>"; };
+		E14788322CC674CF00752213 /* DS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DS.swift; sourceTree = "<group>"; };
+		E14788342CC6752700752213 /* Color + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + Ext.swift"; sourceTree = "<group>"; };
+		E14788362CC6766400752213 /* CacheImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImplementation.swift; sourceTree = "<group>"; };
+		E14788382CC6769D00752213 /* CacheEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheEntry.swift; sourceTree = "<group>"; };
+		E147883A2CC676DA00752213 /* CacheProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheProtocol.swift; sourceTree = "<group>"; };
+		E147883C2CC676FE00752213 /* KeysTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysTracker.swift; sourceTree = "<group>"; };
+		E147883E2CC677E700752213 /* BackBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackBarButton.swift; sourceTree = "<group>"; };
+		E14788402CC6780C00752213 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		E14788422CC67F1800752213 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +114,10 @@
 		3730B1642CC61E3E006AA874 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E147883C2CC676FE00752213 /* KeysTracker.swift */,
+				E147883A2CC676DA00752213 /* CacheProtocol.swift */,
+				E14788382CC6769D00752213 /* CacheEntry.swift */,
+				E14788362CC6766400752213 /* CacheImplementation.swift */,
 				3730B1652CC61E69006AA874 /* NetworkManager */,
 			);
 			path = Services;
@@ -216,6 +240,7 @@
 		374094AD2CC5443E00723D32 /* CategoriesScreen */ = {
 			isa = PBXGroup;
 			children = (
+				E14788422CC67F1800752213 /* Categories.swift */,
 				3730B1572CC56B4A006AA874 /* CategoriesView.swift */,
 				3730B1592CC56B68006AA874 /* CategoriesViewModel.swift */,
 			);
@@ -225,6 +250,11 @@
 		374094AE2CC5450D00723D32 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E14788402CC6780C00752213 /* Resources.swift */,
+				E147883E2CC677E700752213 /* BackBarButton.swift */,
+				E14788342CC6752700752213 /* Color + Ext.swift */,
+				E14788322CC674CF00752213 /* DS.swift */,
+				E14788302CC6747300752213 /* NewsToDayButton.swift */,
 				3730B15F2CC60CDB006AA874 /* Fonts */,
 				374094962CC5306B00723D32 /* Assets.xcassets */,
 			);
@@ -274,7 +304,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					3740948E2CC5306500723D32 = {
 						CreatedOnToolsVersion = 14.2;
@@ -318,14 +348,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E14788312CC6747300752213 /* NewsToDayButton.swift in Sources */,
 				3730B1672CC61E8C006AA874 /* NetworkManager.swift in Sources */,
 				3730B14A2CC569C5006AA874 /* ProfileView.swift in Sources */,
 				E14788292CC64E7500752213 /* NetworkError.swift in Sources */,
 				3730B14C2CC569F9006AA874 /* DetailView.swift in Sources */,
+				E14788372CC6766500752213 /* CacheImplementation.swift in Sources */,
 				E147882D2CC65B1200752213 /* AuthorizationMiddleware.swift in Sources */,
 				3730B1542CC56ACE006AA874 /* FavoritesView.swift in Sources */,
 				E14788232CC6305B00752213 /* NewsDTO.swift in Sources */,
+				E14788412CC6780C00752213 /* Resources.swift in Sources */,
 				E14788272CC64E6300752213 /* APIClient.swift in Sources */,
+				E14788352CC6752700752213 /* Color + Ext.swift in Sources */,
 				3730B15C2CC56BC2006AA874 /* RegistrationScreen.swift in Sources */,
 				3730B1442CC5694B006AA874 /* MainViewModel.swift in Sources */,
 				E147882B2CC6500400752213 /* NewsAPIManager.swift in Sources */,
@@ -337,9 +371,15 @@
 				3730B1582CC56B4A006AA874 /* CategoriesView.swift in Sources */,
 				3730B1562CC56AE9006AA874 /* FavoritesViewModel.swift in Sources */,
 				374094952CC5306600723D32 /* ContentView.swift in Sources */,
+				E147883D2CC676FE00752213 /* KeysTracker.swift in Sources */,
+				E14788392CC6769D00752213 /* CacheEntry.swift in Sources */,
+				E14788332CC674CF00752213 /* DS.swift in Sources */,
+				E147883F2CC677E700752213 /* BackBarButton.swift in Sources */,
 				374094932CC5306600723D32 /* NewsToDayAppApp.swift in Sources */,
 				E14788252CC644BD00752213 /* NewsAPISpec.swift in Sources */,
+				E147883B2CC676DA00752213 /* CacheProtocol.swift in Sources */,
 				3730B1422CC56913006AA874 /* OnboardingViewModel.swift in Sources */,
+				E14788432CC67F1800752213 /* Categories.swift in Sources */,
 				3730B1482CC5699B006AA874 /* ProfileViewModel.swift in Sources */,
 				3730B15E2CC56BE5006AA874 /* UserModel.swift in Sources */,
 				3730B1502CC56A62006AA874 /* CustomTabBarView.swift in Sources */,
@@ -353,6 +393,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -413,6 +454,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
