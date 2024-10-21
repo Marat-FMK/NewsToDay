@@ -37,11 +37,11 @@ enum NewsAPISpec: ApiClient.APISpec {
     var returnType: DecodableType.Type {
         switch self {
         case .getNews:
-            return [Article].self
+            return [ArticleDTO].self
         case .getNewsBy(category: let category):
-            return [Article].self
+            return [ArticleDTO].self
         case .getNewsWith(searchText: let searchText):
-            return Article.self
+            return ArticleDTO.self
         }
     }
     
