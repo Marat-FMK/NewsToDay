@@ -8,24 +8,36 @@
 import Foundation
 
 // MARK: - AuthorizationMiddleware
-// Middleware to add Authorization header to API requests
 final class AuthorizationMiddleware: APIClient.Middleware {
     
-    // Token used for authorization (e.g., JWT token)
-    var token: String?
+    // API Key for authorization (e.g., API key for News API)
+    var apiKey: String
     
     // MARK: - Initializer
-    // Optionally initializes with a token, default is nil
-    init(token: String? = nil) {
-        self.token = token
+    init(apiKey: String) {
+        self.apiKey = apiKey
     }
     
     // MARK: - Intercept Request
-    // Intercepts the request to add Authorization header before sending it
-    func intercept(_ request: URLRequest) async throws -> (URLRequest) {
+    func intercept(_ request: URLRequest) async throws -> URLRequest {
+        guard let originalUrl = request.url else {
+            throw NetworkError.invalidURL
+        }
+        
+        // Parse the URL components
+        guard var urlComponents = URLComponents(url: originalUrl, resolvingAgainstBaseURL: false) else {
+            throw NetworkError.invalidURL
+        }
+        
+        // Add the apiKey as a query item
+        var queryItems = urlComponents.queryItems ?? []
+        queryItems.append(URLQueryItem(name: "apiKey", value: apiKey))
+        urlComponents.queryItems = queryItems
+        
+        // Create a copy of the original request with the updated URL
         var requestCopy = request
-        // Adds the "Bearer" token to the request header
-        requestCopy.addValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
+        requestCopy.url = urlComponents.url
+        
         return requestCopy
     }
 }

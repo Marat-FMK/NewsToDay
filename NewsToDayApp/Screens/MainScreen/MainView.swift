@@ -27,6 +27,8 @@ struct News: Identifiable { // in Model File
 }
 
 struct CategoryNewsView: View {
+    
+    
     let news: News
     
     var body: some View {
@@ -57,7 +59,7 @@ struct CategoryNewsView: View {
                     .frame(width: 208, height: 48, alignment: .leading)
                     .lineLimit(2)
                     .foregroundStyle(Color.white)
-                    
+                
             }
             .padding(.top,100)
         }
@@ -89,6 +91,7 @@ struct RecommendedNewsView: View {
 }
 
 struct MainView: View {
+    @StateObject var viewModel: MainViewModel
     
     @State private var searchText = ""
     @State private var selectedCategory = "Random"
@@ -112,92 +115,95 @@ struct MainView: View {
     
     var body: some View {
         
-            NavigationStack {
-                ScrollView(showsIndicators: false) {
-                    
-                    VStack {
-                        VStack(alignment: .leading) {
-                            Text("Discover things of this world") // add in NavStack
-                                .frame(width:216, height:  24)
-                            
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 12)
-                                    .foregroundStyle(Color.gray)
-                                TextField(" Search ", text: $searchText)
-                                    .textFieldStyle(.roundedBorder)
-                                    .frame(width: 336, height: 56)
+        NavigationStack {
+            ScrollView(showsIndicators: false) {
+                
+                VStack {
+                    VStack(alignment: .leading) {
+                        Text("Discover things of this world") // add in NavStack
+                            .frame(width:216, height:  24)
+                        
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
+                                .foregroundStyle(Color.gray)
+                            TextField(" Search ", text: $searchText)
+                                .textFieldStyle(.roundedBorder)
+                                .frame(width: 336, height: 56)
+                        }
+                        .padding(.bottom,20)
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(categories, id: \.self) { categoryName in
+                                    Button {
+                                        selectedCategory = categoryName
+                                    }
+                                    label: {
+                                        Text(categoryName)
+                                            .font(.system(size: 12))
+                                            .padding(.horizontal,16)
+                                            .padding(.vertical,8)
+                                            .foregroundStyle(checkSelectedCategory(categoryName) ? textSelect : textNonSelect)
+                                            .background(checkSelectedCategory(categoryName) ? .purple : .gray) //?
+                                            .clipShape(.capsule)
+                                            .padding(.horizontal,5)
+                                    }
+                                }
                             }
                             .padding(.bottom,20)
-                            
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack {
-                                    ForEach(categories, id: \.self) { categoryName in
-                                        Button {
-                                            selectedCategory = categoryName
-                                        }
-                                        label: {
-                                            Text(categoryName)
-                                                .font(.system(size: 12))
-                                                .padding(.horizontal,16)
-                                                .padding(.vertical,8)
-                                                .foregroundStyle(checkSelectedCategory(categoryName) ? textSelect : textNonSelect)
-                                                .background(checkSelectedCategory(categoryName) ? .purple : .gray) //?
-                                                .clipShape(.capsule)
-                                                .padding(.horizontal,5)
-                                        }
-                                    }
-                                }
-                                .padding(.bottom,20)
-                            }
-                            
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack {
-                                    ForEach(randomNews) { news in
-                                        NavigationLink {
-                                            DetailView(news: news)
-                                        } label: {
-                                            CategoryNewsView(news: news)
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            .padding(.bottom,50)
-                            
+                        }
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
-                                Text("Recommended for you")
-                                    .font(.system(size: 24))
-                                    .frame(width: 240, height: 24)
-                                    .foregroundStyle(.black) // ?
-                                
-                                Spacer()
-                                
-                                Button {
-                                    //seeAll func button
-                                }label: {
-                                    Text("See All")
-                                        .font(.system(size: 14))
-                                        .foregroundStyle(Color.gray) // ?
-                                }
-                            }
-                            .padding(.bottom,30)
-                            
-                            
-                            ForEach(bookmarks) { news in
-                                NavigationLink {
-                                    DetailView(news: news)
-                                } label: {
-                                    RecommendedNewsView(news: news)
-                                        
+                                ForEach(randomNews) { news in
+                                    NavigationLink {
+                                        DetailView(news: news)
+                                    } label: {
+                                        CategoryNewsView(news: news)
+                                    }
                                 }
                             }
                         }
-                        .padding()
+                        
+                        .padding(.bottom,50)
+                        
+                        HStack {
+                            Text("Recommended for you")
+                                .font(.system(size: 24))
+                                .frame(width: 240, height: 24)
+                                .foregroundStyle(.black) // ?
+                            
+                            Spacer()
+                            
+                            Button {
+                                //seeAll func button
+                            }label: {
+                                Text("See All")
+                                    .font(.system(size: 14))
+                                    .foregroundStyle(Color.gray) // ?
+                            }
+                        }
+                        .padding(.bottom,30)
+                        
+                        
+                        ForEach(bookmarks) { news in
+                            NavigationLink {
+                                DetailView(news: news)
+                            } label: {
+                                RecommendedNewsView(news: news)
+                                
+                            }
+                        }
                     }
+                    .padding()
                 }
-                .navigationTitle("Browse")
-                //            .searchable(text: $searchText, prompt: "Search")
             }
+            .task {
+                await viewModel.fetchNews()
+            }
+            .navigationTitle("Browse")
+            //            .searchable(text: $searchText, prompt: "Search")
+        }
     }
     
     private func checkSelectedCategory(_ categoryName: String)-> Bool {
@@ -208,6 +214,7 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(viewModel: MainViewModel(newsAPIManager: NewsAPIManager()))
+        
     }
 }

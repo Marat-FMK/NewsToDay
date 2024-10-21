@@ -9,17 +9,15 @@ import Foundation
 
 // MARK: - APIClient
 struct APIClient {
-    private var baseUrl: URL
+
     private var URLSession: URLSession
     private(set) var middlewares: [any APIClient.Middleware]
     
     // MARK: - Initializer
     init(
-        baseUrl: URL,
         middlewares: [any APIClient.Middleware] = [],
         URLSession: URLSession = .shared
     ) {
-        self.baseUrl = baseUrl
         self.middlewares = middlewares
         self.URLSession = URLSession
     }
@@ -27,7 +25,7 @@ struct APIClient {
     // MARK: - Sending API Request
     func sendRequest(_ apiSpec: APISpec) async throws -> DecodableType {
         // Construct the full URL
-        guard let url = URL(string: baseUrl.absoluteString + apiSpec.endpoint) else {
+        guard let url = URL(string: apiSpec.endpoint) else {
             throw NetworkError.invalidURL
         }
         
@@ -40,28 +38,33 @@ struct APIClient {
         request.httpMethod = apiSpec.method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = apiSpec.body
-        
+
         // Apply middlewares
         for middleware in middlewares {
             request = try await middleware.intercept(request)
         }
-        
+
         // Send the request and unwrap the response
         do {
             let (data, response) = try await URLSession.data(for: request)
-            
+//            if let jsonString = String(data: data, encoding: .utf8) {
+//                print("Полученные данные: \(jsonString)")
+//            }
             // Unwrap the response using unwrapResponse method
             let unwrappedResult = unwrapResponse((data, response))
             switch unwrappedResult {
             case .success(let responseData):
                 let decoder = JSONDecoder()
                 let decodedData = try decoder.decode(apiSpec.returnType, from: responseData)
+                print("data: \(decodedData)")
                 return decodedData
             case .failure(let error):
+                print("err: \(error)")
                 throw error
             }
             
         } catch {
+            print("err: \(error)")
             throw error
         }
     }

@@ -9,10 +9,16 @@ import Foundation
 
 // MARK: - NewsApiResponseDTO
 // Represents the main response structure for the News API
-struct NewsApiResponseDTO: Sendable, Codable, DecodableType {
+struct NewsApiResponseDTO: Sendable, Decodable, DecodableType {
     let status: String        // Status of the API response (e.g., "ok")
     let totalResults: Int     // Total number of articles returned
     let articles: [ArticleDTO] // Array of articles in the response
+    
+    enum CodingKeys: String, CodingKey {
+        case status = "status"
+        case totalResults = "totalResults"
+        case articles = "articles"
+    }
     
     // MARK: - Custom Decoder for NewsApiResponseDTO
     init(from decoder: any Decoder) throws {
@@ -47,8 +53,19 @@ struct ArticleDTO: Sendable, Codable, DecodableType {
     let description: String      // Short description of the article
     let url: String              // URL to the full article
     let urlToImage: String?      // URL to the article's image (optional)
-    let publishedAt: Date        // Publication date
+    let publishedAt: String        // Publication date
     let content: String?         // Full content of the article (optional)
+    
+    enum CodingKeys: String, CodingKey {
+        case source = "source"
+        case author = "author"
+        case title = "title"
+        case description = "description"
+        case url = "url"
+        case urlToImage = "urlToImage"
+        case publishedAt = "publishedAt"
+        case content = "content"
+    }
     
     // MARK: - Custom Decoder for ArticleDTO
     init(from decoder: any Decoder) throws {
@@ -64,12 +81,12 @@ struct ArticleDTO: Sendable, Codable, DecodableType {
         self.description = try container.decode(String.self, forKey: .description)
         self.url = try container.decode(String.self, forKey: .url)
         self.urlToImage = try container.decodeIfPresent(String.self, forKey: .urlToImage)
-        self.publishedAt = try container.decode(Date.self, forKey: .publishedAt)
+        self.publishedAt = try container.decode(String.self, forKey: .publishedAt)
         self.content = try container.decodeIfPresent(String.self, forKey: .content)
     }
     
     // MARK: - Initializer
-    init(source: Source, author: String?, title: String, description: String, url: String, urlToImage: String?, publishedAt: Date, content: String?) {
+    init(source: Source, author: String?, title: String, description: String, url: String, urlToImage: String?, publishedAt: String, content: String?) {
         self.source = source
         self.author = author
         self.title = title

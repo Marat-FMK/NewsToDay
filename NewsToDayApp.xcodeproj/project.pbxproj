@@ -23,7 +23,6 @@
 		3730B15A2CC56B68006AA874 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1592CC56B68006AA874 /* CategoriesViewModel.swift */; };
 		3730B15C2CC56BC2006AA874 /* RegistrationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B15B2CC56BC2006AA874 /* RegistrationScreen.swift */; };
 		3730B15E2CC56BE5006AA874 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B15D2CC56BE5006AA874 /* UserModel.swift */; };
-		3730B1672CC61E8C006AA874 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1662CC61E8C006AA874 /* NetworkManager.swift */; };
 		3730B1882CC673E6006AA874 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1872CC673E6006AA874 /* Resources.swift */; };
 		3730B18E2CC67457006AA874 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B18D2CC67457006AA874 /* CustomButton.swift */; };
 		374094932CC5306600723D32 /* NewsToDayAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374094922CC5306600723D32 /* NewsToDayAppApp.swift */; };
@@ -35,7 +34,6 @@
 		E14788272CC64E6300752213 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788262CC64E6300752213 /* APIClient.swift */; };
 		E14788292CC64E7500752213 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788282CC64E7500752213 /* NetworkError.swift */; };
 		E147882B2CC6500400752213 /* NewsAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147882A2CC6500400752213 /* NewsAPIManager.swift */; };
-		E147882D2CC65B1200752213 /* AuthorizationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147882C2CC65B1200752213 /* AuthorizationMiddleware.swift */; };
 		E14788332CC674CF00752213 /* DS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788322CC674CF00752213 /* DS.swift */; };
 		E14788352CC6752700752213 /* Color + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788342CC6752700752213 /* Color + Ext.swift */; };
 		E14788372CC6766500752213 /* CacheImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788362CC6766400752213 /* CacheImplementation.swift */; };
@@ -46,6 +44,8 @@
 		E14788432CC67F1800752213 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788422CC67F1800752213 /* Categories.swift */; };
 		E14788472CC6831800752213 /* Adamina.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E14788442CC6831800752213 /* Adamina.ttf */; };
 		E14788482CC6831800752213 /* InterVariable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E14788452CC6831800752213 /* InterVariable.ttf */; };
+		E147884A2CC6DFDB00752213 /* AuthorizationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788492CC6DFDB00752213 /* AuthorizationMiddleware.swift */; };
+		E147884C2CC6E90800752213 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147884B2CC6E90800752213 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +65,6 @@
 		3730B1592CC56B68006AA874 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
 		3730B15B2CC56BC2006AA874 /* RegistrationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreen.swift; sourceTree = "<group>"; };
 		3730B15D2CC56BE5006AA874 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		3730B1662CC61E8C006AA874 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3730B1872CC673E6006AA874 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		3730B18B2CC6742A006AA874 /* CustomToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBar.swift; sourceTree = "<group>"; };
 		3730B18D2CC67457006AA874 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -79,7 +78,6 @@
 		E14788262CC64E6300752213 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		E14788282CC64E7500752213 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		E147882A2CC6500400752213 /* NewsAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAPIManager.swift; sourceTree = "<group>"; };
-		E147882C2CC65B1200752213 /* AuthorizationMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationMiddleware.swift; sourceTree = "<group>"; };
 		E14788322CC674CF00752213 /* DS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DS.swift; sourceTree = "<group>"; };
 		E14788342CC6752700752213 /* Color + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + Ext.swift"; sourceTree = "<group>"; };
 		E14788362CC6766400752213 /* CacheImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImplementation.swift; sourceTree = "<group>"; };
@@ -90,6 +88,8 @@
 		E14788422CC67F1800752213 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		E14788442CC6831800752213 /* Adamina.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Adamina.ttf; sourceTree = "<group>"; };
 		E14788452CC6831800752213 /* InterVariable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = InterVariable.ttf; sourceTree = "<group>"; };
+		E14788492CC6DFDB00752213 /* AuthorizationMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationMiddleware.swift; sourceTree = "<group>"; };
+		E147884B2CC6E90800752213 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,13 +106,13 @@
 		3730B1652CC61E69006AA874 /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
+				E147884B2CC6E90800752213 /* NetworkManager.swift */,
+				E14788492CC6DFDB00752213 /* AuthorizationMiddleware.swift */,
 				E14788282CC64E7500752213 /* NetworkError.swift */,
-				3730B1662CC61E8C006AA874 /* NetworkManager.swift */,
 				E14788222CC6305B00752213 /* NewsDTO.swift */,
 				E14788242CC644BD00752213 /* NewsAPISpec.swift */,
 				E14788262CC64E6300752213 /* APIClient.swift */,
 				E147882A2CC6500400752213 /* NewsAPIManager.swift */,
-				E147882C2CC65B1200752213 /* AuthorizationMiddleware.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -390,12 +390,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3730B1672CC61E8C006AA874 /* NetworkManager.swift in Sources */,
 				3730B14A2CC569C5006AA874 /* ProfileView.swift in Sources */,
 				E14788292CC64E7500752213 /* NetworkError.swift in Sources */,
 				3730B14C2CC569F9006AA874 /* DetailView.swift in Sources */,
 				E14788372CC6766500752213 /* CacheImplementation.swift in Sources */,
-				E147882D2CC65B1200752213 /* AuthorizationMiddleware.swift in Sources */,
 				3730B1542CC56ACE006AA874 /* FavoritesView.swift in Sources */,
 				E14788232CC6305B00752213 /* NewsDTO.swift in Sources */,
 				E14788272CC64E6300752213 /* APIClient.swift in Sources */,
@@ -409,7 +407,9 @@
 				3730B1462CC56969006AA874 /* MainView.swift in Sources */,
 				3730B1402CC568D6006AA874 /* OnboardingView.swift in Sources */,
 				3730B1582CC56B4A006AA874 /* CategoriesView.swift in Sources */,
+				E147884C2CC6E90800752213 /* NetworkManager.swift in Sources */,
 				3730B1562CC56AE9006AA874 /* FavoritesViewModel.swift in Sources */,
+				E147884A2CC6DFDB00752213 /* AuthorizationMiddleware.swift in Sources */,
 				374094952CC5306600723D32 /* ContentView.swift in Sources */,
 				E147883D2CC676FE00752213 /* KeysTracker.swift in Sources */,
 				E14788392CC6769D00752213 /* CacheEntry.swift in Sources */,

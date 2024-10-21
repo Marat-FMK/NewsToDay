@@ -7,30 +7,29 @@
 
 import Foundation
 
-final class NewsAPIManager: NetworkManager {
+// MARK: - NewsAPIManagerProtocol
+protocol INewsAPIManager {
+    func getNews() async throws -> NewsApiResponseDTO
+    func getNews(by category: String) async throws -> [ArticleDTO]?
+    func getNews(with searchText: String) async throws -> [ArticleDTO]?
+}
 
-    
+final class NewsAPIManager: NetworkManager, INewsAPIManager {
+
     // MARK: - Initializer
     init() {
-        // Define base URL for the news API
-        let baseURL = URL(string: "https://newsapi.org/")!
-        
         // Create middlewares
-        let authorizationMiddleware = AuthorizationMiddleware(token: "2b9cf27ea13e45eb89926c533fb14c6b")
-        
+#warning("apiKey")
+        let authorizationMiddleware = AuthorizationMiddleware(apiKey: "2b9cf27ea13e45eb89926c533fb14c6b")
         // Initialize API client with base URL and middleware
-        let apiClient = APIClient(
-            baseUrl: baseURL,
-            middlewares: [authorizationMiddleware]
-        )
-        
+        let apiClient = APIClient(middlewares: [authorizationMiddleware])
         super.init(apiClient: apiClient)
     }
     
-    func getNews() async throws -> [ArticleDTO] {
+    func getNews() async throws -> NewsApiResponseDTO {
         let apiSpec: NewsAPISpec = .getNews
         let news = try await apiClient?.sendRequest(apiSpec)
-        return news as? [ArticleDTO] ?? []
+        return (news as? NewsApiResponseDTO)!
     }
     
     func getNews(by category: String) async throws -> [ArticleDTO]? {
