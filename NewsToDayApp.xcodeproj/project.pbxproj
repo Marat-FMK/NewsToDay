@@ -26,6 +26,11 @@
 		3730B1622CC60E69006AA874 /* Adamina.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3730B1602CC60E68006AA874 /* Adamina.ttf */; };
 		3730B1632CC60E69006AA874 /* InterVariable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3730B1612CC60E69006AA874 /* InterVariable.ttf */; };
 		3730B1672CC61E8C006AA874 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1662CC61E8C006AA874 /* NetworkManager.swift */; };
+		3730B1822CC67383006AA874 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1812CC67383006AA874 /* CacheManager.swift */; };
+		3730B1852CC673B2006AA874 /* Button + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1842CC673B2006AA874 /* Button + Extension.swift */; };
+		3730B1882CC673E6006AA874 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1872CC673E6006AA874 /* Resources.swift */; };
+		3730B18C2CC6742A006AA874 /* CustomToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B18B2CC6742A006AA874 /* CustomToolBar.swift */; };
+		3730B18E2CC67457006AA874 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B18D2CC67457006AA874 /* CustomButton.swift */; };
 		374094932CC5306600723D32 /* NewsToDayAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374094922CC5306600723D32 /* NewsToDayAppApp.swift */; };
 		374094952CC5306600723D32 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374094942CC5306600723D32 /* ContentView.swift */; };
 		374094972CC5306B00723D32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 374094962CC5306B00723D32 /* Assets.xcassets */; };
@@ -58,6 +63,11 @@
 		3730B1602CC60E68006AA874 /* Adamina.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Adamina.ttf; sourceTree = "<group>"; };
 		3730B1612CC60E69006AA874 /* InterVariable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = InterVariable.ttf; sourceTree = "<group>"; };
 		3730B1662CC61E8C006AA874 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3730B1812CC67383006AA874 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		3730B1842CC673B2006AA874 /* Button + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button + Extension.swift"; sourceTree = "<group>"; };
+		3730B1872CC673E6006AA874 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		3730B18B2CC6742A006AA874 /* CustomToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBar.swift; sourceTree = "<group>"; };
+		3730B18D2CC67457006AA874 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3740948F2CC5306500723D32 /* NewsToDayApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsToDayApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		374094922CC5306600723D32 /* NewsToDayAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsToDayAppApp.swift; sourceTree = "<group>"; };
 		374094942CC5306600723D32 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -113,6 +123,57 @@
 			path = NetworkManager;
 			sourceTree = "<group>";
 		};
+		3730B17F2CC67364006AA874 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				3730B1802CC6736B006AA874 /* CacheManager */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		3730B1802CC6736B006AA874 /* CacheManager */ = {
+			isa = PBXGroup;
+			children = (
+				3730B1812CC67383006AA874 /* CacheManager.swift */,
+			);
+			path = CacheManager;
+			sourceTree = "<group>";
+		};
+		3730B1832CC6738D006AA874 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3730B1842CC673B2006AA874 /* Button + Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3730B1862CC673BE006AA874 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				3730B15F2CC60CDB006AA874 /* Fonts */,
+				3730B1872CC673E6006AA874 /* Resources.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		3730B1892CC673F2006AA874 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3730B18A2CC67405006AA874 /* ToolBar */,
+				374094AB2CC53A5200723D32 /* TabBar */,
+				3730B18D2CC67457006AA874 /* CustomButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3730B18A2CC67405006AA874 /* ToolBar */ = {
+			isa = PBXGroup;
+			children = (
+				3730B18B2CC6742A006AA874 /* CustomToolBar.swift */,
+			);
+			path = ToolBar;
+			sourceTree = "<group>";
+		};
 		374094862CC5306500723D32 = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +193,10 @@
 		374094912CC5306600723D32 /* NewsToDayApp */ = {
 			isa = PBXGroup;
 			children = (
+				3730B1892CC673F2006AA874 /* Components */,
+				3730B1862CC673BE006AA874 /* DesignSystem */,
+				3730B1832CC6738D006AA874 /* Extensions */,
+				3730B17F2CC67364006AA874 /* Managers */,
 				374094AF2CC5455E00723D32 /* Screens */,
 				3730B1642CC61E3E006AA874 /* Services */,
 				374094AE2CC5450D00723D32 /* Resources */,
@@ -225,7 +290,6 @@
 		374094AE2CC5450D00723D32 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3730B15F2CC60CDB006AA874 /* Fonts */,
 				374094962CC5306B00723D32 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -239,7 +303,6 @@
 				374094A92CC539E300723D32 /* FavoritesScreen */,
 				374094A62CC535E600723D32 /* DetailScreen */,
 				374094A82CC5375700723D32 /* ProfileScreen */,
-				374094AB2CC53A5200723D32 /* TabBar */,
 				374094AD2CC5443E00723D32 /* CategoriesScreen */,
 				374094AC2CC5442600723D32 /* Authentication */,
 			);
@@ -334,13 +397,17 @@
 				3730B15A2CC56B68006AA874 /* CategoriesViewModel.swift in Sources */,
 				3730B1462CC56969006AA874 /* MainView.swift in Sources */,
 				3730B1402CC568D6006AA874 /* OnboardingView.swift in Sources */,
+				3730B1852CC673B2006AA874 /* Button + Extension.swift in Sources */,
 				3730B1582CC56B4A006AA874 /* CategoriesView.swift in Sources */,
 				3730B1562CC56AE9006AA874 /* FavoritesViewModel.swift in Sources */,
 				374094952CC5306600723D32 /* ContentView.swift in Sources */,
 				374094932CC5306600723D32 /* NewsToDayAppApp.swift in Sources */,
 				E14788252CC644BD00752213 /* NewsAPISpec.swift in Sources */,
 				3730B1422CC56913006AA874 /* OnboardingViewModel.swift in Sources */,
+				3730B1822CC67383006AA874 /* CacheManager.swift in Sources */,
 				3730B1482CC5699B006AA874 /* ProfileViewModel.swift in Sources */,
+				3730B18E2CC67457006AA874 /* CustomButton.swift in Sources */,
+				3730B1882CC673E6006AA874 /* Resources.swift in Sources */,
 				3730B15E2CC56BE5006AA874 /* UserModel.swift in Sources */,
 				3730B1502CC56A62006AA874 /* CustomTabBarView.swift in Sources */,
 			);
