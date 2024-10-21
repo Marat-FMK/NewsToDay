@@ -9,3 +9,5 @@ xcshareddata/
 !*.xcodeproj/xcshareddata
 !*.xcworkspace/contents.xcworkspacedata
 .DS_Store
+# Игнорируем временные файлы и пользовательские настройки
+NewsToDayApp.xcodeproj/project.xcworkspace/xcuserdata/evgeniykislitsin.xcuserdatad/UserInterfaceState.xcuserstate
