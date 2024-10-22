@@ -29,7 +29,7 @@ final class NewsAPIManager: NetworkManager, INewsAPIManager {
     func getNews() async throws -> NewsApiResponseDTO {
         let apiSpec: NewsAPISpec = .getNews
         let news = try await apiClient?.sendRequest(apiSpec)
-        return (news as? NewsApiResponseDTO)!
+        return news as! NewsApiResponseDTO
     }
     
     func getNews(by category: String) async throws -> [ArticleDTO]? {

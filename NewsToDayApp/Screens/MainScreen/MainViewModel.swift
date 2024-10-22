@@ -7,59 +7,88 @@
 
 import Foundation
 
+struct FetchTaskToken: Equatable {
+    var articles: String
+    var token: Date
+}
+
 @MainActor
 final class MainViewModel: ObservableObject {
-    @Published var articles: [ArticleDTO] = []
-    @Published var isLoading: Bool = false
+    @Published var phase: DataFetchPhase<[ArticleDTO]> = .empty
+    @Published var fetchTaskToken: FetchTaskToken
     @Published var errorMessage: String? = nil
     
+    
+    private let timeIntervalForUpdateCache: TimeInterval = 24 * 60
+    private let cache: DiskCache<[ArticleDTO]>
+    
     private let newsAPIManager: INewsAPIManager
+    
+    
+    var error: Error? {
+        if case let .failure(error) = phase {
+            return error
+        }
+        return nil
+    }
     
     // MARK: - Initializer with Dependency Injection
     init(newsAPIManager: INewsAPIManager) {
         self.newsAPIManager = newsAPIManager
         
-        print(articles.count)
+        self.fetchTaskToken = FetchTaskToken(articles: "TopNews", token: Date())
+        self.cache = DiskCache<[ArticleDTO]>(
+            filename: "xca_top_news",
+            expirationInterval: timeIntervalForUpdateCache
+        )
+        Task(priority: .high) {
+            try? await cache.loadFromDisk()
+        }
     }
     
     // MARK: - Fetch All News
-    func fetchNews() async {
-        isLoading = true
-        errorMessage = nil
+    func fetchTopNews(ignoreCache: Bool = false) async {
+        phase = .empty
         do {
-            let news = try await newsAPIManager.getNews()
-            articles = news.articles
+            if !ignoreCache,
+               let cachedArticles = await cache.value(forKey: fetchTaskToken.articles) {
+                print("CACHE HIT")
+                phase = .success(cachedArticles)
+            } else {
+                let articlesFromAPI = try await fetchArticlesFromAPI()
+                print("CACHE MISSED")
+                phase = .success(articlesFromAPI)
+            }
+            
+            
         } catch {
-            errorMessage = "Failed to load news: \(error.localizedDescription)"
+            phase = .failure(error)
         }
-        isLoading = false
+    }
+    
+    /// Cancels the error alert and refreshes the data.
+    func cancelErrorAlert() {
+        Task {
+            await fetchTopNews(ignoreCache: true)
+        }
+    }
+    
+    /// Refreshes the cache and updates the fetch task token.
+    func refreshTask() async {
+        await cache.removeValue(forKey: fetchTaskToken.articles)
+        fetchTaskToken.token = Date()
+    }
+    
+    private func fetchArticlesFromAPI() async throws -> [ArticleDTO] {
+        let articlesFromAPI = try await newsAPIManager.getNews().articles
+        await cache.setValue(articlesFromAPI, forKey: fetchTaskToken.articles)
+        try? await cache.saveToDisk()
+        return articlesFromAPI
     }
     
     // MARK: - Fetch News by Category
-    func fetchNews(by category: String) async {
-        isLoading = true
-        errorMessage = nil
-        do {
-            if let news = try await newsAPIManager.getNews(by: category) {
-                articles = news
-            }
-        } catch {
-            errorMessage = "Failed to load news: \(error.localizedDescription)"
-        }
-        isLoading = false
-    }
-    
+   
+
     // MARK: - Fetch News with Search
-    func fetchNews(with searchText: String) async {
-        isLoading = true
-        errorMessage = nil
-        do {
-            if let news = try await newsAPIManager.getNews(with: searchText) {
-                articles = news
-            }
-        } catch {
-            errorMessage = "Failed to load news: \(error.localizedDescription)"
-        }
-        isLoading = false
-    }
+
 }

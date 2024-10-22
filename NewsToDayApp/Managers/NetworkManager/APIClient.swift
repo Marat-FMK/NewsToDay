@@ -9,7 +9,6 @@ import Foundation
 
 // MARK: - APIClient
 struct APIClient {
-
     private var URLSession: URLSession
     private(set) var middlewares: [any APIClient.Middleware]
     
@@ -47,16 +46,12 @@ struct APIClient {
         // Send the request and unwrap the response
         do {
             let (data, response) = try await URLSession.data(for: request)
-//            if let jsonString = String(data: data, encoding: .utf8) {
-//                print("Полученные данные: \(jsonString)")
-//            }
             // Unwrap the response using unwrapResponse method
             let unwrappedResult = unwrapResponse((data, response))
             switch unwrappedResult {
             case .success(let responseData):
                 let decoder = JSONDecoder()
                 let decodedData = try decoder.decode(apiSpec.returnType, from: responseData)
-                print("data: \(decodedData)")
                 return decodedData
             case .failure(let error):
                 print("err: \(error)")

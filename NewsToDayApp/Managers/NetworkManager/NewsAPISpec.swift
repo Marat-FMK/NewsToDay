@@ -58,7 +58,7 @@ enum NewsAPISpec: APIClient.APISpec {
     
     // MARK: - Return Type
     var returnType: DecodableType.Type {
-        return ArticleDTO.self
+        return NewsApiResponseDTO.self
     }
     
     // MARK: - Request Body

@@ -46,6 +46,7 @@
 		E14788482CC6831800752213 /* InterVariable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E14788452CC6831800752213 /* InterVariable.ttf */; };
 		E147884A2CC6DFDB00752213 /* AuthorizationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788492CC6DFDB00752213 /* AuthorizationMiddleware.swift */; };
 		E147884C2CC6E90800752213 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147884B2CC6E90800752213 /* NetworkManager.swift */; };
+		E147884E2CC833D100752213 /* DataFetchPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147884D2CC833D100752213 /* DataFetchPhase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		E14788452CC6831800752213 /* InterVariable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = InterVariable.ttf; sourceTree = "<group>"; };
 		E14788492CC6DFDB00752213 /* AuthorizationMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationMiddleware.swift; sourceTree = "<group>"; };
 		E147884B2CC6E90800752213 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E147884D2CC833D100752213 /* DataFetchPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetchPhase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 		3730B1802CC6736B006AA874 /* CacheManager */ = {
 			isa = PBXGroup;
 			children = (
+				E147884D2CC833D100752213 /* DataFetchPhase.swift */,
 				E147883C2CC676FE00752213 /* KeysTracker.swift */,
 				E147883A2CC676DA00752213 /* CacheProtocol.swift */,
 				E14788382CC6769D00752213 /* CacheEntry.swift */,
@@ -412,6 +415,7 @@
 				E147884A2CC6DFDB00752213 /* AuthorizationMiddleware.swift in Sources */,
 				374094952CC5306600723D32 /* ContentView.swift in Sources */,
 				E147883D2CC676FE00752213 /* KeysTracker.swift in Sources */,
+				E147884E2CC833D100752213 /* DataFetchPhase.swift in Sources */,
 				E14788392CC6769D00752213 /* CacheEntry.swift in Sources */,
 				E14788332CC674CF00752213 /* DS.swift in Sources */,
 				E147883F2CC677E700752213 /* BackBarButton.swift in Sources */,
