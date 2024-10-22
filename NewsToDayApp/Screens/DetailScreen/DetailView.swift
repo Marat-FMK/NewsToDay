@@ -12,17 +12,16 @@ struct DetailView: View {
     
     let news: News
     
-    
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
                 
                 ZStack(alignment: .bottomLeading) {
                     
-                    ShareLink(item: news.description) { // передает текст новости / можно в модель добавить ЮРЛ  и отдавать ее
+                    ShareLink(item: news.description) { // отдает текст новости в линк
                         Label("", systemImage: "square.and.arrow.up.circle") // Image?
                     }
-                    .foregroundStyle(Color.black) // white !! не отображается белая почеу то , все остальное работает
+                    .foregroundStyle(Color.black) // white !! не отображается белая почеу то, все остальное работает
                     .offset(x: 340, y: -200)
                     
                     news.image
@@ -33,7 +32,7 @@ struct DetailView: View {
                     
                     VStack(alignment: .leading) {
                         
-                        Text(news.type)
+                        Text(news.category)
                             .frame(width: 48, height: 16)
                             .font(.system(size: 12))
                             .padding(.horizontal,16)
@@ -42,7 +41,7 @@ struct DetailView: View {
                             .background(.purple) // 71 90 215
                             .clipShape(.capsule)
                         
-                        Text(news.news)
+                        Text(news.name)
                             .frame(width: 336, height: 56, alignment: .leading)
                             .lineLimit(2)
                             .font(.system(size: 20))
@@ -87,9 +86,9 @@ struct DetailView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
-                        dismiss() // close
+                        dismiss() // ? close
                     } label: {
-                        Image(systemName: "arrow.left") //image!
+                        Image(systemName: "arrow.left") //image?
                             .resizable()
                             .foregroundStyle(.white)
                             .frame(width: 14, height: 14)
@@ -99,11 +98,11 @@ struct DetailView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        // bookmark choose add/delete
+                        // bookmark add/delete on savedNews array
                     } label: {
-                        Image(systemName: "bookmark") //image!
+                        Image(systemName: "bookmark") //image?
                             .resizable()
-                            .foregroundStyle(.white)
+                            .foregroundStyle(news.bookmark ? .white : .gray) // color?
                             .frame(width: 17, height: 24)
                             .padding(.trailing,12)
                     }
@@ -117,7 +116,7 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(news: News(news: "det new", annotation: "detAnot", image: Image("handLuggage"), type: "Politics", author: "Det Autor", description: "Det Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpwet Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw"))
+        DetailView(news: News(name: "det new", bookmark: false, image: Image("handLuggage"), category: "Politics", author: "Det Autor", description: "Det Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpwet Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw"))
     }
 }
 
