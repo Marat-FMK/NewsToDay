@@ -190,6 +190,9 @@ struct MainView: View {
                         .padding()
                     }
                 }
+                .task {
+                    await viewModel.fetchTopNews()
+                }
                 .navigationTitle("Browse")
                 //            .searchable(text: $searchText, prompt: "Search")
          

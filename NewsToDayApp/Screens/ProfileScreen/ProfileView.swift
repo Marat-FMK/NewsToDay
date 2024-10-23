@@ -11,20 +11,20 @@ struct ProfileView: View {
     var body: some View {
         ZStack {
             Text("Hello, World!")
-            
         }
-        .toolbar {
+        .navigationBarItems(leading:
             CustomToolBar(
                 title: Resources.Text.profileTitle,
                 subTitle: ""
             )
-        }
+        )
     }
-    
 }
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        NavigationView {
+            ProfileView()
+        }
     }
 }

@@ -57,7 +57,8 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
     let url: String              // URL to the full article
     let urlToImage: String?      // URL to the article's image (optional)
     let publishedAt: String        // Publication date
-    let content: String?         // Full content of the article (optional)
+    let content: String?    // Full content of the article (optional)
+    var isFavorite: Bool
     
     enum CodingKeys: String, CodingKey {
         case source
@@ -68,6 +69,7 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
         case urlToImage
         case publishedAt
         case content
+        case isFavorite
     }
     
     // MARK: - Custom Decoder for ArticleDTO
@@ -89,10 +91,11 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
         self.urlToImage = try container.decodeIfPresent(String.self, forKey: .urlToImage)
         self.publishedAt = try container.decode(String.self, forKey: .publishedAt)
         self.content = try container.decodeIfPresent(String.self, forKey: .content)
+        self.isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
     }
     
     // MARK: - Initializer
-    init(source: Source, author: String?, title: String, description: String?, url: String, urlToImage: String?, publishedAt: String, content: String?) {
+    init(source: Source, author: String?, title: String, description: String?, url: String, urlToImage: String?, publishedAt: String, content: String?, isFavorite: Bool) {
         self.source = source
         self.author = author
         self.title = title
@@ -101,18 +104,20 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
         self.urlToImage = urlToImage
         self.publishedAt = publishedAt
         self.content = content
+        self.isFavorite = isFavorite
     }
     // Manual Equatable implementation
-      static func ==(lhs: ArticleDTO, rhs: ArticleDTO) -> Bool {
-          return lhs.source == rhs.source &&
-                 lhs.author == rhs.author &&
-                 lhs.title == rhs.title &&
-                 lhs.description == rhs.description &&
-                 lhs.url == rhs.url &&
-                 lhs.urlToImage == rhs.urlToImage &&
-                 lhs.publishedAt == rhs.publishedAt &&
-                 lhs.content == rhs.content
-      }
+    static func ==(lhs: ArticleDTO, rhs: ArticleDTO) -> Bool {
+        return lhs.source == rhs.source &&
+        lhs.author == rhs.author &&
+        lhs.title == rhs.title &&
+        lhs.description == rhs.description &&
+        lhs.url == rhs.url &&
+        lhs.urlToImage == rhs.urlToImage &&
+        lhs.publishedAt == rhs.publishedAt &&
+        lhs.content == rhs.content
+        lhs.isFavorite == rhs.isFavorite
+    }
 }
 
 // MARK: - Source

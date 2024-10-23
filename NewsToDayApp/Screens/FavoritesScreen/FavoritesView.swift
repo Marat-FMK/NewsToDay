@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Kingfisher
+
 
 struct BookmarkView: View {
     // для примера

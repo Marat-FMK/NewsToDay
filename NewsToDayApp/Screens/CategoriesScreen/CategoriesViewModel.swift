@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+final class CategoriesViewModel: ObservableObject {
+    // MARK: Properties
+    @Published var categories: [Categories] = []
+    
+    func loadCategories() {}
+    
+    func saveCategories() {}
+}

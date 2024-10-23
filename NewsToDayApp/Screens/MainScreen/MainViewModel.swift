@@ -12,18 +12,42 @@ struct FetchTaskToken: Equatable {
     var token: Date
 }
 
+enum DisplayOrderType: CaseIterable {
+    case alphabetical
+    case favoriteFirst
+
+    var name: String {
+        switch self {
+        case .alphabetical:
+            return "Alphabetical"
+        case .favoriteFirst:
+            return "Favorite First"
+        }
+    }
+}
+
 @MainActor
 final class MainViewModel: ObservableObject {
     @Published var phase: DataFetchPhase<[ArticleDTO]> = .empty
     @Published var fetchTaskToken: FetchTaskToken
     @Published var errorMessage: String? = nil
+    @Published var selectedOrder: DisplayOrderType = .alphabetical
     
-    
-    private let timeIntervalForUpdateCache: TimeInterval = 24 * 60
+    private let timeIntervalForUpdateCache: TimeInterval = 7 * 24 * 60 * 60
     private let cache: DiskCache<[ArticleDTO]>
     
     private let newsAPIManager: INewsAPIManager
     
+    // MARK: - Computed Properties
+    private var sortedArticles: [ArticleDTO] {
+        guard let articles = phase.value else { return [] }
+        switch selectedOrder {
+        case .alphabetical:
+            return articles.sorted(by: { $0.title < $1.title })
+        case .favoriteFirst:
+            return articles.sorted { $0.isFavorite && !$1.isFavorite }
+        }
+    }
     
     var error: Error? {
         if case let .failure(error) = phase {
@@ -45,6 +69,11 @@ final class MainViewModel: ObservableObject {
             try? await cache.loadFromDisk()
         }
     }
+    
+    // MARK: - Methods
+    func getTopNews() -> [ArticleDTO] { sortedArticles }
+    
+    
     
     // MARK: - Fetch All News
     func fetchTopNews(ignoreCache: Bool = false) async {
