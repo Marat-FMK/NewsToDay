@@ -38,30 +38,13 @@ struct MainView: View {
                             subTitle: Resources.Text.mainSubTitle
                         )
                         .padding(.top, 0)
+                        
                         ScrollView(showsIndicators: false) {
                         
                         VStack(alignment: .leading) {
-                            
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 12)
-                                    .foregroundStyle(Color.gray)
-                                TextField(" Search ", text: $searchText)
-                                    .textFieldStyle(.roundedBorder)
-                                    .frame(width: 336, height: 56)
-                            }
-                            .padding(.bottom,20)
-                            
-                            Picker("Tip percentage",selection: $selectedTitleForSort) {
-                                ForEach(0 ..< 3) {number in
-                                    Text(sortTitles[number])
-                                        .padding(.bottom,20)
-                                }
-                            }
-                            .pickerStyle(.segmented)
-                            .padding(.bottom,20)
-                            .colorMultiply(DS.Colors.purplePrimary)
-                            .colorScheme(.dark) // текст бы сделать белыму пикера
-                            
+
+                            SearchBar(text: $viewModel.searchText)
+                                .padding(.bottom, 16)
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {
                                     ForEach(categories, id: \.self) { categoryName in
@@ -85,7 +68,7 @@ struct MainView: View {
                             
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {
-                                    ForEach(categoryNews) { news in
+                                    ForEach(viewModel.getTopNews()) { news in
                                         NavigationLink {
                                             DetailView(news: news, action: {})
                                         } label: {
@@ -116,7 +99,7 @@ struct MainView: View {
                             .padding(.bottom,30)
                             
                             
-                            ForEach(recommendedNews) { news in
+                            ForEach(viewModel.getTopNews()) { news in
                                 NavigationLink {
                                     DetailView(news: news, action: {})
                                 } label: {

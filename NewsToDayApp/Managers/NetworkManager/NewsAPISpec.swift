@@ -17,9 +17,9 @@ enum NewsAPISpec: APISpec {
     private var path: String {
         switch self {
         case .getNews, .getNewsBy:
-            return "/v2/top-headlines"
+            return "/api/1/news"
         case .getNewsWith:
-            return "/v2/everything"
+            return "/api/1/news"
         }
     }
     
@@ -45,7 +45,7 @@ enum NewsAPISpec: APISpec {
     var endpoint: String {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "newsapi.org"
+        components.host = "newsdata.io"
         components.path = path
         components.queryItems = queryItems
         return components.url?.absoluteString ?? ""
