@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct BookmarkView: View {
     // для примера
     @State private var bookmarks: [News] = [

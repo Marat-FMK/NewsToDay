@@ -38,6 +38,6 @@ struct CustomTabBarView: View {
     }
 }
 
-#Preview {
-    CustomTabBarView(mainViewModel: MainViewModel(newsAPIManager: NewsAPIManager()))
-}
+//#Preview {
+//    CustomTabBarView(mainViewModel: MainViewModel(newsAPIManager: NewsAPIManager()))
+//}
