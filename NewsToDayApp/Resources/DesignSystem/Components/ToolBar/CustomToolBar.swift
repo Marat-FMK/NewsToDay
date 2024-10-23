@@ -20,7 +20,7 @@ struct CustomToolBar: View {
                 .padding(.horizontal)
             
             Text(subTitle)
-                .foregroundStyle(DS.Colors.pgrayPrimary)
+                .foregroundStyle(DS.Colors.grayPrimary)
                 .font(.interSemiBold(16))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
