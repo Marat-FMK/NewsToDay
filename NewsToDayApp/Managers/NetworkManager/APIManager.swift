@@ -1,15 +1,15 @@
 //
-//  NetworkManager.swift
+//  APIManager.swift
 //  NewsToDayApp
 //
-//  Created by Evgeniy on 21.10.2024.
+//  Created by Келлер Дмитрий on 21.10.2024.
 //
-
 
 import Foundation
 
-class NetworkManager {
+class APIManager {
     private(set) var apiClient: APIClient?
+    
     init(apiClient: APIClient?) {
         self.apiClient = apiClient
     }

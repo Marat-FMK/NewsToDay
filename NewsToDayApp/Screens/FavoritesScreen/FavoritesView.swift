@@ -49,7 +49,7 @@ struct BookmarkView: View {
                             ZStack {
                                 ArticleView(model: item)
                                 NavigationLink(
-                                    destination: DetailView(news: item),
+                                    destination: DetailView(news: item, action: {}),
                                     label: {
                                         EmptyView() // Используем EmptyView для скрытия NavigationLink, чтобы не отображать отдельный элемент интерфейса.
                                     }

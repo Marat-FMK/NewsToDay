@@ -9,17 +9,26 @@ import Foundation
 
 // MARK: - NewsApiResponseDTO
 // Represents the main response structure for the News API
-struct NewsApiResponseDTO: Sendable, Codable, DecodableType {
+struct NewsApiResponseDTO: Sendable, Decodable, DecodableType {
     let status: String        // Status of the API response (e.g., "ok")
     let totalResults: Int     // Total number of articles returned
     let articles: [ArticleDTO] // Array of articles in the response
+    
+    enum CodingKeys: String, CodingKey {
+        case status
+        case totalResults
+        case articles
+    }
     
     // MARK: - Custom Decoder for NewsApiResponseDTO
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard !container.allKeys.isEmpty else {
             throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Empty object: \(container.allKeys)")
+                DecodingError.Context(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "Empty object in NewsApiResponseDTO: \(container.allKeys)"
+                )
             )
         }
         self.status = try container.decode(String.self, forKey: .status)
@@ -37,39 +46,53 @@ struct NewsApiResponseDTO: Sendable, Codable, DecodableType {
 
 // MARK: - ArticleDTO
 // Represents an individual article in the API response
-struct ArticleDTO: Sendable, Codable, DecodableType {
-    var id: String? {
+struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, DecodableType {
+    var id: String {
         return UUID().uuidString // Generates a unique identifier if not present
     }
     let source: Source           // Source of the article
     let author: String?          // Author of the article (optional)
     let title: String            // Title of the article
-    let description: String      // Short description of the article
+    let description: String?      // Short description of the article
     let url: String              // URL to the full article
     let urlToImage: String?      // URL to the article's image (optional)
-    let publishedAt: Date        // Publication date
+    let publishedAt: String        // Publication date
     let content: String?         // Full content of the article (optional)
+    
+    enum CodingKeys: String, CodingKey {
+        case source
+        case author
+        case title
+        case description
+        case url
+        case urlToImage
+        case publishedAt
+        case content
+    }
     
     // MARK: - Custom Decoder for ArticleDTO
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard !container.allKeys.isEmpty else {
             throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Empty object: \(container.allKeys)")
+                DecodingError.Context(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "Empty object in ArticleDTO: \(container.allKeys)"
+                )
             )
         }
         self.source = try container.decode(Source.self, forKey: .source)
         self.author = try container.decodeIfPresent(String.self, forKey: .author)
         self.title = try container.decode(String.self, forKey: .title)
-        self.description = try container.decode(String.self, forKey: .description)
+        self.description = try container.decodeIfPresent(String.self, forKey: .description)
         self.url = try container.decode(String.self, forKey: .url)
         self.urlToImage = try container.decodeIfPresent(String.self, forKey: .urlToImage)
-        self.publishedAt = try container.decode(Date.self, forKey: .publishedAt)
+        self.publishedAt = try container.decode(String.self, forKey: .publishedAt)
         self.content = try container.decodeIfPresent(String.self, forKey: .content)
     }
     
     // MARK: - Initializer
-    init(source: Source, author: String?, title: String, description: String, url: String, urlToImage: String?, publishedAt: Date, content: String?) {
+    init(source: Source, author: String?, title: String, description: String?, url: String, urlToImage: String?, publishedAt: String, content: String?) {
         self.source = source
         self.author = author
         self.title = title
@@ -79,11 +102,22 @@ struct ArticleDTO: Sendable, Codable, DecodableType {
         self.publishedAt = publishedAt
         self.content = content
     }
+    // Manual Equatable implementation
+      static func ==(lhs: ArticleDTO, rhs: ArticleDTO) -> Bool {
+          return lhs.source == rhs.source &&
+                 lhs.author == rhs.author &&
+                 lhs.title == rhs.title &&
+                 lhs.description == rhs.description &&
+                 lhs.url == rhs.url &&
+                 lhs.urlToImage == rhs.urlToImage &&
+                 lhs.publishedAt == rhs.publishedAt &&
+                 lhs.content == rhs.content
+      }
 }
 
 // MARK: - Source
 // Represents the source of an article
-struct Source: Sendable, Codable, DecodableType {
+struct Source: Codable, DecodableType, Sendable, Equatable, Hashable {
     let id: String?   // Optional ID of the source
     let name: String  // Name of the source
     
@@ -92,7 +126,10 @@ struct Source: Sendable, Codable, DecodableType {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard !container.allKeys.isEmpty else {
             throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Empty object: \(container.allKeys)")
+                DecodingError.Context(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "Empty object in Source: \(container.allKeys)"
+                )
             )
         }
         self.id = try container.decodeIfPresent(String.self, forKey: .id)

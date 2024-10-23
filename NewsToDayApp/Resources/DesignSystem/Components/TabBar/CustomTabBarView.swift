@@ -8,13 +8,38 @@
 import SwiftUI
 
 struct CustomTabBarView: View {
+    @State private var tabSelection = 1
+    
+    let mainViewModel: MainViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack(alignment: .bottom) {
+            switch tabSelection {
+            case 1:
+                NavigationView {
+                    MainView(viewModel: mainViewModel)
+                }
+            case 2:
+                NavigationView {
+                    CategoriesView()
+                }
+            case 3:
+                NavigationView {
+                    BookmarkView()
+                }
+            case 4:
+                NavigationView {
+                    ProfileView()
+                }
+            default:
+                ProfileView()
+            }
+            CustomTabBar(tabSelection: $tabSelection)
+        }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
-struct CustomTabBarView_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomTabBarView()
-    }
+#Preview {
+    CustomTabBarView(mainViewModel: MainViewModel(newsAPIManager: NewsAPIManager()))
 }

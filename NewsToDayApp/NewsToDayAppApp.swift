@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct NewsToDayAppApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let newsAPIManager = NewsAPIManager()
+            let mainViewModel = MainViewModel(newsAPIManager: newsAPIManager)
+            
+            CustomTabBarView(mainViewModel: mainViewModel)
         }
     }
 }

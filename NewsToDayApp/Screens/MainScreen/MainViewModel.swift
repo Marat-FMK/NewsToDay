@@ -6,3 +6,89 @@
 //
 
 import Foundation
+
+struct FetchTaskToken: Equatable {
+    var articles: String
+    var token: Date
+}
+
+@MainActor
+final class MainViewModel: ObservableObject {
+    @Published var phase: DataFetchPhase<[ArticleDTO]> = .empty
+    @Published var fetchTaskToken: FetchTaskToken
+    @Published var errorMessage: String? = nil
+    
+    
+    private let timeIntervalForUpdateCache: TimeInterval = 24 * 60
+    private let cache: DiskCache<[ArticleDTO]>
+    
+    private let newsAPIManager: INewsAPIManager
+    
+    
+    var error: Error? {
+        if case let .failure(error) = phase {
+            return error
+        }
+        return nil
+    }
+    
+    // MARK: - Initializer with Dependency Injection
+    init(newsAPIManager: INewsAPIManager) {
+        self.newsAPIManager = newsAPIManager
+        
+        self.fetchTaskToken = FetchTaskToken(articles: "TopNews", token: Date())
+        self.cache = DiskCache<[ArticleDTO]>(
+            filename: "xca_top_news",
+            expirationInterval: timeIntervalForUpdateCache
+        )
+        Task(priority: .high) {
+            try? await cache.loadFromDisk()
+        }
+    }
+    
+    // MARK: - Fetch All News
+    func fetchTopNews(ignoreCache: Bool = false) async {
+        phase = .empty
+        do {
+            if !ignoreCache,
+               let cachedArticles = await cache.value(forKey: fetchTaskToken.articles) {
+                print("CACHE HIT")
+                phase = .success(cachedArticles)
+            } else {
+                let articlesFromAPI = try await fetchArticlesFromAPI()
+                print("CACHE MISSED")
+                phase = .success(articlesFromAPI)
+            }
+            
+            
+        } catch {
+            phase = .failure(error)
+        }
+    }
+    
+    /// Cancels the error alert and refreshes the data.
+    func cancelErrorAlert() {
+        Task {
+            await fetchTopNews(ignoreCache: true)
+        }
+    }
+    
+    /// Refreshes the cache and updates the fetch task token.
+    func refreshTask() async {
+        await cache.removeValue(forKey: fetchTaskToken.articles)
+        fetchTaskToken.token = Date()
+    }
+    
+    private func fetchArticlesFromAPI() async throws -> [ArticleDTO] {
+        let articlesFromAPI = try await newsAPIManager.getNews().articles
+        await cache.setValue(articlesFromAPI, forKey: fetchTaskToken.articles)
+        try? await cache.saveToDisk()
+        return articlesFromAPI
+    }
+    
+    // MARK: - Fetch News by Category
+   
+
+    // MARK: - Fetch News with Search
+
+}

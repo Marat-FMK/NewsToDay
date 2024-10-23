@@ -9,17 +9,14 @@ import Foundation
 
 // MARK: - APIClient
 struct APIClient {
-    private var baseUrl: URL
     private var URLSession: URLSession
-    private(set) var middlewares: [any APIClient.Middleware]
+    private(set) var middlewares: [any Middleware]
     
     // MARK: - Initializer
     init(
-        baseUrl: URL,
-        middlewares: [any APIClient.Middleware] = [],
+        middlewares: [any Middleware] = [],
         URLSession: URLSession = .shared
     ) {
-        self.baseUrl = baseUrl
         self.middlewares = middlewares
         self.URLSession = URLSession
     }
@@ -27,7 +24,7 @@ struct APIClient {
     // MARK: - Sending API Request
     func sendRequest(_ apiSpec: APISpec) async throws -> DecodableType {
         // Construct the full URL
-        guard let url = URL(string: baseUrl.absoluteString + apiSpec.endpoint) else {
+        guard let url = URL(string: apiSpec.endpoint) else {
             throw NetworkError.invalidURL
         }
         
@@ -40,16 +37,15 @@ struct APIClient {
         request.httpMethod = apiSpec.method.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = apiSpec.body
-        
+
         // Apply middlewares
         for middleware in middlewares {
             request = try await middleware.intercept(request)
         }
-        
+
         // Send the request and unwrap the response
         do {
             let (data, response) = try await URLSession.data(for: request)
-            
             // Unwrap the response using unwrapResponse method
             let unwrappedResult = unwrapResponse((data, response))
             switch unwrappedResult {
@@ -58,10 +54,12 @@ struct APIClient {
                 let decodedData = try decoder.decode(apiSpec.returnType, from: responseData)
                 return decodedData
             case .failure(let error):
+                print("err: \(error)")
                 throw error
             }
             
         } catch {
+            print("err: \(error)")
             throw error
         }
     }
@@ -93,27 +91,23 @@ struct APIClient {
 }
 
 // MARK: - APISpec and HttpMethod Definitions
-extension APIClient {
-    protocol APISpec {
-        var endpoint: String { get }
-        var method: HttpMethod { get }
-        var returnType: DecodableType.Type { get }
-        var body: Data? { get }
-    }
-    
-    enum HttpMethod: String, CaseIterable {
-        case get = "GET"
-        case patch = "PATCH"
-        case head = "HEAD"
-        case optional = "OPTIONAL"
-    }
+protocol APISpec {
+    var endpoint: String { get }
+    var method: HttpMethod { get }
+    var returnType: DecodableType.Type { get }
+    var body: Data? { get }
+}
+
+enum HttpMethod: String, CaseIterable {
+    case get = "GET"
+    case patch = "PATCH"
+    case head = "HEAD"
+    case optional = "OPTIONAL"
 }
 
 // MARK: - Middleware Protocol
-extension APIClient {
-    protocol Middleware {
-        func intercept(_ request: URLRequest) async throws -> URLRequest
-    }
+protocol Middleware {
+    func intercept(_ request: URLRequest) async throws -> URLRequest
 }
 
 // MARK: - DecodableType Protocol

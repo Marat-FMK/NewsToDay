@@ -96,7 +96,7 @@ struct OnboardingView: View {
                                 .frame(width: 216, height: 68, alignment:.center)
                                 .font(.system(size: 16))
                                 .offset(y: 290)
-                                .bold()
+                         
                             
                             if index == 2 {
                                 

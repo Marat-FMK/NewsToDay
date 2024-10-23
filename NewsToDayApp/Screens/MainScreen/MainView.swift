@@ -18,6 +18,8 @@ struct News: Identifiable { // in Model File
 }
 
 struct CategoryNewsView: View {
+    
+    
     let news: News
     
     var body: some View {
@@ -48,7 +50,7 @@ struct CategoryNewsView: View {
                     .frame(width: 208, height: 48, alignment: .leading)
                     .lineLimit(2)
                     .foregroundStyle(Color.white)
-                    
+                
             }
             .padding(.top,100)
         }
@@ -81,6 +83,7 @@ struct RecommendedNewsView: View {
 }
 
 struct MainView: View {
+    @StateObject var viewModel: MainViewModel
     
     @State private var searchText = ""
     @State private var selectedCategory = "Random"
@@ -105,7 +108,6 @@ struct MainView: View {
     
     var body: some View {
         
-            NavigationStack {
                 ScrollView(showsIndicators: false) {
                     
                     VStack {
@@ -147,7 +149,7 @@ struct MainView: View {
                                 HStack {
                                     ForEach(categoryNews) { news in
                                         NavigationLink {
-                                            DetailView(news: news)
+                                            DetailView(news: news, action: {})
                                         } label: {
                                             CategoryNewsView(news: news)
                                         }
@@ -178,7 +180,7 @@ struct MainView: View {
                             
                             ForEach(recommendedNews) { news in
                                 NavigationLink {
-                                    DetailView(news: news)
+                                    DetailView(news: news, action: {})
                                 } label: {
                                     RecommendedNewsView(news: news)
                                         
@@ -190,7 +192,7 @@ struct MainView: View {
                 }
                 .navigationTitle("Browse")
                 //            .searchable(text: $searchText, prompt: "Search")
-            }
+         
     }
     
     private func checkSelectedCategory(_ categoryName: String)-> Bool {
@@ -201,6 +203,7 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(viewModel: MainViewModel(newsAPIManager: NewsAPIManager()))
+        
     }
 }
