@@ -29,6 +29,6 @@ struct CustomToolBar: View {
 }
 
 
-#Preview {
-    CustomToolBar(title: "MainTitle", subTitle: "same text")
-}
+//#Preview {
+//    CustomToolBar(title: "MainTitle", subTitle: "same text")
+//}

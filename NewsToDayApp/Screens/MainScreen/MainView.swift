@@ -137,7 +137,7 @@ struct MainView: View {
                                                 .padding(.vertical,8)
                                                 .foregroundStyle(checkSelectedCategory(categoryName) ? textSelect : textNonSelect)
                                                 .background(checkSelectedCategory(categoryName) ? .purple : .gray) //?
-                                                .clipShape(.capsule)
+                                                .clipShape(Capsule())
                                                 .padding(.horizontal,5)
                                         }
                                     }
