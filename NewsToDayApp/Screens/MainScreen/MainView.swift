@@ -34,8 +34,6 @@ struct MainView: View {
                     
                     VStack {
                         VStack(alignment: .leading) {
-                            Text("Discover things of this world") // add in NavStack
-                                .frame(width:216, height:  24)
                             
                             ZStack {
                                 RoundedRectangle(cornerRadius: 12)
@@ -122,7 +120,10 @@ struct MainView: View {
                         .padding()
                     }
                 }
-                .navigationTitle("Browse")
+                .toolbar {
+                    CustomToolBar(title: "Browse", subTitle: "Discover things of this world")
+                        .offset(x: -130, y: -10)
+                }
 //                  .searchable(text: $searchText, prompt: "Search")
          
     }
