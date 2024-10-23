@@ -24,8 +24,4 @@ enum DS {
         static let blackLight = Color(hex: "#44485F")
         static let blackLighter = Color(hex: "#555A77")
     }
-    
-    enum Fonts {
-        
-    }
 }

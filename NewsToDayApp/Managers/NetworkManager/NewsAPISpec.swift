@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - NewsAPISpec Enum
-enum NewsAPISpec: APIClient.APISpec {
+enum NewsAPISpec: APISpec {
     case getNews
     case getNewsBy(category: String)
     case getNewsWith(searchText: String)
@@ -52,7 +52,7 @@ enum NewsAPISpec: APIClient.APISpec {
     }
     
     // MARK: - HTTP Method
-    var method: APIClient.HttpMethod {
+    var method: HttpMethod {
         return .get
     }
     

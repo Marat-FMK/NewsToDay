@@ -14,7 +14,7 @@ protocol INewsAPIManager {
     func getNews(with searchText: String) async throws -> [ArticleDTO]?
 }
 
-final class NewsAPIManager: NetworkManager, INewsAPIManager {
+final class NewsAPIManager: APIManager, INewsAPIManager {
 
     // MARK: - Initializer
     init() {

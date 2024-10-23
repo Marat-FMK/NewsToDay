@@ -9,12 +9,25 @@ import SwiftUI
 
 struct CategoriesView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Text("Hello, World!")
+        }
+        .background(DS.Colors.purpleLighter)
+        .ignoresSafeArea()
+       
+        .toolbar {
+            CustomToolBar(
+                title: Resources.Text.categoriesTitle,
+                subTitle: Resources.Text.categoriesSubTitle
+            )
+        }
     }
 }
 
 struct CategoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoriesView()
+        NavigationView {
+            CategoriesView()
+        }
     }
 }

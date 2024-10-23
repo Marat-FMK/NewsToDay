@@ -7,8 +7,10 @@
 
 import Foundation
 
+import Foundation
+
 // MARK: - AuthorizationMiddleware
-final class AuthorizationMiddleware: APIClient.Middleware {
+final class AuthorizationMiddleware: Middleware {
     
     // API Key for authorization (e.g., API key for News API)
     var apiKey: String

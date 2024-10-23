@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3717CAFE2CC8B1D20074FCE4 /* HeaderTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3717CAFD2CC8B1D20074FCE4 /* HeaderTitleView.swift */; };
 		3717CB002CC8B22A0074FCE4 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3717CAFF2CC8B22A0074FCE4 /* ArticleView.swift */; };
-		3717CB032CC8B7060074FCE4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3717CB022CC8B7060074FCE4 /* Kingfisher */; };
 		3730B1402CC568D6006AA874 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B13F2CC568D6006AA874 /* OnboardingView.swift */; };
 		3730B1422CC56913006AA874 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1412CC56913006AA874 /* OnboardingViewModel.swift */; };
 		3730B1442CC5694B006AA874 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1432CC5694B006AA874 /* MainViewModel.swift */; };
@@ -45,11 +44,14 @@
 		E147883D2CC676FE00752213 /* KeysTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147883C2CC676FE00752213 /* KeysTracker.swift */; };
 		E147883F2CC677E700752213 /* BackBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147883E2CC677E700752213 /* BackBarButton.swift */; };
 		E14788432CC67F1800752213 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788422CC67F1800752213 /* Categories.swift */; };
-		E14788472CC6831800752213 /* Adamina.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E14788442CC6831800752213 /* Adamina.ttf */; };
-		E14788482CC6831800752213 /* InterVariable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E14788452CC6831800752213 /* InterVariable.ttf */; };
 		E147884A2CC6DFDB00752213 /* AuthorizationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788492CC6DFDB00752213 /* AuthorizationMiddleware.swift */; };
-		E147884C2CC6E90800752213 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147884B2CC6E90800752213 /* NetworkManager.swift */; };
 		E147884E2CC833D100752213 /* DataFetchPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147884D2CC833D100752213 /* DataFetchPhase.swift */; };
+		E14788502CC8E28700752213 /* CustomToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147884F2CC8E1DD00752213 /* CustomToolBar.swift */; };
+		E14788522CC8E43000752213 /* UIFont + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14788512CC8E43000752213 /* UIFont + Ext.swift */; };
+		E14788562CC8E56000752213 /* Inter-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E14788542CC8E56000752213 /* Inter-Medium.otf */; };
+		E14788572CC8E56000752213 /* Inter-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E14788552CC8E56000752213 /* Inter-Regular.otf */; };
+		E14788582CC8E56000752213 /* Inter-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E14788532CC8E56000752213 /* Inter-SemiBold.otf */; };
+		E147885B2CC8F00100752213 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147885A2CC8F00100752213 /* APIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,7 +74,6 @@
 		3730B15B2CC56BC2006AA874 /* RegistrationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreen.swift; sourceTree = "<group>"; };
 		3730B15D2CC56BE5006AA874 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3730B1872CC673E6006AA874 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
-		3730B18B2CC6742A006AA874 /* CustomToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBar.swift; sourceTree = "<group>"; };
 		3730B18D2CC67457006AA874 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		3740948F2CC5306500723D32 /* NewsToDayApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsToDayApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		374094922CC5306600723D32 /* NewsToDayAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsToDayAppApp.swift; sourceTree = "<group>"; };
@@ -92,11 +93,15 @@
 		E147883C2CC676FE00752213 /* KeysTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysTracker.swift; sourceTree = "<group>"; };
 		E147883E2CC677E700752213 /* BackBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackBarButton.swift; sourceTree = "<group>"; };
 		E14788422CC67F1800752213 /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
-		E14788442CC6831800752213 /* Adamina.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Adamina.ttf; sourceTree = "<group>"; };
-		E14788452CC6831800752213 /* InterVariable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = InterVariable.ttf; sourceTree = "<group>"; };
 		E14788492CC6DFDB00752213 /* AuthorizationMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationMiddleware.swift; sourceTree = "<group>"; };
-		E147884B2CC6E90800752213 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E147884D2CC833D100752213 /* DataFetchPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetchPhase.swift; sourceTree = "<group>"; };
+		E147884F2CC8E1DD00752213 /* CustomToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBar.swift; sourceTree = "<group>"; };
+		E14788512CC8E43000752213 /* UIFont + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Ext.swift"; sourceTree = "<group>"; };
+		E14788532CC8E56000752213 /* Inter-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.otf"; sourceTree = "<group>"; };
+		E14788542CC8E56000752213 /* Inter-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.otf"; sourceTree = "<group>"; };
+		E14788552CC8E56000752213 /* Inter-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.otf"; sourceTree = "<group>"; };
+		E14788592CC8E6DE00752213 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E147885A2CC8F00100752213 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +109,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3717CB032CC8B7060074FCE4 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +118,7 @@
 		3730B1652CC61E69006AA874 /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
-				E147884B2CC6E90800752213 /* NetworkManager.swift */,
+				E147885A2CC8F00100752213 /* APIManager.swift */,
 				E14788492CC6DFDB00752213 /* AuthorizationMiddleware.swift */,
 				E14788282CC64E7500752213 /* NetworkError.swift */,
 				E14788222CC6305B00752213 /* NewsDTO.swift */,
@@ -149,6 +153,7 @@
 		3730B1832CC6738D006AA874 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E14788512CC8E43000752213 /* UIFont + Ext.swift */,
 				E14788342CC6752700752213 /* Color + Ext.swift */,
 			);
 			path = Extensions;
@@ -179,7 +184,7 @@
 		3730B18A2CC67405006AA874 /* ToolBar */ = {
 			isa = PBXGroup;
 			children = (
-				3730B18B2CC6742A006AA874 /* CustomToolBar.swift */,
+				E147884F2CC8E1DD00752213 /* CustomToolBar.swift */,
 			);
 			path = ToolBar;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 		374094912CC5306600723D32 /* NewsToDayApp */ = {
 			isa = PBXGroup;
 			children = (
+				E14788592CC8E6DE00752213 /* Info.plist */,
 				374094922CC5306600723D32 /* NewsToDayAppApp.swift */,
 				374094942CC5306600723D32 /* ContentView.swift */,
 				374094AF2CC5455E00723D32 /* Screens */,
@@ -212,6 +218,7 @@
 			);
 			path = NewsToDayApp;
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		374094982CC5306B00723D32 /* Preview Content */ = {
 			isa = PBXGroup;
@@ -323,8 +330,9 @@
 		E14788462CC6831800752213 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				E14788442CC6831800752213 /* Adamina.ttf */,
-				E14788452CC6831800752213 /* InterVariable.ttf */,
+				E14788532CC8E56000752213 /* Inter-SemiBold.otf */,
+				E14788542CC8E56000752213 /* Inter-Medium.otf */,
+				E14788552CC8E56000752213 /* Inter-Regular.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -346,7 +354,6 @@
 			);
 			name = NewsToDayApp;
 			packageProductDependencies = (
-				3717CB022CC8B7060074FCE4 /* Kingfisher */,
 			);
 			productName = NewsToDayApp;
 			productReference = 3740948F2CC5306500723D32 /* NewsToDayApp.app */;
@@ -374,10 +381,10 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 374094862CC5306500723D32;
 			packageReferences = (
-				3717CB012CC8B7060074FCE4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 374094902CC5306500723D32 /* Products */;
 			projectDirPath = "";
@@ -393,8 +400,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E14788472CC6831800752213 /* Adamina.ttf in Resources */,
-				E14788482CC6831800752213 /* InterVariable.ttf in Resources */,
+				E14788562CC8E56000752213 /* Inter-Medium.otf in Resources */,
+				E14788572CC8E56000752213 /* Inter-Regular.otf in Resources */,
+				E14788582CC8E56000752213 /* Inter-SemiBold.otf in Resources */,
 				3740949A2CC5306B00723D32 /* Preview Assets.xcassets in Resources */,
 				374094972CC5306B00723D32 /* Assets.xcassets in Resources */,
 			);
@@ -407,11 +415,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E14788502CC8E28700752213 /* CustomToolBar.swift in Sources */,
 				3730B14A2CC569C5006AA874 /* ProfileView.swift in Sources */,
 				E14788292CC64E7500752213 /* NetworkError.swift in Sources */,
 				3730B14C2CC569F9006AA874 /* DetailView.swift in Sources */,
 				E14788372CC6766500752213 /* CacheImplementation.swift in Sources */,
-				E147882D2CC65B1200752213 /* AuthorizationMiddleware.swift in Sources */,
+				E14788522CC8E43000752213 /* UIFont + Ext.swift in Sources */,
 				3717CB002CC8B22A0074FCE4 /* ArticleView.swift in Sources */,
 				3730B1542CC56ACE006AA874 /* FavoritesView.swift in Sources */,
 				E14788232CC6305B00752213 /* NewsDTO.swift in Sources */,
@@ -427,7 +436,6 @@
 				3730B1462CC56969006AA874 /* MainView.swift in Sources */,
 				3730B1402CC568D6006AA874 /* OnboardingView.swift in Sources */,
 				3730B1582CC56B4A006AA874 /* CategoriesView.swift in Sources */,
-				E147884C2CC6E90800752213 /* NetworkManager.swift in Sources */,
 				3730B1562CC56AE9006AA874 /* FavoritesViewModel.swift in Sources */,
 				E147884A2CC6DFDB00752213 /* AuthorizationMiddleware.swift in Sources */,
 				374094952CC5306600723D32 /* ContentView.swift in Sources */,
@@ -439,6 +447,7 @@
 				374094932CC5306600723D32 /* NewsToDayAppApp.swift in Sources */,
 				E14788252CC644BD00752213 /* NewsAPISpec.swift in Sources */,
 				E147883B2CC676DA00752213 /* CacheProtocol.swift in Sources */,
+				E147885B2CC8F00100752213 /* APIManager.swift in Sources */,
 				3730B1422CC56913006AA874 /* OnboardingViewModel.swift in Sources */,
 				E14788432CC67F1800752213 /* Categories.swift in Sources */,
 				3730B1482CC5699B006AA874 /* ProfileViewModel.swift in Sources */,
@@ -578,11 +587,15 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NewsToDayApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewsToDayApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphoneos*]" = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -590,9 +603,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = evgenyk.NewsToDayApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -606,11 +623,14 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NewsToDayApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewsToDayApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -618,9 +638,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = evgenyk.NewsToDayApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -646,25 +670,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		3717CB012CC8B7060074FCE4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		3717CB022CC8B7060074FCE4 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3717CB012CC8B7060074FCE4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 374094872CC5306500723D32 /* Project object */;
 }

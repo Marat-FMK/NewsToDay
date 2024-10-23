@@ -9,61 +9,58 @@ import SwiftUI
 
 struct DetailView: View {
     @Environment(\.dismiss) var dismiss
-    
     let news: News
+    let action: () -> Void
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack(alignment: .leading) {
-                
                 ZStack(alignment: .bottomLeading) {
-                    
-                    ShareLink(item: news.description) { // отдает текст новости в линк
-                        Label("", systemImage: "square.and.arrow.up.circle") // Image?
+                    Button(action: {
+                        shareNewsText(news.description)
+                    }) {
+                        Image(systemName: "square.and.arrow.up.circle")
+                            .foregroundStyle(.black)
                     }
-                    .foregroundStyle(Color.black) // white !! не отображается белая почеу то, все остальное работает
                     .offset(x: 340, y: -200)
                     
                     news.image
                         .resizable()
                         .scaledToFill()
-                        .opacity(0.5) // удалить на релизн версии
-                        .frame(width: 375, height: 384 )
+                        .opacity(0.5)
+                        .frame(width: 375, height: 384)
                     
                     VStack(alignment: .leading) {
                         
                         Text(news.category)
                             .frame(width: 48, height: 16)
                             .font(.system(size: 12))
-                            .padding(.horizontal,16)
-                            .padding(.vertical,8)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
                             .foregroundStyle(.white)
-                            .background(.purple) // 71 90 215
-                            .clipShape(.capsule)
+                            .background(Color.purple)
+                            .clipShape(Capsule())
                         
                         Text(news.name)
                             .frame(width: 336, height: 56, alignment: .leading)
                             .lineLimit(2)
                             .font(.system(size: 20))
-                            .bold()
-                            .foregroundStyle(Color.white)
-                            .padding(.bottom,30)
-                        
+                            .foregroundColor(.white)
+                            .padding(.bottom, 30)
                         
                         Text(news.author)
                             .font(.system(size: 16))
                             .bold()
-                            .foregroundStyle(.white)
-                            .padding(.bottom,8)
+                            .foregroundColor(.white)
+                            .padding(.bottom, 8)
                         
                         Text("Autor")
-                            .foregroundStyle(Color.white) // 172 175 195
+                            .foregroundColor(.white)
                             .font(.custom("Helvetica Neue", size: 14))
                         
                     }
-                    .padding(.leading,8)
+                    .padding(.leading, 8)
                     .offset(y: -30)
-                    
                 }
                 
                 VStack {
@@ -71,52 +68,59 @@ struct DetailView: View {
                         .font(.system(size: 16))
                         .bold()
                         .frame(width: 58, height: 24, alignment: .leading)
-                        .padding(.top,8)
+                        .padding(.top, 8)
                 }
                 
                 ScrollView(showsIndicators: false) {
                     Text(news.description)
                         .frame(width: 336, alignment: .leading)
-                    
-                        .padding(.top,8)
+                        .padding(.top, 8)
                 }
                 
             }
             .ignoresSafeArea()
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        dismiss() // ? close
+                        dismiss()
                     } label: {
-                        Image(systemName: "arrow.left") //image?
+                        Image(systemName: "arrow.left")
                             .resizable()
-                            .foregroundStyle(.white)
+                            .foregroundColor(.white)
                             .frame(width: 14, height: 14)
-                            .padding(.leading,12)
+                            .padding(.leading, 12)
                     }
                 }
                 
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        // bookmark add/delete on savedNews array
+                        action()
                     } label: {
-                        Image(systemName: "bookmark") //image?
+                        Image(systemName: "bookmark")
                             .resizable()
-                            .foregroundStyle(news.bookmark ? .white : .gray) // color?
+                            .foregroundColor(news.bookmark ? .white : .gray)
                             .frame(width: 17, height: 24)
-                            .padding(.trailing,12)
+                            .padding(.trailing, 12)
                     }
                 }
             }
         }
-        .navigationBarBackButtonHidden()
+        .navigationBarBackButtonHidden(true)
     }
-        
+    
+
+    private func shareNewsText(_ text: String) {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootVC = windowScene.windows.first?.rootViewController else { return }
+
+        let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+        rootVC.present(activityVC, animated: true, completion: nil)
+    }
 }
+
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(news: News(name: "det new", bookmark: false, image: Image("handLuggage"), category: "Politics", author: "Det Autor", description: "Det Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpwet Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw"))
+        DetailView(news: News(name: "Sample News", bookmark: false, image: Image("handLuggage"), category: "Politics", author: "Sample Author", description: "Sample description of the news article."), action: {})
     }
 }
-
