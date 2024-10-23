@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - NewsAPIManagerProtocol
 protocol INewsAPIManager {
-    func getNews() async throws -> NewsApiResponseDTO
+    func getNews(with country: String,_ category: String) async throws -> [ArticleDTO]
     func getNews(by category: String) async throws -> [ArticleDTO]?
     func getNews(with searchText: String) async throws -> [ArticleDTO]?
 }
@@ -26,10 +26,10 @@ final class NewsAPIManager: APIManager, INewsAPIManager {
         super.init(apiClient: apiClient)
     }
     
-    func getNews() async throws -> NewsApiResponseDTO {
-        let apiSpec: NewsAPISpec = .getNews
+    func getNews(with country: String, _ category: String) async throws -> [ArticleDTO] {
+        let apiSpec: NewsAPISpec = .getTopNews(country: country, category: category)
         let news = try await apiClient?.sendRequest(apiSpec)
-        return news as! NewsApiResponseDTO
+        return news as! [ArticleDTO]
     }
     
     func getNews(by category: String) async throws -> [ArticleDTO]? {

@@ -9,14 +9,14 @@ import Foundation
 
 // MARK: - NewsAPISpec Enum
 enum NewsAPISpec: APISpec {
-    case getNews
+    case getTopNews(country: String, category: String)
     case getNewsBy(category: String)
     case getNewsWith(searchText: String)
     
     // MARK: - Base URL Path
     private var path: String {
         switch self {
-        case .getNews, .getNewsBy:
+        case .getTopNews, .getNewsBy:
             return "/api/1/news"
         case .getNewsWith:
             return "/api/1/news"
@@ -26,8 +26,11 @@ enum NewsAPISpec: APISpec {
     // MARK: - Query Items
     private var queryItems: [URLQueryItem] {
         switch self {
-        case .getNews:
-            return [URLQueryItem(name: "country", value: "us")]
+        case .getTopNews(let country, let category):
+            return [
+                URLQueryItem(name: "country", value: country),
+                URLQueryItem(name: "category", value: category)
+            ]
         case .getNewsBy(let category):
             return [
                 URLQueryItem(name: "country", value: "us"),
@@ -36,7 +39,6 @@ enum NewsAPISpec: APISpec {
         case .getNewsWith(let searchText):
             return [
                 URLQueryItem(name: "q", value: searchText),
-                URLQueryItem(name: "country", value: "us")
             ]
         }
     }

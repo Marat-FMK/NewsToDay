@@ -33,6 +33,7 @@ final class MainViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
     @Published var selectedOrder: DisplayOrderType = .alphabetical
     @Published var searchText: String = ""
+    @Published var selectedCategory: Categories = .top
     
     private let timeIntervalForUpdateCache: TimeInterval = 7 * 24 * 60 * 60
     private let cache: DiskCache<[ArticleDTO]>
@@ -110,10 +111,11 @@ final class MainViewModel: ObservableObject {
     }
     
     private func fetchArticlesFromAPI() async throws -> [ArticleDTO] {
-        let articlesFromAPI = try await newsAPIManager.getNews().results
+        let articlesFromAPI = try await newsAPIManager.getNews(with: selectedCategory.rawValue)
         await cache.setValue(articlesFromAPI, forKey: fetchTaskToken.articles)
         try? await cache.saveToDisk()
-        return articlesFromAPI
+#warning("исравить")
+        return articlesFromAPI!
     }
     
     // MARK: - Fetch News by Category
