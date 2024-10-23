@@ -16,66 +16,74 @@ struct DetailView: View {
         NavigationView {
             VStack(alignment: .leading) {
                 ZStack(alignment: .bottomLeading) {
+                    
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 0)
+                        news.image
+                            .resizable()
+                            .opacity(0.75)
+                    }
+                    .frame(width: 405, height: 380)
+                    
                     Button(action: {
                         shareNewsText(news.description)
                     }) {
-                        Image(systemName: "square.and.arrow.up.circle")
-                            .foregroundStyle(.black)
+                        Image(systemName: "arrowshape.turn.up.right")
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .foregroundStyle(.white)
+                            
                     }
-                    .offset(x: 340, y: -200)
-                    
-                    news.image
-                        .resizable()
-                        .scaledToFill()
-                        .opacity(0.5)
-                        .frame(width: 375, height: 384)
+                    .offset(x: 355, y: -240)
                     
                     VStack(alignment: .leading) {
                         
                         Text(news.category)
                             .frame(width: 48, height: 16)
-                            .font(.system(size: 12))
+                            .font(.interRegular(12))
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
                             .foregroundStyle(.white)
-                            .background(Color.purple)
+                            .background(DS.Colors.purplePrimary)
                             .clipShape(Capsule())
+                            .padding(.bottom,10)
                         
                         Text(news.name)
                             .frame(width: 336, height: 56, alignment: .leading)
                             .lineLimit(2)
-                            .font(.system(size: 20))
+                            .font(.interSemiBold(20))
                             .foregroundColor(.white)
                             .padding(.bottom, 30)
                         
                         Text(news.author)
-                            .font(.system(size: 16))
-                            .bold()
+                            .font(.interSemiBold(16))
                             .foregroundColor(.white)
                             .padding(.bottom, 8)
                         
                         Text("Autor")
                             .foregroundColor(.white)
-                            .font(.custom("Helvetica Neue", size: 14))
+                            .font(.interMedium(14))
                         
                     }
-                    .padding(.leading, 8)
+                    .padding(.leading, 26)
                     .offset(y: -30)
                 }
                 
-                VStack {
+                VStack(alignment: .leading) {
                     Text("Results")
-                        .font(.system(size: 16))
-                        .bold()
+                        .font(.interSemiBold(16))
                         .frame(width: 58, height: 24, alignment: .leading)
-                        .padding(.top, 8)
+                        .padding(.top,24)
+                    
+                    ScrollView(showsIndicators: false) {
+                        Text(news.description)
+                            .font(.interMedium(16))
+                            .foregroundStyle(DS.Colors.grayDark)
+                            .frame(width: 336, alignment: .leading)
+                            .padding(.top, 8)
+                    }
                 }
-                
-                ScrollView(showsIndicators: false) {
-                    Text(news.description)
-                        .frame(width: 336, alignment: .leading)
-                        .padding(.top, 8)
-                }
+                    .padding()
                 
             }
             .ignoresSafeArea()
@@ -121,6 +129,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(news: News(name: "Sample News", bookmark: false, image: Image("handLuggage"), category: "Politics", author: "Sample Author", description: "Sample description of the news article."), action: {})
+        DetailView(news: News(name: "Sample News", bookmark: true, image: Image("handLuggage"), category: "Politics", author: "Sample Author", description: "Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races.\n\n For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters.\n\n Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races.\n\n For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters."), action: {})
     }
 }
