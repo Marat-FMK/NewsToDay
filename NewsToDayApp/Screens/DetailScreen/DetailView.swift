@@ -47,7 +47,6 @@ struct DetailView: View {
                     VStack(alignment: .leading) {
                         
                         Text(news.category)
-                            .frame(width: 48, height: 16)
                             .font(.interRegular(12))
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
