@@ -22,31 +22,31 @@ struct PageNumber: View {
         if number == 0 {
             HStack {
                     RoundedRectangle(cornerRadius: 12)
-                    .foregroundStyle(Color.purple)
+                    .foregroundStyle(DS.Colors.purplePrimary)
                     Circle()
-                    .foregroundStyle(Color.gray) // 243 244 246
+                    .foregroundStyle(DS.Colors.grayLighter)
                     Circle()
-                    .foregroundStyle(Color.gray) // 243 244 246
+                    .foregroundStyle(DS.Colors.grayLighter)
             }
         }
         if number == 1 {
             HStack {
                     Circle()
-                    .foregroundStyle(Color.gray) // 243 244 246
+                    .foregroundStyle(DS.Colors.grayLighter)
                 RoundedRectangle(cornerRadius: 12)
-                    .foregroundStyle(Color.purple)
+                    .foregroundStyle(DS.Colors.purplePrimary)
                     Circle()
-                    .foregroundStyle(Color.gray) // 243 244 246
+                    .foregroundStyle(DS.Colors.grayLighter)
             }
         }
         if number == 2 {
             HStack {
                     Circle()
-                    .foregroundStyle(Color.gray) // 243 244 246
+                    .foregroundStyle(DS.Colors.grayLighter)
                     Circle()
-                    .foregroundStyle(Color.gray) // 243 244 246
+                    .foregroundStyle(DS.Colors.grayLighter)
                 RoundedRectangle(cornerRadius: 12)
-                    .foregroundStyle(Color.purple)
+                    .foregroundStyle(DS.Colors.purplePrimary)
             }
         }
         
@@ -88,13 +88,13 @@ struct OnboardingView: View {
                                 .offset(y:190)
                             
                             Text(items[index].title)
-                                .font(.system(size: 24))
-                                .bold()
+                                .font(.interSemiBold(24))
                                 .offset(y:220)
                             
                             Text(items[index].discription)
                                 .frame(width: 216, height: 68, alignment:.center)
-                                .font(.system(size: 16))
+                                .font(.interRegular(18))
+                                .foregroundStyle(DS.Colors.grayPrimary)
                                 .offset(y: 290)
                          
                             
@@ -109,8 +109,7 @@ struct OnboardingView: View {
                                             .frame(width: 235, height: 56)
                                             .foregroundStyle(Color.purple)
                                         Text("Get Started")
-                                            .font(.system(size: 20))
-                                            .bold()
+                                            .font(.interSemiBold(16))
                                             .foregroundStyle(Color.white) // 71 90 215
                                     }
                                 }

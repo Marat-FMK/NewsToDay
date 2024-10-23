@@ -21,8 +21,8 @@ struct CustomToolBar: View {
             
             
             Text(subTitle)
-                .foregroundStyle(DS.Colors.pgrayPrimary)
-                .font(.interMedium(16))
+                .foregroundStyle(DS.Colors.grayPrimary)
+                .font(.interSemiBold(16))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
         }

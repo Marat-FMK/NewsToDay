@@ -9,9 +9,12 @@ import Foundation
 
 enum Resources {
     enum Text {
+        static let mainTitle = "Browse"
+        static let mainSubTitle = "Discover things of this world"
         static let profileTitle = "Profile"
         static let categoriesTitle = "Categories"
         static let categoriesSubTitle = "Thousands of articles in each category"
+        
     }
     
     enum Image {

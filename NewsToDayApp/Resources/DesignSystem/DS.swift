@@ -15,7 +15,7 @@ enum DS {
         static let purpleLighter = Color(hex: "#EEF0FB")
         
         static let grayDark = Color(hex: "#666C8E")
-        static let pgrayPrimary = Color(hex: "#7C82A1")
+        static let grayPrimary = Color(hex: "#7C82A1")
         static let grayLight = Color(hex: "#ACAFC3")
         static let grayLighter = Color(hex: "#F3F4F6")
         
