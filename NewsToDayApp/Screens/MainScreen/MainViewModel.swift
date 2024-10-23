@@ -74,7 +74,6 @@ final class MainViewModel: ObservableObject {
     func getTopNews() -> [ArticleDTO] { sortedArticles }
     
     
-    
     // MARK: - Fetch All News
     func fetchTopNews(ignoreCache: Bool = false) async {
         phase = .empty
