@@ -31,9 +31,15 @@ struct MainView: View {
     let sortTitles = [ "All", "Bookmark", "A - z"]
     var body: some View {
         
-                ScrollView(showsIndicators: false) {
                     
                     VStack {
+                        CustomToolBar(
+                            title: Resources.Text.mainTitle,
+                            subTitle: Resources.Text.mainSubTitle
+                        )
+                        .padding(.top, 0)
+                        ScrollView(showsIndicators: false) {
+                        
                         VStack(alignment: .leading) {
                             
                             ZStack {
@@ -122,12 +128,11 @@ struct MainView: View {
                         .padding()
                     }
                 }
-                .toolbar {
-                    CustomToolBar(title: "Browse", subTitle: "Discover things of this world")
-                        .offset(x: -130, y: -10)
+                .task {
+                    await viewModel.fetchTopNews()
                 }
-//                  .searchable(text: $searchText, prompt: "Search")
-         
+                .ignoresSafeArea()
+
     }
     
     private func checkSelectedCategory(_ categoryName: String)-> Bool {

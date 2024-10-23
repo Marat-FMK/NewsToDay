@@ -12,19 +12,23 @@ struct CustomToolBar: View {
     let subTitle: String
     
     var body: some View {
+        
         VStack(alignment: .leading) {
             Text(title)
                 .foregroundStyle(DS.Colors.blackyPrimary)
                 .font(.interSemiBold(32))
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
+            
             
             Text(subTitle)
                 .foregroundStyle(DS.Colors.grayPrimary)
                 .font(.interSemiBold(16))
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
+            
         }
+        .padding(.top, 72)
+        .padding(.horizontal)
+        .background(.background)
     }
 }
 
