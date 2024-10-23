@@ -20,9 +20,7 @@ struct CustomTabBarView: View {
                     MainView(viewModel: mainViewModel)
                 }
             case 2:
-                NavigationView {
                     CategoriesView()
-                }
             case 3:
                 NavigationView {
                     BookmarkView()
