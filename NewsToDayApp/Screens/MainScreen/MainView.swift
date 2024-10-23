@@ -10,6 +10,8 @@ import SwiftUI
 struct MainView: View {
     @StateObject var viewModel: MainViewModel
     
+    
+    
     @State private var selectedTitleForSort = 0
     @State private var searchText = ""
     @State private var selectedCategory = "Random"
@@ -53,6 +55,7 @@ struct MainView: View {
                             .pickerStyle(.segmented)
                             .padding(.bottom,20)
                             .colorMultiply(DS.Colors.purplePrimary)
+                            .colorScheme(.dark)
                             
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {

@@ -36,6 +36,14 @@ struct DetailView: View {
                     }
                     .offset(x: 355, y: -240)
                     
+                    Link(destination: URL(string: "https://ria.ru/20241023/briks-1979545138.html")!) {
+                        Image(systemName: "globe")
+                            .resizable()
+                            .foregroundStyle(.white)
+                            .frame(width: 25, height: 25)
+                    }
+                    .offset(x: 355, y: -190 )
+                    
                     VStack(alignment: .leading) {
                         
                         Text(news.category)
@@ -70,11 +78,12 @@ struct DetailView: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("Results")
-                        .font(.interSemiBold(16))
-                        .frame(width: 58, height: 24, alignment: .leading)
-                        .padding(.top,24)
-                    
+                
+                        Text("Results")
+                            .font(.interSemiBold(16))
+                            .frame(width: 58, height: 24, alignment: .leading)
+                            .padding(.top,24)
+                      
                     ScrollView(showsIndicators: false) {
                         Text(news.description)
                             .font(.interMedium(16))
