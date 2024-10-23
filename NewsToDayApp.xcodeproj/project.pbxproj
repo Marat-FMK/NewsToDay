@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3717CAFE2CC8B1D20074FCE4 /* HeaderTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3717CAFD2CC8B1D20074FCE4 /* HeaderTitleView.swift */; };
 		3717CB002CC8B22A0074FCE4 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3717CAFF2CC8B22A0074FCE4 /* ArticleView.swift */; };
+		3717CB072CC917860074FCE4 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3717CB062CC917860074FCE4 /* ProfileHeaderView.swift */; };
+		3717CB0A2CC91E300074FCE4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3717CB092CC91E300074FCE4 /* Kingfisher */; };
 		3730B1402CC568D6006AA874 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B13F2CC568D6006AA874 /* OnboardingView.swift */; };
 		3730B1422CC56913006AA874 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1412CC56913006AA874 /* OnboardingViewModel.swift */; };
 		3730B1442CC5694B006AA874 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1432CC5694B006AA874 /* MainViewModel.swift */; };
@@ -19,8 +21,8 @@
 		3730B14E2CC56A0C006AA874 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B14D2CC56A0C006AA874 /* DetailViewModel.swift */; };
 		3730B1502CC56A62006AA874 /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B14F2CC56A62006AA874 /* CustomTabBarView.swift */; };
 		3730B1522CC56A7C006AA874 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1512CC56A7C006AA874 /* CustomTabBar.swift */; };
-		3730B1542CC56ACE006AA874 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1532CC56ACE006AA874 /* FavoritesView.swift */; };
-		3730B1562CC56AE9006AA874 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1552CC56AE9006AA874 /* FavoritesViewModel.swift */; };
+		3730B1542CC56ACE006AA874 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1532CC56ACE006AA874 /* BookmarksView.swift */; };
+		3730B1562CC56AE9006AA874 /* BookmarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1552CC56AE9006AA874 /* BookmarksViewModel.swift */; };
 		3730B1582CC56B4A006AA874 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1572CC56B4A006AA874 /* CategoriesView.swift */; };
 		3730B15A2CC56B68006AA874 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1592CC56B68006AA874 /* CategoriesViewModel.swift */; };
 		3730B15C2CC56BC2006AA874 /* RegistrationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B15B2CC56BC2006AA874 /* RegistrationScreen.swift */; };
@@ -57,6 +59,7 @@
 /* Begin PBXFileReference section */
 		3717CAFD2CC8B1D20074FCE4 /* HeaderTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTitleView.swift; sourceTree = "<group>"; };
 		3717CAFF2CC8B22A0074FCE4 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
+		3717CB062CC917860074FCE4 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		3730B13F2CC568D6006AA874 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		3730B1412CC56913006AA874 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		3730B1432CC5694B006AA874 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -67,8 +70,8 @@
 		3730B14D2CC56A0C006AA874 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		3730B14F2CC56A62006AA874 /* CustomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarView.swift; sourceTree = "<group>"; };
 		3730B1512CC56A7C006AA874 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
-		3730B1532CC56ACE006AA874 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
-		3730B1552CC56AE9006AA874 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		3730B1532CC56ACE006AA874 /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
+		3730B1552CC56AE9006AA874 /* BookmarksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewModel.swift; sourceTree = "<group>"; };
 		3730B1572CC56B4A006AA874 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		3730B1592CC56B68006AA874 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
 		3730B15B2CC56BC2006AA874 /* RegistrationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreen.swift; sourceTree = "<group>"; };
@@ -109,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3717CB0A2CC91E300074FCE4 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +264,7 @@
 			children = (
 				3730B1472CC5699B006AA874 /* ProfileViewModel.swift */,
 				3730B1492CC569C5006AA874 /* ProfileView.swift */,
+				3717CB062CC917860074FCE4 /* ProfileHeaderView.swift */,
 			);
 			path = ProfileScreen;
 			sourceTree = "<group>";
@@ -267,8 +272,8 @@
 		374094A92CC539E300723D32 /* FavoritesScreen */ = {
 			isa = PBXGroup;
 			children = (
-				3730B1532CC56ACE006AA874 /* FavoritesView.swift */,
-				3730B1552CC56AE9006AA874 /* FavoritesViewModel.swift */,
+				3730B1532CC56ACE006AA874 /* BookmarksView.swift */,
+				3730B1552CC56AE9006AA874 /* BookmarksViewModel.swift */,
 				3717CAFD2CC8B1D20074FCE4 /* HeaderTitleView.swift */,
 				3717CAFF2CC8B22A0074FCE4 /* ArticleView.swift */,
 			);
@@ -351,9 +356,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				3717CB0C2CC91E5B0074FCE4 /* PBXTargetDependency */,
 			);
 			name = NewsToDayApp;
 			packageProductDependencies = (
+				3717CB092CC91E300074FCE4 /* Kingfisher */,
 			);
 			productName = NewsToDayApp;
 			productReference = 3740948F2CC5306500723D32 /* NewsToDayApp.app */;
@@ -385,6 +392,7 @@
 			);
 			mainGroup = 374094862CC5306500723D32;
 			packageReferences = (
+				3717CB082CC91E300074FCE4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 374094902CC5306500723D32 /* Products */;
 			projectDirPath = "";
@@ -422,9 +430,10 @@
 				E14788372CC6766500752213 /* CacheImplementation.swift in Sources */,
 				E14788522CC8E43000752213 /* UIFont + Ext.swift in Sources */,
 				3717CB002CC8B22A0074FCE4 /* ArticleView.swift in Sources */,
-				3730B1542CC56ACE006AA874 /* FavoritesView.swift in Sources */,
+				3730B1542CC56ACE006AA874 /* BookmarksView.swift in Sources */,
 				E14788232CC6305B00752213 /* NewsDTO.swift in Sources */,
 				E14788272CC64E6300752213 /* APIClient.swift in Sources */,
+				3717CB072CC917860074FCE4 /* ProfileHeaderView.swift in Sources */,
 				E14788352CC6752700752213 /* Color + Ext.swift in Sources */,
 				3730B15C2CC56BC2006AA874 /* RegistrationScreen.swift in Sources */,
 				3730B1442CC5694B006AA874 /* MainViewModel.swift in Sources */,
@@ -436,7 +445,7 @@
 				3730B1462CC56969006AA874 /* MainView.swift in Sources */,
 				3730B1402CC568D6006AA874 /* OnboardingView.swift in Sources */,
 				3730B1582CC56B4A006AA874 /* CategoriesView.swift in Sources */,
-				3730B1562CC56AE9006AA874 /* FavoritesViewModel.swift in Sources */,
+				3730B1562CC56AE9006AA874 /* BookmarksViewModel.swift in Sources */,
 				E147884A2CC6DFDB00752213 /* AuthorizationMiddleware.swift in Sources */,
 				374094952CC5306600723D32 /* ContentView.swift in Sources */,
 				E147883D2CC676FE00752213 /* KeysTracker.swift in Sources */,
@@ -459,6 +468,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3717CB0C2CC91E5B0074FCE4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 3717CB0B2CC91E5B0074FCE4 /* Kingfisher */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3740949B2CC5306B00723D32 /* Debug */ = {
@@ -670,6 +686,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3717CB082CC91E300074FCE4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3717CB092CC91E300074FCE4 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3717CB082CC91E300074FCE4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		3717CB0B2CC91E5B0074FCE4 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3717CB082CC91E300074FCE4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 374094872CC5306500723D32 /* Project object */;
 }

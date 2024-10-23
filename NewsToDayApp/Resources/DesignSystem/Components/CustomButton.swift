@@ -63,6 +63,6 @@ struct CustomButton: View {
 }
 
 // MARK: - Preview
-#Preview {
-    CustomButton(title: "Language", action: {}, buttonType: .mode, isSelected: true)
-}
+//#Preview {
+//    CustomButton(title: "Language", action: {}, buttonType: .mode, isSelected: true)
+//}

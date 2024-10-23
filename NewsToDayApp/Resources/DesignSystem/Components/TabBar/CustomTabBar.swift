@@ -77,6 +77,6 @@ struct CustomTabBar: View {
     }
 }
 
-#Preview {
-    CustomTabBar(tabSelection: .constant(1))
-}
+//#Preview {
+//    CustomTabBar(tabSelection: .constant(1))
+//}
