@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3717CAFE2CC8B1D20074FCE4 /* HeaderTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3717CAFD2CC8B1D20074FCE4 /* HeaderTitleView.swift */; };
+		3717CB002CC8B22A0074FCE4 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3717CAFF2CC8B22A0074FCE4 /* ArticleView.swift */; };
 		3730B1402CC568D6006AA874 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B13F2CC568D6006AA874 /* OnboardingView.swift */; };
 		3730B1422CC56913006AA874 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1412CC56913006AA874 /* OnboardingViewModel.swift */; };
 		3730B1442CC5694B006AA874 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3730B1432CC5694B006AA874 /* MainViewModel.swift */; };
@@ -49,6 +51,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3717CAFD2CC8B1D20074FCE4 /* HeaderTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTitleView.swift; sourceTree = "<group>"; };
+		3717CAFF2CC8B22A0074FCE4 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 		3730B13F2CC568D6006AA874 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		3730B1412CC56913006AA874 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		3730B1432CC5694B006AA874 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -253,6 +257,8 @@
 			children = (
 				3730B1532CC56ACE006AA874 /* FavoritesView.swift */,
 				3730B1552CC56AE9006AA874 /* FavoritesViewModel.swift */,
+				3717CAFD2CC8B1D20074FCE4 /* HeaderTitleView.swift */,
+				3717CAFF2CC8B22A0074FCE4 /* ArticleView.swift */,
 			);
 			path = FavoritesScreen;
 			sourceTree = "<group>";
@@ -396,6 +402,7 @@
 				3730B14C2CC569F9006AA874 /* DetailView.swift in Sources */,
 				E14788372CC6766500752213 /* CacheImplementation.swift in Sources */,
 				E147882D2CC65B1200752213 /* AuthorizationMiddleware.swift in Sources */,
+				3717CB002CC8B22A0074FCE4 /* ArticleView.swift in Sources */,
 				3730B1542CC56ACE006AA874 /* FavoritesView.swift in Sources */,
 				E14788232CC6305B00752213 /* NewsDTO.swift in Sources */,
 				E14788272CC64E6300752213 /* APIClient.swift in Sources */,
@@ -404,6 +411,7 @@
 				3730B1442CC5694B006AA874 /* MainViewModel.swift in Sources */,
 				E147882B2CC6500400752213 /* NewsAPIManager.swift in Sources */,
 				3730B14E2CC56A0C006AA874 /* DetailViewModel.swift in Sources */,
+				3717CAFE2CC8B1D20074FCE4 /* HeaderTitleView.swift in Sources */,
 				3730B1522CC56A7C006AA874 /* CustomTabBar.swift in Sources */,
 				3730B15A2CC56B68006AA874 /* CategoriesViewModel.swift in Sources */,
 				3730B1462CC56969006AA874 /* MainView.swift in Sources */,
