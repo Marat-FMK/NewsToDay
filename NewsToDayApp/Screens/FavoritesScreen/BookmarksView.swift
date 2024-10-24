@@ -49,12 +49,17 @@ struct BookmarkView: View {
                         ForEach(bookmarks, id: \.id) { item in
                             ZStack {
                                 ArticleView(model: item)
-                                NavigationLink(
-                                    destination: DetailView(news: item, action: {}),
-                                    label: {
-                                        EmptyView() // Используем EmptyView для скрытия NavigationLink, чтобы не отображать отдельный элемент интерфейса.
-                                    }
-                                ).opacity(0) // Делаем NavigationLink невидимым, но он все равно будет активным для навигации при нажатии на статью
+//                                NavigationLink(
+//                                    destination:
+//                                        DetailView(
+//                                            title: item.title,
+//                                            isFavorite: item.isFavorite,
+//                                                   action: {})
+//                                ),
+//                                    label: {
+//                                        EmptyView() // Используем EmptyView для скрытия NavigationLink, чтобы не отображать отдельный элемент интерфейса.
+//                                    }
+//                                ).opacity(0) // Делаем NavigationLink невидимым, но он все равно будет активным для навигации при нажатии на статью
                             }
                             .listRowInsets(.init())
                             .listRowSeparator(.hidden)
