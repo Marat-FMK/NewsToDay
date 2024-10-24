@@ -9,7 +9,15 @@ import SwiftUI
 
 struct DetailView: View {
     @Environment(\.dismiss) var dismiss
-    let news: ArticleDTO
+    
+    let title: String
+    let link: String?
+    let creator: [String]?
+    let description: String?
+    let category: [String]?
+    let isFavorite: Bool
+    let imageUrl: String?
+    
     let action: () -> Void
     
     var body: some View {
@@ -19,14 +27,15 @@ struct DetailView: View {
                     
                     ZStack {
                         RoundedRectangle(cornerRadius: 0)
-                        AsyncImage(url: URL(string:  news.imageUrl ?? ""))
+                        
+                        AsyncImage(url: URL(string: imageUrl ?? ""))
 //                            .resizable()
                             .opacity(0.75)
                     }
                     .frame(width: 405, height: 380)
                     
                     Button(action: {
-                        shareNewsText(news.description ?? "")
+                        shareNewsText(title)
                     }) {
                         Image(systemName: "arrowshape.turn.up.right")
                             .resizable()
@@ -36,7 +45,7 @@ struct DetailView: View {
                     }
                     .offset(x: 355, y: -240)
                     
-                    Link(destination: URL(string: "https://ria.ru/20241023/briks-1979545138.html")!) {
+                    Link(destination: URL(string: link ?? "https://ria.ru/20241023/briks-1979545138.html")!) {
                         Image(systemName: "globe")
                             .resizable()
                             .foregroundStyle(.white)
@@ -46,7 +55,7 @@ struct DetailView: View {
                     
                     VStack(alignment: .leading) {
                         
-                        Text(news.category?.first ?? "")
+                        Text(category?.first ?? "No category")
                             .font(.interRegular(12))
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
@@ -55,14 +64,14 @@ struct DetailView: View {
                             .clipShape(Capsule())
                             .padding(.bottom,10)
                         
-                        Text(news.title)
+                        Text(title)
                             .frame(width: 336, height: 56, alignment: .leading)
                             .lineLimit(2)
                             .font(.interSemiBold(20))
                             .foregroundColor(.white)
                             .padding(.bottom, 30)
                         
-                        Text(news.creator?.first ?? "")
+                        Text(creator?.first ?? "No author / creator")
                             .font(.interSemiBold(16))
                             .foregroundColor(.white)
                             .padding(.bottom, 8)
@@ -84,7 +93,7 @@ struct DetailView: View {
                             .padding(.top,24)
                       
                     ScrollView(showsIndicators: false) {
-                        Text(news.description ?? "")
+                        Text(description ?? "")
                             .font(.interMedium(16))
                             .foregroundStyle(DS.Colors.grayDark)
                             .frame(width: 336, alignment: .leading)
@@ -114,7 +123,7 @@ struct DetailView: View {
                     } label: {
                         Image(systemName: "bookmark")
                             .resizable()
-                            .foregroundColor(news.isFavorite ? .white : .gray)
+                            .foregroundColor(isFavorite ? .white : .gray)
                             .frame(width: 17, height: 24)
                             .padding(.trailing, 12)
                     }
@@ -137,6 +146,6 @@ struct DetailView: View {
 
 //struct DetailView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        DetailView(news: News(name: "Sample News", bookmark: true, image: Image("handLuggage"), category: "Politics", author: "Sample Author", description: "Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races.\n\n For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters.\n\n Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races.\n\n For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters."), action: {})
+////        DetailView(news: News(name: "Sample News", bookmark: true, image: Image("handLuggage"), category: "Politics", author: "Sample Author", description: "Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races.\n\n For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters.\n\n Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races.\n\n For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters."), action: {})
 //    }
 //}
