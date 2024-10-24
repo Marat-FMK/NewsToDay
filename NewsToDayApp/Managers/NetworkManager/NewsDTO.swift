@@ -12,12 +12,12 @@ import Foundation
 struct NewsApiResponseDTO: Sendable, Decodable, DecodableType {
     let status: String        // Status of the API response (e.g., "ok")
     let totalResults: Int     // Total number of articles returned
-    let articles: [ArticleDTO] // Array of articles in the response
+    let results: [ArticleDTO] // Array of articles in the response
     
     enum CodingKeys: String, CodingKey {
         case status
         case totalResults
-        case articles
+        case results
     }
     
     // MARK: - Custom Decoder for NewsApiResponseDTO
@@ -33,14 +33,14 @@ struct NewsApiResponseDTO: Sendable, Decodable, DecodableType {
         }
         self.status = try container.decode(String.self, forKey: .status)
         self.totalResults = try container.decode(Int.self, forKey: .totalResults)
-        self.articles = try container.decode([ArticleDTO].self, forKey: .articles)
+        self.results = try container.decode([ArticleDTO].self, forKey: .results)
     }
     
     // MARK: - Initializer
-    init(status: String, totalResults: Int, articles: [ArticleDTO]) {
+    init(status: String, totalResults: Int, results: [ArticleDTO]) {
         self.status = status
         self.totalResults = totalResults
-        self.articles = articles
+        self.results = results
     }
 }
 
@@ -48,27 +48,27 @@ struct NewsApiResponseDTO: Sendable, Decodable, DecodableType {
 // Represents an individual article in the API response
 struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, DecodableType {
     var id: String {
-        return UUID().uuidString // Generates a unique identifier if not present
+        return UUID().uuidString
     }
-    let source: Source           // Source of the article
-    let author: String?          // Author of the article (optional)
-    let title: String            // Title of the article
-    let description: String?      // Short description of the article
-    let url: String              // URL to the full article
-    let urlToImage: String?      // URL to the article's image (optional)
-    let publishedAt: String        // Publication date
-    let content: String?    // Full content of the article (optional)
-    var isFavorite: Bool
+    let title: String
+    let link: String?
+    let creator: [String]?
+    let description: String?
+    let content: String?
+    let imageUrl: String?
+    let category: [String]?
+    let country: [String]?
+    var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {
-        case source
-        case author
         case title
+        case link
+        case creator
         case description
-        case url
-        case urlToImage
-        case publishedAt
         case content
+        case imageUrl
+        case category
+        case country
         case isFavorite
     }
     
@@ -83,67 +83,16 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
                 )
             )
         }
-        self.source = try container.decode(Source.self, forKey: .source)
-        self.author = try container.decodeIfPresent(String.self, forKey: .author)
         self.title = try container.decode(String.self, forKey: .title)
+        self.link = try container.decodeIfPresent(String.self, forKey: .link)
+        self.creator = try container.decodeIfPresent([String].self, forKey: .creator)
         self.description = try container.decodeIfPresent(String.self, forKey: .description)
-        self.url = try container.decode(String.self, forKey: .url)
-        self.urlToImage = try container.decodeIfPresent(String.self, forKey: .urlToImage)
-        self.publishedAt = try container.decode(String.self, forKey: .publishedAt)
         self.content = try container.decodeIfPresent(String.self, forKey: .content)
+        self.imageUrl = try container.decodeIfPresent(String.self, forKey: .imageUrl)
+        self.category = try container.decodeIfPresent([String].self, forKey: .category)
+        self.country = try container.decodeIfPresent([String].self, forKey: .country)
         self.isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
-    }
-    
-    // MARK: - Initializer
-    init(source: Source, author: String?, title: String, description: String?, url: String, urlToImage: String?, publishedAt: String, content: String?, isFavorite: Bool) {
-        self.source = source
-        self.author = author
-        self.title = title
-        self.description = description
-        self.url = url
-        self.urlToImage = urlToImage
-        self.publishedAt = publishedAt
-        self.content = content
-        self.isFavorite = isFavorite
-    }
-    // Manual Equatable implementation
-    static func ==(lhs: ArticleDTO, rhs: ArticleDTO) -> Bool {
-        return lhs.source == rhs.source &&
-        lhs.author == rhs.author &&
-        lhs.title == rhs.title &&
-        lhs.description == rhs.description &&
-        lhs.url == rhs.url &&
-        lhs.urlToImage == rhs.urlToImage &&
-        lhs.publishedAt == rhs.publishedAt &&
-        lhs.content == rhs.content
-        lhs.isFavorite == rhs.isFavorite
     }
 }
 
-// MARK: - Source
-// Represents the source of an article
-struct Source: Codable, DecodableType, Sendable, Equatable, Hashable {
-    let id: String?   // Optional ID of the source
-    let name: String  // Name of the source
-    
-    // MARK: - Custom Decoder for Source
-    init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard !container.allKeys.isEmpty else {
-            throw DecodingError.dataCorrupted(
-                DecodingError.Context(
-                    codingPath: decoder.codingPath,
-                    debugDescription: "Empty object in Source: \(container.allKeys)"
-                )
-            )
-        }
-        self.id = try container.decodeIfPresent(String.self, forKey: .id)
-        self.name = try container.decode(String.self, forKey: .name)
-    }
-    
-    // MARK: - Initializer
-    init(id: String?, name: String) {
-        self.id = id
-        self.name = name
-    }
-}
+

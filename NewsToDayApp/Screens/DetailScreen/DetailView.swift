@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DetailView: View {
     @Environment(\.dismiss) var dismiss
-    let news: News
+    let news: ArticleDTO
     let action: () -> Void
     
     var body: some View {
@@ -19,14 +19,14 @@ struct DetailView: View {
                     
                     ZStack {
                         RoundedRectangle(cornerRadius: 0)
-                        news.image
-                            .resizable()
+                        AsyncImage(url: URL(string:  news.imageUrl ?? ""))
+//                            .resizable()
                             .opacity(0.75)
                     }
                     .frame(width: 405, height: 380)
                     
                     Button(action: {
-                        shareNewsText(news.description)
+                        shareNewsText(news.description ?? "")
                     }) {
                         Image(systemName: "arrowshape.turn.up.right")
                             .resizable()
@@ -46,7 +46,7 @@ struct DetailView: View {
                     
                     VStack(alignment: .leading) {
                         
-                        Text(news.category)
+                        Text(news.category?.first ?? "")
                             .font(.interRegular(12))
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
@@ -55,14 +55,14 @@ struct DetailView: View {
                             .clipShape(Capsule())
                             .padding(.bottom,10)
                         
-                        Text(news.name)
+                        Text(news.title)
                             .frame(width: 336, height: 56, alignment: .leading)
                             .lineLimit(2)
                             .font(.interSemiBold(20))
                             .foregroundColor(.white)
                             .padding(.bottom, 30)
                         
-                        Text(news.author)
+                        Text(news.creator?.first ?? "")
                             .font(.interSemiBold(16))
                             .foregroundColor(.white)
                             .padding(.bottom, 8)
@@ -84,7 +84,7 @@ struct DetailView: View {
                             .padding(.top,24)
                       
                     ScrollView(showsIndicators: false) {
-                        Text(news.description)
+                        Text(news.description ?? "")
                             .font(.interMedium(16))
                             .foregroundStyle(DS.Colors.grayDark)
                             .frame(width: 336, alignment: .leading)
@@ -114,7 +114,7 @@ struct DetailView: View {
                     } label: {
                         Image(systemName: "bookmark")
                             .resizable()
-                            .foregroundColor(news.bookmark ? .white : .gray)
+                            .foregroundColor(news.isFavorite ? .white : .gray)
                             .frame(width: 17, height: 24)
                             .padding(.trailing, 12)
                     }
@@ -135,8 +135,8 @@ struct DetailView: View {
 }
 
 
-struct DetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailView(news: News(name: "Sample News", bookmark: true, image: Image("handLuggage"), category: "Politics", author: "Sample Author", description: "Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races.\n\n For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters.\n\n Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races.\n\n For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters."), action: {})
-    }
-}
+//struct DetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailView(news: News(name: "Sample News", bookmark: true, image: Image("handLuggage"), category: "Politics", author: "Sample Author", description: "Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races.\n\n For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters.\n\n Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races.\n\n For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters."), action: {})
+//    }
+//}

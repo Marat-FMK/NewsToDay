@@ -9,20 +9,20 @@ import SwiftUI
 
 struct ArticleView: View {
     
-    let model: News
+    let model: ArticleDTO
        
        var body: some View {
            HStack() {
                // Используем встроенное изображение
-               model.image
-                   .resizable()
-                   .aspectRatio(contentMode: .fill)
+               AsyncImage(url: URL(string:  model.imageUrl ?? ""))
+//                   .resizable()
+//                   .aspectRatio(contentMode: .fill)
                    .frame(width: 96, height: 96)
                    .background(Color.black.opacity(0.4)) // Захардкоженный цвет фона
                    .clipShape(RoundedRectangle(cornerRadius: 12)) // Закругляем углы
                
                VStack(alignment: .leading) {
-                   Text(model.name)
+                   Text(model.title)
                        .font(.custom("Inter", size: 14)) // Шрифт Inter, размер 14
                        .fontWeight(.semibold) // Вес шрифта 600
                        .foregroundColor(Color(.black)) // Используем кастомный цвет
@@ -32,7 +32,7 @@ struct ArticleView: View {
 //                       .background(Color.yellow.opacity(0.1))
 
                    
-                   Text(model.category)
+                   Text(model.category?.first ?? "")
                        .font(.system(size: 16, weight: .semibold))
                        .foregroundColor(Color(.black)) // Используем кастомный цвет
                        .lineSpacing(24 - 16)

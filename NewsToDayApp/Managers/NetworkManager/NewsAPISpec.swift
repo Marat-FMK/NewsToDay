@@ -9,25 +9,28 @@ import Foundation
 
 // MARK: - NewsAPISpec Enum
 enum NewsAPISpec: APISpec {
-    case getNews
+    case getTopNews(country: String, category: String)
     case getNewsBy(category: String)
     case getNewsWith(searchText: String)
     
     // MARK: - Base URL Path
     private var path: String {
         switch self {
-        case .getNews, .getNewsBy:
-            return "/v2/top-headlines"
+        case .getTopNews, .getNewsBy:
+            return "/api/1/news"
         case .getNewsWith:
-            return "/v2/everything"
+            return "/api/1/news"
         }
     }
     
     // MARK: - Query Items
     private var queryItems: [URLQueryItem] {
         switch self {
-        case .getNews:
-            return [URLQueryItem(name: "country", value: "us")]
+        case .getTopNews(let country, let category):
+            return [
+                URLQueryItem(name: "country", value: country),
+                URLQueryItem(name: "category", value: category)
+            ]
         case .getNewsBy(let category):
             return [
                 URLQueryItem(name: "country", value: "us"),
@@ -36,7 +39,6 @@ enum NewsAPISpec: APISpec {
         case .getNewsWith(let searchText):
             return [
                 URLQueryItem(name: "q", value: searchText),
-                URLQueryItem(name: "country", value: "us")
             ]
         }
     }
@@ -45,7 +47,7 @@ enum NewsAPISpec: APISpec {
     var endpoint: String {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "newsapi.org"
+        components.host = "newsdata.io"
         components.path = path
         components.queryItems = queryItems
         return components.url?.absoluteString ?? ""

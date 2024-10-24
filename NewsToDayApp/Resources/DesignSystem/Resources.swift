@@ -14,7 +14,7 @@ enum Resources {
         static let profileTitle = "Profile"
         static let categoriesTitle = "Categories"
         static let categoriesSubTitle = "Thousands of articles in each category"
-        
+        static let search = "Search"
     }
     
     enum Image {
