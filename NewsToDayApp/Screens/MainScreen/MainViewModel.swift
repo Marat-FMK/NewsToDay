@@ -92,6 +92,7 @@ final class MainViewModel: ObservableObject {
             expirationInterval: timeIntervalForUpdateCache
         )
         
+        self.selectedCategory = categories.first ?? .top
         
         Task(priority: .high) {
             try? await cache.loadFromDisk()
