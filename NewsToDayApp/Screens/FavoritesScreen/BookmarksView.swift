@@ -38,42 +38,41 @@ struct BookmarkView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 24, height: 24)
                     }
-                    
-                    Text("No bookmarks yet!")
-                        .font(.system(size: 16, weight: .medium))
-                        .multilineTextAlignment(.center)
-                        .padding()
-                    Spacer()
-                }
-                .padding(.vertical, 150)
-            } else {
-                List {
-                    ForEach(bookmarks, id: \.id) { item in
-                        ZStack {
-                            ArticleView(model: item)
-                            NavigationLink(
-                                destination: DetailView(news: item, action: {}),
-                                label: {
-                                    EmptyView() // Используем EmptyView для скрытия NavigationLink, чтобы не отображать отдельный элемент интерфейса.
-                                }
-                            ).opacity(0) // Делаем NavigationLink невидимым, но он все равно будет активным для навигации при нажатии на статью
-                        }
-                        .listRowInsets(.init())
-                        .listRowSeparator(.hidden)
-                        .padding(.vertical, 10)
-                        .swipeActions {
-                            Button(
-                                action: {
-                                    // Удаление статьи
-                                    //                                        if let index = bookmarks.firstIndex(where: { $0.id == item.id }) {
-                                    //                                            self.bookmarks.remove(at: index)
-                                    //                                        }
-                                },
-                                label:  {
-                                    Text("Delete")
-                                }
-                            )
-                            .tint(.red)
+                    .padding(.vertical, 150)
+                } else {
+                    List {
+                        ForEach(bookmarks, id: \.id) { item in
+                            ZStack {
+                                ArticleView(model: item)
+//                                NavigationLink(
+//                                    destination:
+//                                        DetailView(
+//                                            title: item.title,
+//                                            isFavorite: item.isFavorite,
+//                                                   action: {})
+//                                ),
+//                                    label: {
+//                                        EmptyView() // Используем EmptyView для скрытия NavigationLink, чтобы не отображать отдельный элемент интерфейса.
+//                                    }
+//                                ).opacity(0) // Делаем NavigationLink невидимым, но он все равно будет активным для навигации при нажатии на статью
+                            }
+                            .listRowInsets(.init())
+                            .listRowSeparator(.hidden)
+                            .padding(.vertical, 10)
+                            .swipeActions {
+                                Button(
+                                    action: {
+                                        // Удаление статьи
+//                                        if let index = bookmarks.firstIndex(where: { $0.id == item.id }) {
+//                                            self.bookmarks.remove(at: index)
+//                                        }
+                                    },
+                                    label:  {
+                                        Text("Delete")
+                                    }
+                                )
+                                .tint(.red)
+                            }
                         }
                     }
                 }

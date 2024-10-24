@@ -83,7 +83,12 @@ struct CategoriesView: View {
                 }
                 .padding()
             }
+            
         }
+        .onAppear {
+            viewModel.loadCategories()
+        }
+        
         .navigationBarHidden(true)
         .background(.background)
         .ignoresSafeArea()
