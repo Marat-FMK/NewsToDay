@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct News: Identifiable { // in Model File
-    var id = UUID()
-    var name: String
-    var bookmark: Bool
-    var image: Image
-    var category: String
-    var author: String
-    var description: String
-}
+//struct News: Identifiable { // in Model File
+//    var id = UUID()
+//    var name: String
+//    var bookmark: Bool
+//    var image: Image
+//    var category: String
+//    var author: String
+//    var description: String
+//}

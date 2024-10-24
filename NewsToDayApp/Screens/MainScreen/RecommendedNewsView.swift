@@ -8,30 +8,31 @@
 import SwiftUI
 
 struct RecommendedNewsView: View {
-    let news: ArticleDTO
+    
+    let title: String
+    let imageUrl: String?
+    let category: [String]?
     
     var body: some View {
         HStack {
             
             ZStack {
-                
-//                RoundedRectangle(cornerRadius: 12) // Раскоментить , если надо затемнить рекоменд тоже
+//                RoundedRectangle(cornerRadius: 12) // Раскоментить , если надо затемнить каритнку
 //                    .foregroundStyle(.black)
 //                    .frame(width: 96, height: 96)
-                AsyncImage(url: URL(string:  news.imageUrl ?? ""))
+                AsyncImage(url: URL(string: imageUrl ?? ""))
 //                    .resizable()
 //                    .opacity(0.75)
                     .frame(width: 96, height: 96)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                
             }
             VStack(alignment: .leading) {
-                Text(news.category?.first ?? "")
+                Text(category?.first ?? "")
                     .frame(width:224, height: 20, alignment: .leading)
                     .font(.interMedium(14))
                     .foregroundStyle(DS.Colors.grayPrimary)
                 
-                Text(news.title)
+                Text(title)
                     .frame(width: 223, height: 48, alignment: .leading)
                     .font(.interSemiBold(16))
                     .foregroundStyle(DS.Colors.blackyPrimary)

@@ -9,7 +9,10 @@ import SwiftUI
 
 struct CategoryNewsView: View {
     
-    let news: ArticleDTO
+    let title: String
+    let imageUrl: String?
+    let isFavorite: Bool
+    let category: [String]?
     
     var body: some View {
         ZStack {
@@ -17,7 +20,7 @@ struct CategoryNewsView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundStyle(.black)
-                AsyncImage(url: URL(string:  news.imageUrl ?? ""))
+                AsyncImage(url: URL(string: imageUrl ?? ""))
 //                    .resizable()
                     .opacity(0.75)
                     .frame(width: 256, height: 256)
@@ -31,15 +34,15 @@ struct CategoryNewsView: View {
                 Image(systemName: "bookmark")
                     .resizable()
                     .frame(width: 18, height: 24)
-                    .foregroundStyle(news.isFavorite ? .white : DS.Colors.grayLight)
+                    .foregroundStyle(isFavorite ? .white : DS.Colors.grayLight)
             }
             .offset(x: 90, y: -90)
             
             VStack(alignment: .leading ) {
-                Text(news.category?.first?.uppercased() ?? "")
+                Text(category?.first?.uppercased() ?? "")
                     .font(.interRegular(16))
                     .foregroundStyle(DS.Colors.grayLighter)
-                Text(news.title)
+                Text(title)
                     .font(.interSemiBold(16))
                     .frame(width: 208, height: 48, alignment: .leading)
                     .lineLimit(2)
