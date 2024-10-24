@@ -9,15 +9,19 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        ZStack {
-            Text("Hello, World!")
-        }
-        .navigationBarItems(leading:
+        VStack {
             CustomToolBar(
                 title: Resources.Text.profileTitle,
                 subTitle: ""
             )
-        )
+            .padding(.top, 0)
+            Spacer()
+            Text("Hello, World!")
+        }
+
+        .navigationBarHidden(true)
+        .background(.background)
+        .ignoresSafeArea()
     }
 }
 
