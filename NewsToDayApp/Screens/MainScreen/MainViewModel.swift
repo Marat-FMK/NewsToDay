@@ -96,6 +96,7 @@ final class MainViewModel: ObservableObject {
         Task(priority: .high) {
             try? await cache.loadFromDisk()
         }
+        
     }
     
     // MARK: - Methods
@@ -163,7 +164,7 @@ final class MainViewModel: ObservableObject {
        }
     
     private func fetchAllArticlesFromAPI() async throws -> [ArticleDTO] {
-        let allArticles = try await newsAPIManager.getNews(with: country.rawValue) ?? []
+        let allArticles = try await newsAPIManager.getTopNews(with: country.rawValue) ?? []
         print("CACHE RecomendedNews MISSED \(allArticles)")
         await cache.setValue(allArticles, forKey: "recomendedNews")
         try? await cache.saveToDisk()

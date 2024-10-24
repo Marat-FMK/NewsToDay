@@ -74,7 +74,9 @@ struct MainView: View {
                         Spacer()
                         
                         Button {
-                            //seeAll func button
+                            Task {
+                                await viewModel.refreshTask()
+                            }
                         } label: {
                             Text("See All")
                                 .font(.interRegular(14))
