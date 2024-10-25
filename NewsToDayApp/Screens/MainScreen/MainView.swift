@@ -11,108 +11,117 @@ struct MainView: View {
     @StateObject var viewModel: MainViewModel
     
     
-    @State private var selectedTitleForSort = 0
-    @State private var searchText = ""
-    @State private var selectedCategory = "Random"
-    
-    // @State private var categoryNews: [News] = [] // новости по выбранной категории
-    // @State private var recommendedNews: [News] = [] // рекомендованные в верт стеке
-    
-    let categories = ["Random", "Sports", "Gaming", "Politics", "Life", "Animals", "Nature", "Food", "Art", "History", "Fashion", "Covid-19", "Middle East"]
-    
-    let sortTitles = [ "All", "Bookmark", "A - z"]
     var body: some View {
+        VStack {
+            CustomToolBar(
+                title: Resources.Text.mainTitle,
+                subTitle: Resources.Text.mainSubTitle
+            )
+            .padding(.top, 0)
+            
+            ScrollView(showsIndicators: false) {
+                
+                VStack(alignment: .leading) {
                     
-                    VStack {
-                        CustomToolBar(
-                            title: Resources.Text.mainTitle,
-                            subTitle: Resources.Text.mainSubTitle
-                        )
-                        .padding(.top, 0)
-                        
-                        ScrollView(showsIndicators: false) {
-                        
-                        VStack(alignment: .leading) {
-
-                            SearchBar(text: $viewModel.searchText)
-                                .padding(.bottom, 16)
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack {
-                                    ForEach(categories, id: \.self) { categoryName in
-                                        Button {
-                                            selectedCategory = categoryName
-                                        }
-                                        label: {
-                                            Text(categoryName)
-                                                .font(.system(size: 12))
-                                                .padding(.horizontal,16)
-                                                .padding(.vertical,8)
-                                                .foregroundStyle(checkSelectedCategory(categoryName) ? .white : DS.Colors.grayPrimary)
-                                                .background(checkSelectedCategory(categoryName) ? DS.Colors.purplePrimary : DS.Colors.grayLighter)
-                                                .clipShape(Capsule())
-                                                .padding(.horizontal,5)
-                                        }
-                                    }
-                                }
-                                .padding(.bottom,20)
+                    SearchBar(text: $viewModel.searchText)
+                        .padding(.bottom, 16)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(viewModel.categories, id: \.self) { category in
+                                CategoryCell(
+                                    category: category,
+                                    selected: $viewModel.selectedCategory
+                                )
                             }
-                            
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack {
-                                    ForEach(viewModel.getTopNews()) { news in
-                                        NavigationLink {
-                                            DetailView(title: news.title, link: news.link, creator: news.creator, description: news.description, category: news.category, isFavorite: news.isFavorite, imageUrl: news.imageUrl, action: {})
-                                        } label: {
-                                            CategoryNewsView(title: news.title, imageUrl: news.imageUrl, isFavorite: news.isFavorite, category: news.category)
-                                        }
-                                    }
-                                }
-                            }
-                            .padding(.bottom,50)
-                            
-                            HStack {
-                                Text("Recommended for you")
-                                    .font(.interSemiBold(20))
-                                    .frame(width: 240, height: 24)
-                                    .foregroundStyle(DS.Colors.blackyPrimary)
-                                
-                                Spacer()
-                                
-                                Button {
-                                    //seeAll func button
-                                }label: {
-                                    Text("See All")
-                                        .font(.interRegular(14))
-                                        .foregroundStyle(DS.Colors.grayPrimary)
-                                }
-                            }
-                            .padding(.bottom,30)
-                            
-                            
-                            ForEach(viewModel.getTopNews()) { news in
+                        }
+                        .padding(.bottom,20)
+                    }
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(viewModel.getCategoryNews()) { news in
                                 NavigationLink {
-                                    DetailView(title: news.title, link: news.link, creator: news.creator, description: news.description, category: news.category, isFavorite: news.isFavorite, imageUrl: news.imageUrl, action: {})
+                                    DetailView(
+                                        title: news.title,
+                                        link: news.link,
+                                        creator: news.creator,
+                                        description: news.description,
+                                        category: news.category,
+                                        isFavorite: news.isFavorite,
+                                        imageUrl: news.imageUrl,
+                                        action: {}
+                                    )
                                 } label: {
-                                    RecommendedNewsView(title: news.title, imageUrl: news.imageUrl, category: news.category)
-                                        
+                                    CategoryNewsCell(
+                                        title: news.title,
+                                        imageUrl: news.imageUrl,
+                                        isFavorite: news.isFavorite,
+                                        category: news.category
+                                    )
                                 }
                             }
                         }
-                        .padding()
+                    }
+                    .padding(.bottom,50)
+                    
+                    HStack {
+                        Text("Recommended for you")
+                            .font(.interSemiBold(20))
+                            .frame(width: 240, height: 24)
+                            .foregroundStyle(DS.Colors.blackyPrimary)
+                        
+                        Spacer()
+                        
+                        Button {
+                            Task {
+                                await viewModel.refreshTask()
+                            }
+                        } label: {
+                            Text("See All")
+                                .font(.interRegular(14))
+                                .foregroundStyle(DS.Colors.grayPrimary)
+                        }
+                    }
+                    .padding(.bottom,30)
+                    
+                    ForEach(viewModel.getRecomendedNews()) { article in
+                        NavigationLink {
+                            DetailView(
+                                title: article.title,
+                                link: article.link,
+                                creator: article.creator,
+                                description: article.description,
+                                category: article.category,
+                                isFavorite: article.isFavorite,
+                                imageUrl: article.imageUrl,
+                                action: {}
+                            )
+                        } label: {
+                            RecommendedNewsView(
+                                title: article.title,
+                                imageUrl: article.imageUrl,
+                                category: article.category
+                            )
+                        }
                     }
                 }
-                .task {
-                    await viewModel.fetchTopNews()
-                }
-                .ignoresSafeArea()
-
-    }
-    
-    private func checkSelectedCategory(_ categoryName: String)-> Bool {
-        selectedCategory == categoryName ? true : false
+                .padding()
+            }
+        }
+        .onAppear{
+            viewModel.loadCategories()
+        }
+        .task {
+            await viewModel.fetchCategoryNews()
+            await viewModel.fetchRecomendedNews()
+        }
+        .navigationBarHidden(true)
+        .background(.background)
+        .ignoresSafeArea()
+        
     }
 }
-
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
@@ -121,14 +130,3 @@ struct MainView_Previews: PreviewProvider {
         }
     }
 }
-
-
-// // // //
-//
-//@State private var categoryNews: [News] = [ // пример
-//    News(name: "News: Russian benzin exceeded 60 rub !!!", bookmark: true, image: Image("chinatown"), category: "Politic", author: "Petka Popov1", description: "aboutNews1"), News(name: "det new", bookmark: false, image: Image("handLuggage"), category: "Politics", author: "Det Autor", description: "Det Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpwet Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw"),
-//    News(name: "News2", bookmark: false, image: Image("timesquare"), category: "SportType2", author: "Petka Popov2", description: "aboutNews2"), News(name: "News3", bookmark: false, image: Image("chinatown"), category: "Sport3", author: "Petka Popov3", description: "aboutNews3")]
-//
-//@State private var recommendedNews: [News] = [ // пример
-//    News(name: "A Simple Trick For Creating", bookmark: true, image: Image("chinatown"), category: "UI/UX Design", author: "Petka Popov1", description: "A Simple Trick For Creating"), News(name: "det new", bookmark: false, image: Image("handLuggage"), category: "Politics", author: "Det Autor", description: "Det Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw et Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpwet Descrdnvnjkdnvjndskjn kjn  nwekjnvkwnvkjnwk n nw kvnwn vwn vln lwnelvw nelvjnserkjvnsevnkjsen  njsne   eajnclane nake nckaneclancl nalalenlnacnwepvjowpqvjqvnowpnv ncpwepvnpw"),
-//    News(name: "News2", bookmark: false, image: Image("timesquare"), category: "SportType2", author: "Petka Popov2", description: "aboutNews2"), News(name: "News3", bookmark: false, image: Image("chinatown"), category: "Sport3", author: "Petka Popov3", description: "aboutNews3")]

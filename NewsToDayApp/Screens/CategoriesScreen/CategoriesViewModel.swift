@@ -11,7 +11,14 @@ final class CategoriesViewModel: ObservableObject {
     // MARK: Properties
     @Published var categories: [Categories] = []
     
-    func loadCategories() {}
+    private let storageManager = StorageManager.shared
     
-    func saveCategories() {}
+    // MARK: Methods
+    func saveCategories() {
+        storageManager.saveCategories(categories: categories)
+    }
+    
+    func loadCategories() {
+        self.categories = storageManager.loadCategories() ?? []
+    }
 }
