@@ -9,13 +9,13 @@ import Foundation
 
 // MARK: - NewsAPIManagerProtocol
 protocol INewsAPIManager {
-    func getNews(with country: String,_ category: String) async throws -> [ArticleDTO]?
-    func getTopNews(with country: String) async throws -> [ArticleDTO]?
-    func getNews(with searchText: String) async throws -> [ArticleDTO]?
+    func getNews(with country: String,_ category: String) async throws -> NewsApiResponseDTO?
+    func getTopNews(with country: String) async throws -> NewsApiResponseDTO?
+    func getSearchedNews(with searchText: String) async throws -> NewsApiResponseDTO?
 }
 
 final class NewsAPIManager: APIManager, INewsAPIManager {
-
+    
     // MARK: - Initializer
     init() {
         // Create middlewares
@@ -26,41 +26,36 @@ final class NewsAPIManager: APIManager, INewsAPIManager {
         super.init(apiClient: apiClient)
     }
     
-    func getNews(with country: String, _ category: String) async throws -> [ArticleDTO]? {
-           let apiSpec: NewsAPISpec = .getCategoryNews(country: country, category: category)
-           
-           print("Requesting news with URL: \(apiSpec.endpoint)")
-           
-           let news = try await apiClient?.sendRequest(apiSpec)
-           return news as? [ArticleDTO]
-       }
-       
-       func getTopNews(with country: String) async throws -> [ArticleDTO]? {
-           let apiSpec: NewsAPISpec = .getTopNewsFor(country: country)
-           
-           print("Requesting top news with URL: \(apiSpec.endpoint)")
-           
-           do {
-               let news = try await apiClient?.sendRequest(apiSpec)
-               return news as? [ArticleDTO]
-           } catch {
-               print(error)
-               return nil
-           }
-       }
-       
-       func getNews(with searchText: String) async throws -> [ArticleDTO]? {
-           let apiSpec: NewsAPISpec = .getNewsWith(searchText: searchText)
-           
-
-           print("Requesting search results with URL: \(apiSpec.endpoint)")
-           
-           do {
-               let news = try await apiClient?.sendRequest(apiSpec)
-               return news as? [ArticleDTO]
-           } catch {
-               print(error)
-               return nil
-           }
-       }
-   }
+    func getNews(with country: String, _ category: String) async throws -> NewsApiResponseDTO? {
+        let apiSpec: NewsAPISpec = .getCategoryNews(country: country, category: category)
+        do {
+            let news = try await apiClient?.sendRequest(apiSpec)
+            return news as? NewsApiResponseDTO
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
+    func getTopNews(with country: String) async throws ->  NewsApiResponseDTO? {
+        let apiSpec: NewsAPISpec = .getTopNewsFor(country: country)
+        do {
+            let news = try await apiClient?.sendRequest(apiSpec)
+            return news as?  NewsApiResponseDTO
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
+    func getSearchedNews(with searchText: String) async throws -> NewsApiResponseDTO? {
+        let apiSpec: NewsAPISpec = .getNewsWith(searchText: searchText)
+        do {
+            let news = try await apiClient?.sendRequest(apiSpec)
+            return news as?  NewsApiResponseDTO
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+}

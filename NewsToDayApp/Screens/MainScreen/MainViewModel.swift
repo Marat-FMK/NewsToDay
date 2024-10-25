@@ -27,7 +27,7 @@ enum Country: String, CaseIterable {
 enum DisplayOrderType: CaseIterable {
     case alphabetical
     case favoriteFirst
-
+    
     var name: String {
         switch self {
         case .alphabetical:
@@ -42,13 +42,21 @@ enum DisplayOrderType: CaseIterable {
 final class MainViewModel: ObservableObject {
     @Published var categoryNewsPhase: DataFetchPhase<[ArticleDTO]> = .empty
     @Published var recomendedNewsPhase: DataFetchPhase<[ArticleDTO]> = .empty
+    @Published var searshNewsResults: [ArticleDTO] = []
     
     @Published var fetchTaskToken: FetchTaskToken
     @Published var errorMessage: String? = nil
     @Published var selectedOrder: DisplayOrderType = .alphabetical
     @Published var searchText: String = ""
-    @Published var selectedCategory: Categories = .top
     @Published var categories: [Categories] = []
+    @Published var selectedCategory: Categories = .top {
+        didSet {
+            Task {
+                await fetchCategoryNews()
+            }
+        }
+    }
+    
     
     private let timeIntervalForUpdateCache: TimeInterval = 7 * 24 * 60 * 60
     private let cache: DiskCache<[ArticleDTO]>
@@ -105,7 +113,7 @@ final class MainViewModel: ObservableObject {
     
     func getRecomendedNews() -> [ArticleDTO] { filteredArticles }
     
-
+    
     /// Cancels the error alert and refreshes the data.
     func cancelErrorAlert() {
         Task {
@@ -126,7 +134,6 @@ final class MainViewModel: ObservableObject {
             if !ignoreCache,
                let cachedArticles = await cache.value(forKey: fetchTaskToken.articles) {
                 print("CACHE HIT")
-           
                 categoryNewsPhase = .success(cachedArticles)
             } else {
                 let articlesFromAPI = try await fetchCategoryArticlesFromAPI()
@@ -139,47 +146,51 @@ final class MainViewModel: ObservableObject {
     }
     
     private func fetchCategoryArticlesFromAPI() async throws -> [ArticleDTO] {
-        let articles = try await newsAPIManager.getNews(with: country.rawValue, selectedCategory.rawValue) ?? []
+        let articles = try await newsAPIManager.getNews(with: country.rawValue, selectedCategory.rawValue)?.results ?? []
         await cache.setValue(articles, forKey: selectedCategory.rawValue)
         try? await cache.saveToDisk()
         return articles
     }
-//    MARK: - Recomended News
+    
+    //    MARK: - Recomended News
     func fetchRecomendedNews(ignoreCache: Bool = false) async {
-           recomendedNewsPhase = .empty
-           
-           do {
-               if !ignoreCache,
-             let cachedArticles = await cache.value(forKey: "recomendedNews") {
-                   print("CACHE RecomendedNews HIT\(cachedArticles)")
-                   
-                   recomendedNewsPhase = .success(cachedArticles)
-               } else {
-                   let articlesFromAPI = try await fetchAllArticlesFromAPI()
-                   print("CACHE RecomendedNews MISSED")
-                   recomendedNewsPhase = .success(articlesFromAPI)
-               }
-           } catch {
-               recomendedNewsPhase = .failure(error)
-           }
-       }
+        recomendedNewsPhase = .empty
+        
+        do {
+            if !ignoreCache,
+               let cachedArticles = await cache.value(forKey: "recomendedNews") {
+                recomendedNewsPhase = .success(cachedArticles)
+            } else {
+                let articlesFromAPI = try await fetchAllArticlesFromAPI()
+                print("CACHE RecomendedNews MISSED")
+                recomendedNewsPhase = .success(articlesFromAPI)
+            }
+        } catch {
+            recomendedNewsPhase = .failure(error)
+        }
+    }
     
     private func fetchAllArticlesFromAPI() async throws -> [ArticleDTO] {
-        let allArticles = try await newsAPIManager.getTopNews(with: country.rawValue) ?? []
-        print("CACHE RecomendedNews MISSED \(allArticles)")
+        let allArticles = try await newsAPIManager.getTopNews(with: country.rawValue)?.results ?? []
         await cache.setValue(allArticles, forKey: "recomendedNews")
         try? await cache.saveToDisk()
         return allArticles
     }
     
-
+    
     // MARK: - Load Categories
     func loadCategories() {
         self.categories = storageManager.loadCategories() ?? []
+        if categories.isEmpty {
+            categories.append(.health)
+        }
     }
-   
-
-    // MARK: - Fetch News with Search
-
     
+    
+    // MARK: - Fetch News with Search
+    func fetchSearchResults() {
+        Task {
+            try await searshNewsResults = newsAPIManager.getSearchedNews(with: searchText)?.results ?? []
+        }
+    }
 }
