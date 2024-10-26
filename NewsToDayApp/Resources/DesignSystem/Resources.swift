@@ -17,6 +17,7 @@ enum Resources {
         static let categoriesTitle = "Categories"
         static let categoriesSubTitle = "Thousands of articles in each category"
         static let search = "Search"
+        static let news = "News"
     }
     
     enum Image {
