@@ -7,34 +7,37 @@
 
 import SwiftUI
 
-
 struct MainView: View {
     @StateObject var viewModel: MainViewModel
     
     var body: some View {
-        VStack {
-            CustomToolBar(title: Resources.Text.mainTitle, subTitle: Resources.Text.mainSubTitle)
-                .padding(.top, 0)
-            
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading) {
-                    SearchBarView()
-                    CategoryScrollView()
-                    NewsScrollView()
-                    RecommendedNewsHeader()
-                    RecommendedNewsList()
+        if viewModel.searshNewsResults.isEmpty {
+            VStack {
+                CustomToolBar(title: Resources.Text.mainTitle, subTitle: Resources.Text.mainSubTitle)
+                    .padding(.top, 0)
+                
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading) {
+                        SearchBarView()
+                        CategoryScrollView()
+                        NewsScrollView()
+                        RecommendedNewsHeader()
+                        RecommendedNewsList()
+                    }
+                    .padding()
                 }
-                .padding()
             }
+            .onAppear(perform: viewModel.loadCategories)
+            .task {
+                await viewModel.fetchCategoryNews()
+                await viewModel.fetchRecomendedNews()
+            }
+            .navigationBarHidden(true)
+            .background(.background)
+            .ignoresSafeArea()
+        } else {
+            SearchNewsView(news: $viewModel.searshNewsResults, searchText: $viewModel.searchText)
         }
-        .onAppear(perform: viewModel.loadCategories)
-        .task {
-            await viewModel.fetchCategoryNews()
-            await viewModel.fetchRecomendedNews()
-        }
-        .navigationBarHidden(true)
-        .background(.background)
-        .ignoresSafeArea()
     }
 }
 
@@ -43,7 +46,12 @@ struct MainView: View {
 extension MainView {
     
     private func SearchBarView() -> some View {
-        SearchBar(text: $viewModel.searchText)
+        SearchBar(action: {
+            viewModel.fetchSearchResults()
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//                viewModel.searchText = ""
+//            }
+        }, text: $viewModel.searchText)
             .padding(.bottom, 16)
     }
     
@@ -159,8 +167,6 @@ extension MainView {
         
     }
 }
-
-
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
