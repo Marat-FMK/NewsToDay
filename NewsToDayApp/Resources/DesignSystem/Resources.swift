@@ -18,6 +18,14 @@ enum Resources {
         static let categoriesSubTitle = "Thousands of articles in each category"
         static let search = "Search"
         static let news = "News"
+        static let loading = "Loading news"
+        static let noAuthor = "No author"
+        static let noCategory = "No category"
+        static let author = "Author"
+        static let resaults = "Results"
+        static let recommendedForYou = "Recommended for you"
+        static let allRecommendedNews = "All recommended news"
+        static let weHaveSelectedTheBestNewsForYou = "We have selected the best news for you"
     }
     
     enum Image {
