@@ -91,7 +91,9 @@ extension MainView {
                                 []
                     )
                 } else {
-                    ShimmerView()
+                    ForEach(0..<5) { _ in
+                        ShimmerView(cef: 1)
+                    }
                 }
             }
             .padding(.bottom, 50)
@@ -100,50 +102,61 @@ extension MainView {
     
     private func RecommendedNewsHeader() -> some View {
         HStack {
-            Text("Recommended for you")
+            Text(Resources.Text.recommendedForYou)
                 .font(.interSemiBold(20))
                 .frame(width: 240, height: 24)
                 .foregroundStyle(DS.Colors.blackyPrimary)
             
             Spacer()
             
-            Button {
-                Task { await viewModel.refreshTask() }
+            NavigationLink {
+                AllRecomendedNewsView(news: viewModel.getRecomendedNews())
             } label: {
-                Text("See All")
-                    .font(.interRegular(14))
-                    .foregroundStyle(DS.Colors.grayPrimary)
+                    Text("See All")
+                        .font(.interRegular(14))
+                        .foregroundStyle(DS.Colors.grayPrimary)
             }
         }
         .padding(.bottom, 30)
     }
     
     private func RecommendedNewsList() -> some View {
-        ForEach(viewModel.getRecomendedNews()) { article in
-            NavigationLink {
-                DetailView(
-                    title: article.title,
-                    link: article.link,
-                    creator: article.creator,
-                    description: article.description,
-                    category: article.category,
-                    isFavorite: article.isFavorite,
-                    imageUrl: article.imageUrl,
-                    action: {}
-                )
-            } label: {
-                RecommendedNewsView(
-                    title: article.title,
-                    imageUrl: article.imageUrl,
-                    category: article.category
-                )
-                .frame(height: 100)
+        Group {
+            if viewModel.getRecomendedNews().isEmpty {
+                ForEach(1..<5) { _ in
+                    VStack {
+                        HStack {
+                            ShimmerView(cef: 2.56)
+                            ShimmerTextView()
+                        }
+                    }
+                }
+            } else {
+                ForEach(viewModel.getRecomendedNews()) { article in
+                    NavigationLink {
+                        DetailView(
+                            title: article.title,
+                            link: article.link,
+                            creator: article.creator,
+                            description: article.description,
+                            category: article.category,
+                            isFavorite: article.isFavorite,
+                            imageUrl: article.imageUrl,
+                            action: {}
+                        )
+                    } label: {
+                        RecommendedNewsView(
+                            title: article.title,
+                            imageUrl: article.imageUrl,
+                            category: article.category
+                        )
+                        .frame(height: 100)
+                    }
+                }
+                .padding(.bottom,150)
             }
         }
-        .redacted(reason: viewModel.getRecomendedNews().isEmpty
-                  ? .placeholder
-                  : []
-        )
+        
     }
 }
 
