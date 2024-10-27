@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct MainView: View {
     @StateObject var viewModel: MainViewModel
     
@@ -61,32 +62,37 @@ extension MainView {
     private func NewsScrollView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(viewModel.getCategoryNews()) { news in
-                    NavigationLink {
-                        DetailView(
-                            title: news.title,
-                            link: news.link,
-                            creator: news.creator,
-                            description: news.description,
-                            category: news.category,
-                            isFavorite: news.isFavorite,
-                            imageUrl: news.imageUrl,
-                            action: {}
-                        )
-                    } label: {
-                        CategoryNewsCell(
-                            title: news.title,
-                            imageUrl: news.imageUrl,
-                            isFavorite: news.isFavorite,
-                            category: news.category
-                        )
-                        .frame(height: 256)
+                if !viewModel.getCategoryNews().isEmpty {
+                    ForEach(viewModel.getCategoryNews()) { news in
+                        NavigationLink {
+                            DetailView(
+                                title: news.title,
+                                link: news.link,
+                                creator: news.creator,
+                                description: news.description,
+                                category: news.category,
+                                isFavorite: news.isFavorite,
+                                imageUrl: news.imageUrl,
+                                action: {}
+                            )
+                        } label: {
+                            CategoryNewsCell(
+                                title: news.title,
+                                imageUrl: news.imageUrl,
+                                isFavorite: news.isFavorite,
+                                category: news.category
+                            )
+                            
+                            .frame(height: 256)
+                        }
                     }
+                    .redacted(reason: viewModel.getCategoryNews().isEmpty
+                              ? .placeholder :
+                                []
+                    )
+                } else {
+                    ShimmerView()
                 }
-                .redacted(reason: viewModel.getCategoryNews().isEmpty
-                          ? .placeholder :
-                            []
-                )
             }
             .padding(.bottom, 50)
         }
@@ -140,6 +146,9 @@ extension MainView {
         )
     }
 }
+
+
+
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

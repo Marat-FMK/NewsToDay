@@ -19,33 +19,13 @@ struct CategoryNewsCell: View {
             RoundedRectangle(cornerRadius: 12)
                 .foregroundStyle(.black)
             
-            AsyncImage(url: URL(string: imageUrl ?? "")) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                        .frame(width: 256, height: 256)
-                        .background(Color.gray.opacity(0.1))
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 256, height: 256)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                case .failure:
-                    Image(systemName: "photo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 256, height: 256)
-//                        .foregroundColor(.gray)
-                @unknown default:
-                    EmptyView()
-                }
-            }
+            AsyncCachedImage(
+                url: URL(string: imageUrl ?? ""),
+                placeholder: Image(systemName: "photo") 
+            )
             .opacity(0.75)
             .frame(width: 256, height: 256)
             .clipShape(RoundedRectangle(cornerRadius: 12))
-        
         
         Button {
             // Add bookmark and save news on savedNews

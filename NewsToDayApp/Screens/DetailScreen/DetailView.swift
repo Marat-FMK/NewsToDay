@@ -26,11 +26,15 @@ struct DetailView: View {
                 ZStack(alignment: .bottomLeading) {
                     
                     ZStack {
-                        RoundedRectangle(cornerRadius: 0)
+                        RoundedRectangle(cornerRadius: 12)
+                            .foregroundStyle(.black)
                         
-                        AsyncImage(url: URL(string: imageUrl ?? ""))
-//                            .resizable()
-                            .opacity(0.75)
+                        AsyncCachedImage(
+                            url: URL(string: imageUrl ?? ""),
+                            placeholder: Image(systemName: "photo")
+                        )
+                        .opacity(0.75)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     .frame(width: 405, height: 380)
                     
