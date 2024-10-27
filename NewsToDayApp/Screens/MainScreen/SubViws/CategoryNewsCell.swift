@@ -21,7 +21,7 @@ struct CategoryNewsCell: View {
             
             AsyncCachedImage(
                 url: URL(string: imageUrl ?? ""),
-                placeholder: Image(systemName: "photo") 
+                placeholder: Image(systemName: "photo.artframe")
             )
             .opacity(0.75)
             .frame(width: 256, height: 256)
