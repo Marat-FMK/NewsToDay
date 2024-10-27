@@ -59,7 +59,7 @@ struct DetailView: View {
                     
                     VStack(alignment: .leading) {
                         
-                        Text(category?.first ?? "No category")
+                        Text(category?.first ?? Resources.Text.noCategory)
                             .font(.interRegular(12))
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
@@ -75,12 +75,12 @@ struct DetailView: View {
                             .foregroundColor(.white)
                             .padding(.bottom, 30)
                         
-                        Text(creator?.first ?? "No author / creator")
+                        Text(creator?.first ?? Resources.Text.noAuthor)
                             .font(.interSemiBold(16))
                             .foregroundColor(.white)
                             .padding(.bottom, 8)
                         
-                        Text("Autor")
+                        Text(Resources.Text.author)
                             .foregroundColor(.white)
                             .font(.interMedium(14))
                         
@@ -91,7 +91,7 @@ struct DetailView: View {
                 
                 VStack(alignment: .leading) {
                 
-                        Text("Results")
+                    Text(Resources.Text.resaults)
                             .font(.interSemiBold(16))
                             .frame(width: 58, height: 24, alignment: .leading)
                             .padding(.top,24)
