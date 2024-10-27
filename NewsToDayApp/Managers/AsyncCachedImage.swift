@@ -13,7 +13,7 @@ struct AsyncCachedImage: View {
     let placeholder: Image
     @State private var uiImage: UIImage? = nil
     
-    private let imageStore: ImageStore = ImageStoreImpl()
+    private let imageStore: IImageStore = ImageStoreImpl()
     
     var body: some View {
         if let uiImage = uiImage {

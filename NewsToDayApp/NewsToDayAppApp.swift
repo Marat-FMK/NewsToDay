@@ -16,6 +16,7 @@ struct NewsToDayAppApp: App {
             let mainViewModel = MainViewModel(newsAPIManager: newsAPIManager)
             
             CustomTabBarView(mainViewModel: mainViewModel)
+               
         }
     }
 }

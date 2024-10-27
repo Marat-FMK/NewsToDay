@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject var viewModel: MainViewModel
+    @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
         VStack {
@@ -63,24 +64,27 @@ extension MainView {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 if !viewModel.getCategoryNews().isEmpty {
-                    ForEach(viewModel.getCategoryNews()) { news in
+                    ForEach(viewModel.getCategoryNews()) { article in
                         NavigationLink {
                             DetailView(
-                                title: news.title,
-                                link: news.link,
-                                creator: news.creator,
-                                description: news.description,
-                                category: news.category,
-                                isFavorite: news.isFavorite,
-                                imageUrl: news.imageUrl,
+                                id: article.id,
+                                title: article.title,
+                                link: article.link,
+                                creator: article.creator,
+                                description: article.description,
+                                category: article.category,
+                                isFavorite: article.isFavorite,
+                                imageUrl: article.imageUrl,
                                 action: {}
                             )
                         } label: {
                             CategoryNewsCell(
-                                title: news.title,
-                                imageUrl: news.imageUrl,
-                                isFavorite: news.isFavorite,
-                                category: news.category
+                                id: article.id,
+                                title: article.title,
+                                imageUrl: article.imageUrl,
+                                isFavorite: article.isFavorite,
+                                category: article.category,
+                                action: {}
                             )
                             
                             .frame(height: 256)
@@ -122,6 +126,7 @@ extension MainView {
         ForEach(viewModel.getRecomendedNews()) { article in
             NavigationLink {
                 DetailView(
+                    id: article.id,
                     title: article.title,
                     link: article.link,
                     creator: article.creator,
