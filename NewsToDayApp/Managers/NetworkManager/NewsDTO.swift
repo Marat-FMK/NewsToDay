@@ -10,9 +10,9 @@ import Foundation
 // MARK: - NewsApiResponseDTO
 // Represents the main response structure for the News API
 struct NewsApiResponseDTO: Sendable, Decodable, DecodableType {
-    let status: String        // Status of the API response (e.g., "ok")
-    let totalResults: Int     // Total number of articles returned
-    let results: [ArticleDTO] // Array of articles in the response
+    let status: String        
+    let totalResults: Int
+    let results: [ArticleDTO]
     
     enum CodingKeys: String, CodingKey {
         case status
@@ -47,9 +47,7 @@ struct NewsApiResponseDTO: Sendable, Decodable, DecodableType {
 // MARK: - ArticleDTO
 // Represents an individual article in the API response
 struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, DecodableType {
-    var id: String {
-        return UUID().uuidString
-    }
+    let id: String
     let title: String
     let link: String?
     let creator: [String]?
@@ -61,12 +59,13 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
     var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {
+        case id = "article_id"
         case title
         case link
         case creator
         case description
         case content
-        case imageUrl
+        case imageUrl = "image_url"
         case category
         case country
         case isFavorite
@@ -83,6 +82,7 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
                 )
             )
         }
+        self.id = try container.decode(String.self, forKey: .id)
         self.title = try container.decode(String.self, forKey: .title)
         self.link = try container.decodeIfPresent(String.self, forKey: .link)
         self.creator = try container.decodeIfPresent([String].self, forKey: .creator)
@@ -95,4 +95,9 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
     }
 }
 
+extension ArticleDTO {
+    func filterArticlesWithImages(_ articles: [ArticleDTO]) -> [ArticleDTO] {
+        return articles.filter { $0.imageUrl != nil && !$0.imageUrl!.isEmpty }
+    }
+}
 

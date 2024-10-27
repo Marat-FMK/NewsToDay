@@ -15,16 +15,13 @@ struct RecommendedNewsView: View {
     
     var body: some View {
         HStack {
-            
             ZStack {
-//                RoundedRectangle(cornerRadius: 12) // Раскоментить , если надо затемнить каритнку
-//                    .foregroundStyle(.black)
-//                    .frame(width: 96, height: 96)
-                AsyncImage(url: URL(string: imageUrl ?? ""))
-//                    .resizable()
-//                    .opacity(0.75)
-                    .frame(width: 96, height: 96)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                AsyncCachedImage(
+                    url: URL(string: imageUrl ?? ""),
+                    placeholder: Image(systemName: "photo")
+                )
+                .frame(width: 96, height: 96)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
             }
             VStack(alignment: .leading) {
                 Text(category?.first ?? "")
