@@ -114,6 +114,7 @@ final class MainViewModel: ObservableObject {
     func getRecomendedNews() -> [ArticleDTO] { filteredArticles }
     
     
+    
     /// Cancels the error alert and refreshes the data.
     func cancelErrorAlert() {
         Task {
