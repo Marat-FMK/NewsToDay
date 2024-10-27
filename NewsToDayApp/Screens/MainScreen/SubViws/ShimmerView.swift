@@ -108,18 +108,18 @@ public struct Shimmer: ViewModifier {
       }
 
 struct ShimmerView: View {
+    
+    let cef: Double
+    
     var body: some View {
-        
-        HStack {
-            ForEach(1..<10) { _ in
                 ZStack {
                     
                     RoundedRectangle(cornerRadius: 12)
-                        .frame(width: 256, height: 256)
+                        .frame(width: 256/cef, height: 256/cef)
                         .foregroundStyle(DS.Colors.grayLight)
                     
                     RoundedRectangle(cornerRadius: 12)
-                        .frame(width: 240, height: 240)
+                        .frame(width: 240/cef, height: 240/cef)
                         .foregroundStyle(DS.Colors.grayLighter)
                         .shimmering()
                     
@@ -127,13 +127,10 @@ struct ShimmerView: View {
                         .font(.interSemiBold(20))
                         .foregroundStyle(DS.Colors.purplePrimary)
                         .shimmering()
-                      
                 }
-            }
-        }
     }
 }
 
 #Preview {
-    ShimmerView()
+    ShimmerView(cef: 1)
 }
