@@ -132,23 +132,24 @@ final class MainViewModel: ObservableObject {
     }
     
     // MARK: - Bookmark Methods
-    func addBookmark(_ article: ArticleDTO) {
-        bookmarkManager.saveBookmark(
-            id: article.id,
-            title: article.title,
-            link: article.link ?? "",
-            category: article.category?.first ?? "",
-            creator: article.creator?.first ?? "",
-            descrition: article.description ?? "",
-            isFavorite: article.isFavorite,
-            userID: ""
-        )
+    func toggleBookmark(for article: ArticleDTO) {
+        if article.isFavorite {
+            deleteBookmark(article)
+        } else {
+            addBookmark(article)
+        }
     }
     
-    func deleteBookmark(_ id: String) {
-        bookmarkManager.deleteBookmark(id: id)
+    func updateFavoriteStatus(for article: inout [ArticleDTO]) {
+        let bookmarkt = bookmarkManager.fetchBookmarks()
+        let bookmarkIDs = Set(bookmarkt.map { $0.id })
+        
+        for i in article.indices {
+            article[i].isFavorite = bookmarkIDs.contains(article[i].id)
+        }
     }
-    
+
+
     // MARK: - API Methods
     func getCategoryNews() -> [ArticleDTO] { sortedArticles }
     
@@ -240,4 +241,21 @@ final class MainViewModel: ObservableObject {
         return allArticles
     }
     
+    
+    private func addBookmark(_ article: ArticleDTO) {
+        bookmarkManager.saveBookmark(
+            id: article.id,
+            title: article.title,
+            link: article.link ?? "",
+            category: article.category?.first ?? "",
+            creator: article.creator?.first ?? "",
+            descrition: article.description ?? "",
+            isFavorite: true,
+            userID: ""
+        )
+    }
+    
+    private func deleteBookmark(_ article: ArticleDTO) {
+        bookmarkManager.deleteBookmark(id: article.id)
+    }
 }

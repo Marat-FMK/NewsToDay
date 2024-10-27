@@ -10,11 +10,13 @@ import SwiftUI
 
 struct MainView: View {
     @StateObject var viewModel: MainViewModel
-    @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
         VStack {
-            CustomToolBar(title: Resources.Text.mainTitle, subTitle: Resources.Text.mainSubTitle)
+            CustomToolBar(
+                title: Resources.Text.mainTitle,
+                subTitle: Resources.Text.mainSubTitle
+            )
                 .padding(.top, 0)
             
             ScrollView(showsIndicators: false) {
@@ -84,7 +86,9 @@ extension MainView {
                                 imageUrl: article.imageUrl,
                                 isFavorite: article.isFavorite,
                                 category: article.category,
-                                action: {}
+                                action: {
+                                    viewModel.toggleBookmark(for: article)
+                                }
                             )
                             
                             .frame(height: 256)
@@ -139,6 +143,7 @@ extension MainView {
                 ForEach(viewModel.getRecomendedNews()) { article in
                     NavigationLink {
                         DetailView(
+                            id: article.id,
                             title: article.title,
                             link: article.link,
                             creator: article.creator,
@@ -146,7 +151,9 @@ extension MainView {
                             category: article.category,
                             isFavorite: article.isFavorite,
                             imageUrl: article.imageUrl,
-                            action: {}
+                            action: {
+                                viewModel.toggleBookmark(for: article)
+                            }
                         )
                     } label: {
                         RecommendedNewsView(

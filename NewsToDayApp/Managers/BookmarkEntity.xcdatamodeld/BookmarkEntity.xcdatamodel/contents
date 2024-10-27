@@ -5,7 +5,7 @@
         <attribute name="creator" optional="YES" attributeType="String"/>
         <attribute name="descriptionArticle" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
-        <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="imageURL" optional="YES" attributeType="String"/>
         <attribute name="isFavirite" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="link" attributeType="String"/>
         <attribute name="title" attributeType="String"/>

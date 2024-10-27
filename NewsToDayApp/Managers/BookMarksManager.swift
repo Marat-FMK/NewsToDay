@@ -28,7 +28,7 @@ final class BookMarksManager: IBookMarks {
     static let shared = BookMarksManager()
     
     // MARK: - Core Data stack
-   private let persistentContainer: NSPersistentContainer = {
+    private let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "BookmarkEntity")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
@@ -38,37 +38,20 @@ final class BookMarksManager: IBookMarks {
         return container
     }()
     
-    private let viewContext: NSManagedObjectContext
+    private var viewContext: NSManagedObjectContext {
+        persistentContainer.viewContext
+    }
+    
+    private var privateContext: NSManagedObjectContext {
+        let context = persistentContainer.newBackgroundContext()
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        return context
+    }
     
     // MARK: Initialization
-    private init() {
-        viewContext = persistentContainer.viewContext
-    }
+    private init() {}
     
-    // MARK: - CRUD Methods
-    func saveBookmark(
-        id: String,
-        title: String,
-        link: String,
-        category: String,
-        creator: String,
-        descrition: String,
-        isFavorite: Bool,
-        userID: String
-    ) {
-        let bookmark = BookmarkEntity(context: viewContext)
-        bookmark.id = id
-        bookmark.title = title
-        bookmark.link = link
-        bookmark.category = category
-        bookmark.creator = creator
-        bookmark.descriptionArticle = descrition
-        bookmark.isFavirite = isFavorite
-        bookmark.userId = userID
-        saveContext()
-    }
-    
-    // Read
+    // MARK: - CRUD Methods\
     func fetchBookmarks() -> [BookmarkEntity] {
         let request: NSFetchRequest<BookmarkEntity> = BookmarkEntity.fetchRequest()
         do {
@@ -79,32 +62,56 @@ final class BookMarksManager: IBookMarks {
         }
     }
     
+    func saveBookmark(
+        id: String,
+        title: String,
+        link: String,
+        category: String,
+        creator: String,
+        descrition: String,
+        isFavorite: Bool,
+        userID: String
+    ) {
+        
+        privateContext.perform { [weak self] in
+            guard let self else { return }
+            let bookmark = BookmarkEntity(context: viewContext)
+            bookmark.id = id
+            bookmark.title = title
+            bookmark.link = link
+            bookmark.category = category
+            bookmark.creator = creator
+            bookmark.descriptionArticle = descrition
+            bookmark.isFavirite = isFavorite
+            bookmark.userId = userID
+            self.saveContext()
+        }
+    }
     
     // Delete
     func deleteBookmark(id: String) {
         let request: NSFetchRequest<BookmarkEntity> = BookmarkEntity.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id)
-        
-        do {
-            let results = try viewContext.fetch(request)
-            if let bookmark = results.first {
-                viewContext.delete(bookmark)
-                saveContext()
+        privateContext.perform { [weak self] in
+            guard let self else { return }
+            if let bookmark = try? self.privateContext.fetch(request).first {
+                self.privateContext.delete(bookmark)
+                self.saveContext()
             }
-        } catch {
-            print("Failed to delete bookmark: \(error.localizedDescription)")
         }
     }
     
     // MARK: - Private Save Context
     private func saveContext() {
-        if viewContext.hasChanges {
-            do {
+        do {
+            if privateContext.hasChanges {
                 try viewContext.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                viewContext.performAndWait {
+                    try? viewContext.save()
+                }
             }
+        } catch {
+            print("Failed to save context: \(error)")
         }
     }
 }

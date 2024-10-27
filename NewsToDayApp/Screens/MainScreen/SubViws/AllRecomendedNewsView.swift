@@ -29,11 +29,25 @@ struct AllRecomendedNewsView: View {
                     }
                 }
             } else {
-                ForEach(news) { news in
-                    NavigationLink{
-                        DetailView(title: news.title, link: news.link, creator: news.creator, description: news.description, category: news.category, isFavorite: news.isFavorite, imageUrl: news.imageUrl, action: {})
+                ForEach(news) { article in
+                    NavigationLink {
+                        DetailView(
+                            id: article.id,
+                            title: article.title,
+                            link: article.link,
+                            creator: article.creator,
+                            description: article.description,
+                            category: article.category,
+                            isFavorite: article.isFavorite,
+                            imageUrl: article.imageUrl,
+                            action: {}
+                        )
                     } label: {
-                        RecommendedNewsView(title: news.title, imageUrl: news.imageUrl, category: news.category)
+                        RecommendedNewsView(
+                            title: article.title,
+                            imageUrl: article.imageUrl,
+                            category: article.category
+                        )
                     }
                 }
             }
