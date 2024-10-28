@@ -165,15 +165,17 @@ final class MainViewModel: ObservableObject {
     func fetchCategoryNews(ignoreCache: Bool = false) async {
         categoryNewsPhase = .empty
         do {
-            if let cachedArticles = await getCachedArticles(
+            if var cachedArticles = await getCachedArticles(
                 for: fetchTaskToken.articles,
                 ignoreCache: ignoreCache
             ) {
                 print("CACHE HIT")
+                updateFavoriteStatus(for: &cachedArticles)
                 categoryNewsPhase = .success(cachedArticles)
             } else {
-                let articlesFromAPI = try await fetchCategoryArticlesFromAPI()
+                var articlesFromAPI = try await fetchCategoryArticlesFromAPI()
                 print("CACHE MISSED")
+                updateFavoriteStatus(for: &articlesFromAPI)
                 categoryNewsPhase = .success(articlesFromAPI)
             }
         } catch {

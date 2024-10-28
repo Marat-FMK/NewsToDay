@@ -44,7 +44,7 @@ extension BookmarkView {
         VStack {
             ZStack {
                 Circle()
-                    .fill(Color.gray.opacity(0.3))
+                    .fill(DS.Colors.purpleLighter)
                     .frame(width: 72, height: 72)
                 
                 Image(systemName: "text.book.closed")
@@ -58,12 +58,12 @@ extension BookmarkView {
     
     private func bookmarksListView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            VStack {
+            List {
                 ForEach(viewModel.bookmarks, id: \.id)  { article in
                     bookmarkNavigationLink(for: article)
                 }
             }
-            .padding(.horizontal, 20)
+            .padding(.top, 20)
         }
     }
     

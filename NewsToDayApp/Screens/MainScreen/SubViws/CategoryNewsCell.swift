@@ -34,7 +34,7 @@ struct CategoryNewsCell: View {
             Image(systemName: "bookmark")
                 .resizable()
                 .frame(width: 18, height: 24)
-                .foregroundStyle(isFavorite ? .white : DS.Colors.grayLight)
+                .foregroundStyle(isFavorite ? DS.Colors.purpleDark : DS.Colors.grayLight)
         }
         .offset(x: 90, y: -90)
         
