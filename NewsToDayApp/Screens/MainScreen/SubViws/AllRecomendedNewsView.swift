@@ -15,7 +15,7 @@ struct AllRecomendedNewsView: View {
         
         VStack(alignment: .leading) {
             CustomToolBar(title: Resources.Text.allRecommendedNews, subTitle: Resources.Text.weHaveSelectedTheBestNewsForYou)
-                    .padding(.bottom,30)
+                    .padding(.bottom,10)
                     .padding(.top,30)
             
             ScrollView(showsIndicators: false) {
