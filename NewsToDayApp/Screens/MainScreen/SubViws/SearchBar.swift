@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchBar: View {
-    
+    let action: ()->Void
     @Binding var text: String
     
     private struct Drawing {
@@ -21,11 +21,19 @@ struct SearchBar: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            Image(systemName: Drawing.iconName)
-                .foregroundColor(DS.Colors.grayLight)
-                .padding(Drawing.iconPadding)
+            Button {
+                action()
+            }label: {
+                Image(systemName: Drawing.iconName)
+                    .foregroundColor(DS.Colors.grayLight)
+                    .padding(Drawing.iconPadding)
+            }
+            
             TextField(Resources.Text.search, text: $text)
                 .foregroundStyle(DS.Colors.grayDark)
+                .onSubmit {
+                    action()
+                }
             
             if !text.isEmpty {
                 Button(action: {
@@ -47,7 +55,7 @@ struct SearchBar: View {
 
 struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBar(text: .constant("search"))
+        SearchBar(action: {}, text: .constant("search"))
     }
 }
 

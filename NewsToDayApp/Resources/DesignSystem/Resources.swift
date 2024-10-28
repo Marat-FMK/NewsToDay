@@ -26,6 +26,7 @@ enum Resources {
         static let recommendedForYou = "Recommended for you"
         static let allRecommendedNews = "All recommended news"
         static let weHaveSelectedTheBestNewsForYou = "We have selected the best news for you"
+        static let searchedNews = "Searched news"
     }
     
     enum Image {

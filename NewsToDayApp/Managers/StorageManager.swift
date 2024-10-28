@@ -16,6 +16,7 @@ final class StorageManager {
     enum UserDefaultKeys {
         static let hasChooseCategory = "hasChooseCategory"
         static let chooseCategory = "chooseCategory"
+//        static let checkFirstLoud = "firstLoud"
     }
     
     // MARK: - Initialization
@@ -34,5 +35,9 @@ final class StorageManager {
             .flatMap { $0 as? [String] }
             .map { $0.compactMap(Categories.init) }
     }
+    
+//    func checkFirstLoud() {
+//        UserDefaults.standard.set(true, forKey: UserDefaultKeys.checkFirstLoud)
+//    }
 
 }
