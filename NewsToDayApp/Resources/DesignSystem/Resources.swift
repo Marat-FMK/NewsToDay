@@ -27,6 +27,9 @@ enum Resources {
         static let allRecommendedNews = "All recommended news"
         static let weHaveSelectedTheBestNewsForYou = "We have selected the best news for you"
         static let searchedNews = "Searched news"
+        static let noCategoryMessage = "No Category"
+        static let noAuthorMessage = "No Author"
+        static let resultsMessage = "Results"
     }
     
     enum Image {
