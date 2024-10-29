@@ -16,7 +16,7 @@ struct CustomToolBar: View {
         VStack(alignment: .leading) {
             Text(title)
                 .foregroundStyle(DS.Colors.blackyPrimary)
-                .font(.interSemiBold(32))
+                .font(.interSemiBold(24))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             
@@ -33,6 +33,6 @@ struct CustomToolBar: View {
 }
 
 
-#Preview {
-    CustomToolBar(title: "MainTitle", subTitle: "same text")
-}
+//#Preview {
+//    CustomToolBar(title: "MainTitle", subTitle: "same text")
+//}
