@@ -18,9 +18,10 @@ final class BookmarksViewModel: ObservableObject {
     }
     
     func fetchBookmarks() {
-        let bookmarkEntities = boormarksManager.fetchBookmarks()
-        self.bookmarks = bookmarkEntities.map { entity in
-            ArticleDTO(from: entity)
+        Task {
+            let bookmarkEntities = boormarksManager.fetchBookmarks()
+            print(bookmarkEntities)
+            self.bookmarks = bookmarkEntities.map { ArticleDTO(from: $0) }
         }
     }
     
@@ -29,4 +30,7 @@ final class BookmarksViewModel: ObservableObject {
         fetchBookmarks()
     }
     
+    func deleteAllBookmarks() {
+        boormarksManager.deleteAllBookmarks()
+    }
 }

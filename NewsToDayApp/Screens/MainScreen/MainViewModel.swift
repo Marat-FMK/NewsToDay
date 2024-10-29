@@ -42,8 +42,7 @@ enum DisplayOrderType: CaseIterable {
 final class MainViewModel: ObservableObject {
     @Published var categoryNewsPhase: DataFetchPhase<[ArticleDTO]> = .empty
     @Published var recomendedNewsPhase: DataFetchPhase<[ArticleDTO]> = .empty
-    
-    @Published var searshNewsResults: [ArticleDTO] = []
+    @Published var searshNewsResultsPhase: DataFetchPhase<[ArticleDTO]> = .empty
     
     @Published var fetchTaskToken: FetchTaskToken
     @Published var errorMessage: String? = nil
@@ -87,9 +86,9 @@ final class MainViewModel: ObservableObject {
     
     private var filteredArticles: [ArticleDTO] {
         guard let articles = recomendedNewsPhase.value else { return []}
-        return articles.filter { article in
-            categories.contains { $0.rawValue == article.category?.first }
-        }
+       
+        return articles
+        
     }
     
     var error: Error? {
@@ -112,7 +111,7 @@ final class MainViewModel: ObservableObject {
         self.fetchTaskToken = FetchTaskToken(articles: "recomendedNews", token: Date())
         
         self.cache = DiskCache<[ArticleDTO]>(
-            filename: "xca_top_news",
+            filename: "xca_top_new",
             expirationInterval: timeIntervalForUpdateCache
         )
         
@@ -122,7 +121,6 @@ final class MainViewModel: ObservableObject {
             try? await cache.loadFromDisk()
         }
     }
-    
     
     /// Cancels the error alert and refreshes the data.
     func cancelErrorAlert() {
@@ -148,12 +146,12 @@ final class MainViewModel: ObservableObject {
             article[i].isFavorite = bookmarkIDs.contains(article[i].id)
         }
     }
-
-
+    
+    
     // MARK: - API Methods
     func getCategoryNews() -> [ArticleDTO] { sortedArticles }
-    
     func getRecomendedNews() -> [ArticleDTO] { filteredArticles }
+    func getSearshResult() -> [ArticleDTO] { searshNewsResultsPhase.value ?? [] }
     
     /// Refreshes the cache and updates the fetch task token.
     func refreshTask() async {
@@ -204,7 +202,7 @@ final class MainViewModel: ObservableObject {
             recomendedNewsPhase = .failure(error)
         }
     }
-
+    
     // MARK: - Load Categories
     func loadCategories() {
         self.categories = storageManager.loadCategories() ?? []
@@ -212,12 +210,18 @@ final class MainViewModel: ObservableObject {
             categories.append(.health)
         }
     }
-
+    
     // MARK: - Fetch News with Search
     func fetchSearchResults() {
         Task {
-            try await searshNewsResults = newsAPIManager.getSearchedNews(with: searchText)?.results ?? []
+            let searshNewsResults = try await newsAPIManager.getSearchedNews(with: searchText)?.results ?? []
+            searshNewsResultsPhase = .success(searshNewsResults)
         }
+    }
+    
+    func clearAfterSearch() {
+        searshNewsResultsPhase = .empty
+        searchText = ""
     }
     
     // MARK: - Private Methods
@@ -243,12 +247,12 @@ final class MainViewModel: ObservableObject {
         return allArticles
     }
     
-    
     private func addBookmark(_ article: ArticleDTO) {
         bookmarkManager.saveBookmark(
             id: article.id,
             title: article.title,
             link: article.link ?? "",
+            imageURL: article.imageUrl ?? "" ,
             category: article.category?.first ?? "",
             creator: article.creator?.first ?? "",
             descrition: article.description ?? "",

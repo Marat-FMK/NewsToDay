@@ -82,7 +82,7 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
         self.imageUrl = bookmarkEntity.imageURL
         self.category = bookmarkEntity.category?.components(separatedBy: ", ")
         self.country = nil
-        self.isFavorite = bookmarkEntity.isFavirite
+        self.isFavorite = bookmarkEntity.isFavorite
     }
     
     // MARK: - Default Initializer for ArticleDTO

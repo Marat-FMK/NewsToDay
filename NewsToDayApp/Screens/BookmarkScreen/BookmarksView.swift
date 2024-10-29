@@ -13,6 +13,13 @@ struct BookmarkView: View {
     var body: some View {
         VStack {
             setupToolbar()
+                .overlay {
+                    Button {
+                        viewModel.deleteAllBookmarks()
+                    } label: {
+                        Text("delete all")
+                    }
+                }
             Spacer()
             if viewModel.bookmarks.isEmpty {
                 emptyStateView()
@@ -57,15 +64,22 @@ extension BookmarkView {
     }
     
     private func bookmarksListView() -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            List {
-                ForEach(viewModel.bookmarks, id: \.id)  { article in
-                    bookmarkNavigationLink(for: article)
-                }
+        List {
+            ForEach(viewModel.bookmarks) { article in
+                bookmarkNavigationLink(for: article)
             }
-            .padding(.top, 20)
+            .onDelete(perform: deleteBookmark)
         }
+        .listStyle(PlainListStyle())
+        
     }
+    
+    private func deleteBookmark(at offsets: IndexSet) {
+           for index in offsets {
+               let articleId = viewModel.bookmarks[index].id
+               viewModel.deleteBookmark(withId: articleId)
+           }
+       }
     
     private func bookmarkNavigationLink(for article: ArticleDTO) -> some View {
         NavigationLink(destination: DetailView(
@@ -81,18 +95,7 @@ extension BookmarkView {
         )) {
             ArticleView(model: article)
                 .padding(.vertical, 10)
-                .swipeActions {
-                    deleteButton(for: article.id)
-                }
+                .frame(height: 96)
         }
-    }
-    
-    private func deleteButton(for articleId: String) -> some View {
-        Button(action: {
-            viewModel.deleteBookmark(withId: articleId)
-        }) {
-            Text("Delete")
-        }
-        .tint(.red)
     }
 }

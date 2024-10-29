@@ -11,7 +11,7 @@ struct MainView: View {
     @StateObject var viewModel: MainViewModel
     
     var body: some View {
-        if viewModel.searshNewsResults.isEmpty {
+        if viewModel.getSearshResult().isEmpty {
             VStack {
                 CustomToolBar(title: Resources.Text.mainTitle, subTitle: Resources.Text.mainSubTitle)
                     .padding(.top, 0)
@@ -36,7 +36,11 @@ struct MainView: View {
             .background(.background)
             .ignoresSafeArea()
         } else {
-            SearchNewsView(news: $viewModel.searshNewsResults, searchText: $viewModel.searchText)
+            SearchNewsView(
+                news: viewModel.getSearshResult(),
+                searchText: viewModel.searchText,
+                action: viewModel.clearAfterSearch
+            )
         }
     }
 }
@@ -166,10 +170,10 @@ extension MainView {
                             imageUrl: article.imageUrl,
                             category: article.category
                         )
-                        .frame(height: 100)
+                        .frame(height: 96)
                     }
                 }
-                .padding(.bottom,150)
+                .padding(.bottom, 16)
             }
         }
         
