@@ -7,7 +7,12 @@
 
 import Foundation
 
-final class StorageManager {
+protocol IUserDefaultManager {
+    func saveCategories(categories: [Categories])
+    func loadCategories() -> [Categories]?
+}
+
+final class StorageManager: IUserDefaultManager {
     // MARK: - Properties
     static let shared = StorageManager()
     

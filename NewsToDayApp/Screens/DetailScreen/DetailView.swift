@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailView: View {
     @Environment(\.dismiss) var dismiss
     
+    let id: String
     let title: String
     let link: String?
     let creator: [String]?

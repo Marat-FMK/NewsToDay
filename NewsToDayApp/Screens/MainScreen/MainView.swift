@@ -11,7 +11,7 @@ struct MainView: View {
     @StateObject var viewModel: MainViewModel
     
     var body: some View {
-        if viewModel.searshNewsResults.isEmpty {
+        if viewModel.getSearshResult().isEmpty {
             VStack {
                 CustomToolBar(title: Resources.Text.mainTitle, subTitle: Resources.Text.mainSubTitle)
                     .padding(.top, 0)
@@ -36,7 +36,11 @@ struct MainView: View {
             .background(.background)
             .ignoresSafeArea()
         } else {
-            SearchNewsView(news: $viewModel.searshNewsResults, searchText: $viewModel.searchText)
+            SearchNewsView(
+                news: viewModel.getSearshResult(),
+                searchText: viewModel.searchText,
+                action: viewModel.clearAfterSearch
+            )
         }
     }
 }
@@ -71,24 +75,29 @@ extension MainView {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 if !viewModel.getCategoryNews().isEmpty {
-                    ForEach(viewModel.getCategoryNews()) { news in
+                    ForEach(viewModel.getCategoryNews()) { article in
                         NavigationLink {
                             DetailView(
-                                title: news.title,
-                                link: news.link,
-                                creator: news.creator,
-                                description: news.description,
-                                category: news.category,
-                                isFavorite: news.isFavorite,
-                                imageUrl: news.imageUrl,
+                                id: article.id,
+                                title: article.title,
+                                link: article.link,
+                                creator: article.creator,
+                                description: article.description,
+                                category: article.category,
+                                isFavorite: article.isFavorite,
+                                imageUrl: article.imageUrl,
                                 action: {}
                             )
                         } label: {
                             CategoryNewsCell(
-                                title: news.title,
-                                imageUrl: news.imageUrl,
-                                isFavorite: news.isFavorite,
-                                category: news.category
+                                id: article.id,
+                                title: article.title,
+                                imageUrl: article.imageUrl,
+                                isFavorite: article.isFavorite,
+                                category: article.category,
+                                action: {
+                                    viewModel.toggleBookmark(for: article)
+                                }
                             )
                             
                             .frame(height: 256)
@@ -143,6 +152,7 @@ extension MainView {
                 ForEach(viewModel.getRecomendedNews()) { article in
                     NavigationLink {
                         DetailView(
+                            id: article.id,
                             title: article.title,
                             link: article.link,
                             creator: article.creator,
@@ -150,7 +160,9 @@ extension MainView {
                             category: article.category,
                             isFavorite: article.isFavorite,
                             imageUrl: article.imageUrl,
-                            action: {}
+                            action: {
+                                viewModel.toggleBookmark(for: article)
+                            }
                         )
                     } label: {
                         RecommendedNewsView(
@@ -158,10 +170,10 @@ extension MainView {
                             imageUrl: article.imageUrl,
                             category: article.category
                         )
-                        .frame(height: 100)
+                        .frame(height: 96)
                     }
                 }
-                .padding(.bottom,150)
+                .padding(.bottom, 16)
             }
         }
         

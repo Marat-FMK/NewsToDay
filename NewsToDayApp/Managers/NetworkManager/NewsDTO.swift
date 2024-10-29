@@ -71,6 +71,34 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
         case isFavorite
     }
     
+    // MARK: - Custom Initializer for Core Data BookmarkEntity
+    init(from bookmarkEntity: BookmarkEntity) {
+        self.id = bookmarkEntity.id ?? UUID().uuidString
+        self.title = bookmarkEntity.title ?? ""
+        self.link = bookmarkEntity.link
+        self.creator = bookmarkEntity.creator?.components(separatedBy: ", ")
+        self.description = bookmarkEntity.descriptionArticle
+        self.content = nil
+        self.imageUrl = bookmarkEntity.imageURL
+        self.category = bookmarkEntity.category?.components(separatedBy: ", ")
+        self.country = nil
+        self.isFavorite = bookmarkEntity.isFavorite
+    }
+    
+    // MARK: - Default Initializer for ArticleDTO
+    init(id: String, title: String, link: String?, creator: [String]?, description: String?, content: String?, imageUrl: String?, category: [String]?, country: [String]?, isFavorite: Bool = false) {
+        self.id = id
+        self.title = title
+        self.link = link
+        self.creator = creator
+        self.description = description
+        self.content = content
+        self.imageUrl = imageUrl
+        self.category = category
+        self.country = country
+        self.isFavorite = isFavorite
+    }
+
     // MARK: - Custom Decoder for ArticleDTO
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

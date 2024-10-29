@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct CategoryNewsCell: View {
-    
+    let id: String
     let title: String
     let imageUrl: String?
     let isFavorite: Bool
     let category: [String]?
+    let action: () -> Void
     
     var body: some View {
         ZStack {
@@ -28,12 +29,12 @@ struct CategoryNewsCell: View {
             .clipShape(RoundedRectangle(cornerRadius: 12))
         
         Button {
-            // Add bookmark and save news on savedNews
+            action()
         } label: {
             Image(systemName: "bookmark")
                 .resizable()
                 .frame(width: 18, height: 24)
-                .foregroundStyle(isFavorite ? .white : DS.Colors.grayLight)
+                .foregroundStyle(isFavorite ? DS.Colors.purpleDark : DS.Colors.grayLight)
         }
         .offset(x: 90, y: -90)
         
