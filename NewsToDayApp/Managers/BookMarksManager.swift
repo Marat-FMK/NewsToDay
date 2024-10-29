@@ -17,7 +17,6 @@ protocol IBookMarks {
         category: String,
         creator: String,
         descrition: String,
-        isFavorite: Bool,
         userID: String
     )
     func fetchBookmarks() -> [BookmarkEntity]
@@ -72,7 +71,6 @@ final class BookMarksManager: IBookMarks {
         category: String,
         creator: String,
         descrition: String,
-        isFavorite: Bool,
         userID: String
     ) {
         privateContext.perform { [weak self] in

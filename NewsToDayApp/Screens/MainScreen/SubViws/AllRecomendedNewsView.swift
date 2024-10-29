@@ -31,17 +31,7 @@ struct AllRecomendedNewsView: View {
             } else {
                 ForEach(news) { article in
                     NavigationLink {
-                        DetailView(
-                            id: article.id,
-                            title: article.title,
-                            link: article.link,
-                            creator: article.creator,
-                            description: article.description,
-                            category: article.category,
-                            isFavorite: true,
-                            imageUrl: article.imageUrl,
-                            action: {}
-                        )
+                        DetailView(article)
                     } label: {
                         RecommendedNewsView(
                             title: article.title,

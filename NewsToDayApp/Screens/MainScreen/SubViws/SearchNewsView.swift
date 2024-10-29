@@ -26,17 +26,7 @@ struct SearchNewsView: View {
             ScrollView(showsIndicators: false) {
                 ForEach(news) { news in
                     NavigationLink{
-                        DetailView(
-                            id: news.id,
-                            title: news.title,
-                            link: news.link,
-                            creator: news.creator,
-                            description: news.description,
-                            category: news.category,
-                            isFavorite: true,
-                            imageUrl: news.imageUrl,
-                            action: {}
-                        )
+                        DetailView(news)
                     } label: {
                         RecommendedNewsView(
                             title: news.title,

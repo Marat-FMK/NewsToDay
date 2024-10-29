@@ -9,20 +9,18 @@ import SwiftUI
 
 struct DetailView: View {
     @Environment(\.dismiss) var dismiss
+    @StateObject private var viewModel: DetailViewModel
     
-    let id: String
-    let title: String
-    let link: String?
-    let creator: [String]?
-    let description: String?
-    let category: [String]?
-    let isFavorite: Bool
-    let imageUrl: String?
+    // MARK: - Initializer
+    init(_ article: ArticleDTO) {
+        self._viewModel = StateObject(
+            wrappedValue: DetailViewModel(detailArticle: article)
+        )
+    }
     
-    let action: () -> Void
-    
+    // MARK: - Body
     var body: some View {
-        NavigationView {
+       
             VStack(alignment: .leading) {
                 ZStack(alignment: .bottomLeading) {
                     
@@ -30,27 +28,28 @@ struct DetailView: View {
                         RoundedRectangle(cornerRadius: 12)
                             .foregroundStyle(.black)
                         
-                        AsyncCachedImage(
-                            url: URL(string: imageUrl ?? ""),
-                            placeholder: Image(systemName: "photo")
-                        )
-                        .opacity(0.75)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        AsyncCachedImage(url: URL(string: viewModel.detailArticle.imageUrl ?? ""))
+                            .opacity(0.75)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     .frame(width: 405, height: 380)
                     
                     Button(action: {
-                        shareNewsText(title)
+                        shareNewsText(viewModel.detailArticle.title)
                     }) {
                         Image(systemName: "arrowshape.turn.up.right")
                             .resizable()
                             .frame(width: 24, height: 24)
                             .foregroundStyle(.white)
-                            
+                        
                     }
                     .offset(x: 355, y: -240)
                     
-                    Link(destination: URL(string: link ?? "https://ria.ru/20241023/briks-1979545138.html")!) {
+                    Link(destination:
+                            URL(string:
+                                viewModel.detailArticle.link
+                                ?? "https://ria.ru/20241023/briks-1979545138.html")!
+                    ) {
                         Image(systemName: "globe")
                             .resizable()
                             .foregroundStyle(.white)
@@ -60,7 +59,7 @@ struct DetailView: View {
                     
                     VStack(alignment: .leading) {
                         
-                        Text(category?.first ?? Resources.Text.noCategory)
+                        Text(viewModel.detailArticle.category?.first ?? Resources.Text.noCategory)
                             .font(.interRegular(12))
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
@@ -69,14 +68,14 @@ struct DetailView: View {
                             .clipShape(Capsule())
                             .padding(.bottom,10)
                         
-                        Text(title)
+                        Text(viewModel.detailArticle.title)
                             .frame(width: 336, height: 56, alignment: .leading)
                             .lineLimit(2)
                             .font(.interSemiBold(20))
                             .foregroundColor(.white)
                             .padding(.bottom, 30)
                         
-                        Text(creator?.first ?? Resources.Text.noAuthor)
+                        Text(viewModel.detailArticle.creator?.first ?? Resources.Text.noAuthor)
                             .font(.interSemiBold(16))
                             .foregroundColor(.white)
                             .padding(.bottom, 8)
@@ -91,21 +90,21 @@ struct DetailView: View {
                 }
                 
                 VStack(alignment: .leading) {
-                
+                    
                     Text(Resources.Text.resaults)
-                            .font(.interSemiBold(16))
-                            .frame(width: 58, height: 24, alignment: .leading)
-                            .padding(.top,24)
-                      
+                        .font(.interSemiBold(16))
+                        .frame(width: 58, height: 24, alignment: .leading)
+                        .padding(.top,24)
+                    
                     ScrollView(showsIndicators: false) {
-                        Text(description ?? "")
+                        Text(viewModel.detailArticle.description ?? "")
                             .font(.interMedium(16))
                             .foregroundStyle(DS.Colors.grayDark)
                             .frame(width: 336, alignment: .leading)
                             .padding(.top, 8)
                     }
                 }
-                    .padding()
+                .padding()
                 
             }
             .ignoresSafeArea()
@@ -124,25 +123,29 @@ struct DetailView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        action()
+                        viewModel.toggleBookmark()
                     } label: {
                         Image(systemName: "bookmark")
                             .resizable()
-                            .foregroundColor(isFavorite ? .red : .gray)
+                            .foregroundColor(
+                                viewModel.isBookmarked
+                                ? .red
+                                : .gray
+                            )
                             .frame(width: 17, height: 24)
                             .padding(.trailing, 12)
                     }
                 }
             }
-        }
+      
         .navigationBarBackButtonHidden(true)
     }
     
-
+    
     private func shareNewsText(_ text: String) {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let rootVC = windowScene.windows.first?.rootViewController else { return }
-
+        
         let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         rootVC.present(activityVC, animated: true, completion: nil)
     }

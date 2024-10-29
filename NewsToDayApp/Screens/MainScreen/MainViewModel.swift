@@ -45,6 +45,7 @@ final class MainViewModel: ObservableObject {
     @Published var searshNewsResultsPhase: DataFetchPhase<[ArticleDTO]> = .empty
     
     @Published var bookmarks: [ArticleDTO] = []
+    @Published var isBookmarked: Bool = false
     
     @Published var fetchTaskToken: FetchTaskToken
     @Published var errorMessage: String? = nil
@@ -149,6 +150,7 @@ final class MainViewModel: ObservableObject {
         } else {
             addBookmark(article)
         }
+        objectWillChange.send()
     }
     
     // MARK: - API Methods
@@ -257,14 +259,13 @@ final class MainViewModel: ObservableObject {
             category: article.category?.first ?? "",
             creator: article.creator?.first ?? "",
             descrition: article.description ?? "",
-            isFavorite: true,
             userID: ""
         )
-        fetchBookmarks()
+        bookmarks.append(article)
     }
     
     private func deleteBookmark(_ article: ArticleDTO) {
         bookmarkManager.deleteBookmark(id: article.id)
-        fetchBookmarks()
+        bookmarks.removeAll { $0.id == article.id }
     }
 }

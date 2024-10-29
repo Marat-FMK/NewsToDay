@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoriesView: View {
     
-    @StateObject var viewModel: CategoriesViewModel
+    @StateObject private var viewModel: CategoriesViewModel
     
     // MARK: - Drawing Constants
     enum Drawing {

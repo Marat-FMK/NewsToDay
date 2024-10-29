@@ -7,40 +7,55 @@
 
 import SwiftUI
 
+// MARK: - ArticleView
 struct ArticleView: View {
     
+    // MARK: - Properties
     let model: ArticleDTO
        
-       var body: some View {
-           HStack() {
-               AsyncCachedImage(
-                url: URL(string: model.imageUrl ?? ""),
-                   placeholder: Image(systemName: "photo")
-               )
-               .frame(width: 96, height: 96)
-               .clipShape(RoundedRectangle(cornerRadius: 12))
-           
-               
-               VStack(alignment: .leading) {
-                   Text(model.title)
-                       .font(.custom("Inter", size: 14)) 
-                       .fontWeight(.semibold)
-                       .foregroundColor(Color(.black))
-                       .lineSpacing(20 - 14)
-                       .frame(maxWidth: .infinity, alignment: .leading)
-                       .padding(.vertical, 8)
+    // MARK: - Body
+    var body: some View {
+        HStack {
+            // MARK: - Image View
+            AsyncCachedImage(url: URL(string: model.imageUrl ?? ""))
+            .frame(width: Drawing.imageSize, height: Drawing.imageSize)
+            .clipShape(RoundedRectangle(cornerRadius: Drawing.cornerRadius))
+        
+            // MARK: - Text Content
+            VStack(alignment: .leading) {
+                Text(model.title)
+                    .font(.interMedium(Drawing.titleFontSize))
+                    .fontWeight(.semibold)
+                    .foregroundColor(.black)
+                    .lineSpacing(Drawing.titleLineSpacing)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, Drawing.titleVerticalPadding)
+                
+                Text(model.category?.first ?? "")
+                    .font(.system(size: Drawing.categoryFontSize, weight: .semibold))
+                    .foregroundColor(.black)
+                    .lineSpacing(Drawing.categoryLineSpacing)
+                    .frame(height: Drawing.categoryFrameHeight, alignment: .top)
+                    .padding(.bottom, Drawing.categoryBottomPadding)
+                    .lineLimit(2)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.leading, Drawing.textPaddingLeading)
+        }
+    }
+}
 
-                   
-                   Text(model.category?.first ?? "")
-                       .font(.system(size: 16, weight: .semibold))
-                       .foregroundColor(Color(.black))
-                       .lineSpacing(24 - 16)
-                       .frame(height: 50, alignment: .top)
-                       .padding(.bottom, 8)
-                       .lineLimit(2)
-               }
-               .frame(maxWidth: .infinity)
-               .padding(.init(top: .zero, leading: 16, bottom: .zero, trailing: .zero))
-           }
-       }
+// MARK: - Drawing Constants
+
+private enum Drawing {
+    static let imageSize: CGFloat = 96
+    static let cornerRadius: CGFloat = 12
+    static let titleFontSize: CGFloat = 14
+    static let titleLineSpacing: CGFloat = 6
+    static let titleVerticalPadding: CGFloat = 8
+    static let categoryFontSize: CGFloat = 16
+    static let categoryLineSpacing: CGFloat = 8
+    static let categoryFrameHeight: CGFloat = 50
+    static let categoryBottomPadding: CGFloat = 8
+    static let textPaddingLeading: CGFloat = 16
 }

@@ -16,10 +16,7 @@ struct RecommendedNewsView: View {
     var body: some View {
         HStack {
             ZStack {
-                AsyncCachedImage(
-                    url: URL(string: imageUrl ?? ""),
-                    placeholder: Image(systemName: "photo")
-                )
+                AsyncCachedImage(url: URL(string: imageUrl ?? ""))
                 .frame(width: 96, height: 96)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }
