@@ -41,13 +41,11 @@ struct SearchNewsView: View {
         .padding(.bottom, 100)
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()
-        .onDisappear {
-            action()
-        }
         
         .toolbar {
             ToolbarItem( placement: .topBarLeading) {
                 Button {
+                    action()
                     dismiss()
                 } label: {
                     Image(systemName: Resources.Image.arrowLeft)
