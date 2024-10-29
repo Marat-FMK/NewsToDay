@@ -93,7 +93,6 @@ final class BookMarksManager: IBookMarks {
                     bookmark.category = category
                     bookmark.creator = creator
                     bookmark.descriptionArticle = descrition
-                    bookmark.isFavorite = isFavorite
                     bookmark.userId = userID
                     
                     self.saveContext()

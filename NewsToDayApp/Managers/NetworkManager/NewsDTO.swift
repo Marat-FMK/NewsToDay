@@ -56,7 +56,6 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
     let imageUrl: String?
     let category: [String]?
     let country: [String]?
-    var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case id = "article_id"
@@ -68,7 +67,6 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
         case imageUrl = "image_url"
         case category
         case country
-        case isFavorite
     }
     
     // MARK: - Custom Initializer for Core Data BookmarkEntity
@@ -82,7 +80,6 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
         self.imageUrl = bookmarkEntity.imageURL
         self.category = bookmarkEntity.category?.components(separatedBy: ", ")
         self.country = nil
-        self.isFavorite = bookmarkEntity.isFavorite
     }
     
     // MARK: - Default Initializer for ArticleDTO
@@ -96,7 +93,6 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
         self.imageUrl = imageUrl
         self.category = category
         self.country = country
-        self.isFavorite = isFavorite
     }
 
     // MARK: - Custom Decoder for ArticleDTO
@@ -119,7 +115,6 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
         self.imageUrl = try container.decodeIfPresent(String.self, forKey: .imageUrl)
         self.category = try container.decodeIfPresent([String].self, forKey: .category)
         self.country = try container.decodeIfPresent([String].self, forKey: .country)
-        self.isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
     }
 }
 

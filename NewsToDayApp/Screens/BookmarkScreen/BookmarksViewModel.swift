@@ -9,28 +9,29 @@ import Foundation
 
 @MainActor
 final class BookmarksViewModel: ObservableObject {
-    @Published var bookmarks: [ArticleDTO] = []
+    @Published var bookmarks: Set<ArticleDTO> = []
+  
+    private var bookmarkManager: IBookMarks
     
-    private var boormarksManager: IBookMarks
-    
-    init(boormarksManager: IBookMarks = BookMarksManager.shared) {
-        self.boormarksManager = boormarksManager
+    init(bookmarkManager: IBookMarks = BookMarksManager.shared) {
+        self.bookmarkManager = bookmarkManager
     }
     
     func fetchBookmarks() {
         Task {
-            let bookmarkEntities = boormarksManager.fetchBookmarks()
-            print(bookmarkEntities)
-            self.bookmarks = bookmarkEntities.map { ArticleDTO(from: $0) }
+            let bookmarkEntities = bookmarkManager.fetchBookmarks()
+            self.bookmarks = Set(bookmarkEntities.map { ArticleDTO(from: $0)})
         }
     }
     
     func deleteBookmark(withId id: String) {
-        boormarksManager.deleteBookmark(id: id)
-        fetchBookmarks()
+        if let article = bookmarks.first(where: { $0.id == id }) {
+            bookmarks.remove(article)
+            bookmarkManager.deleteBookmark(id: id)
+        }
     }
     
     func deleteAllBookmarks() {
-        boormarksManager.deleteAllBookmarks()
+        bookmarkManager.deleteAllBookmarks()
     }
 }

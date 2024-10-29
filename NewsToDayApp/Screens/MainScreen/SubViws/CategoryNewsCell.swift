@@ -30,11 +30,12 @@ struct CategoryNewsCell: View {
         
         Button {
             action()
+            print(isFavorite)
         } label: {
             Image(systemName: "bookmark")
                 .resizable()
                 .frame(width: 18, height: 24)
-                .foregroundStyle(isFavorite ? DS.Colors.purpleDark : DS.Colors.grayLight)
+                .foregroundStyle(isFavorite ? .red : DS.Colors.grayLight)
         }
         .offset(x: 90, y: -90)
         

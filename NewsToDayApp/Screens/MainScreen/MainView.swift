@@ -84,7 +84,7 @@ extension MainView {
                                 creator: article.creator,
                                 description: article.description,
                                 category: article.category,
-                                isFavorite: article.isFavorite,
+                                isFavorite: viewModel.bookmarks.contains { $0.id == article.id },
                                 imageUrl: article.imageUrl,
                                 action: {}
                             )
@@ -93,7 +93,7 @@ extension MainView {
                                 id: article.id,
                                 title: article.title,
                                 imageUrl: article.imageUrl,
-                                isFavorite: article.isFavorite,
+                                isFavorite: viewModel.bookmarks.contains { $0.id == article.id },
                                 category: article.category,
                                 action: {
                                     viewModel.toggleBookmark(for: article)
@@ -158,7 +158,7 @@ extension MainView {
                             creator: article.creator,
                             description: article.description,
                             category: article.category,
-                            isFavorite: article.isFavorite,
+                            isFavorite: viewModel.bookmarks.contains { $0.id == article.id },
                             imageUrl: article.imageUrl,
                             action: {
                                 viewModel.toggleBookmark(for: article)

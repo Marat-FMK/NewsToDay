@@ -38,7 +38,7 @@ struct AllRecomendedNewsView: View {
                             creator: article.creator,
                             description: article.description,
                             category: article.category,
-                            isFavorite: article.isFavorite,
+                            isFavorite: true,
                             imageUrl: article.imageUrl,
                             action: {}
                         )

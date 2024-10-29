@@ -65,7 +65,7 @@ extension BookmarkView {
     
     private func bookmarksListView() -> some View {
         List {
-            ForEach(viewModel.bookmarks) { article in
+            ForEach(Array(viewModel.bookmarks)) { article in
                 bookmarkNavigationLink(for: article)
             }
             .onDelete(perform: deleteBookmark)
@@ -75,11 +75,13 @@ extension BookmarkView {
     }
     
     private func deleteBookmark(at offsets: IndexSet) {
-           for index in offsets {
-               let articleId = viewModel.bookmarks[index].id
-               viewModel.deleteBookmark(withId: articleId)
-           }
-       }
+        let bookmarksArray = Array(viewModel.bookmarks)
+        
+        for index in offsets {
+            let article = bookmarksArray[index]
+            viewModel.deleteBookmark(withId: article.id)
+        }
+    }
     
     private func bookmarkNavigationLink(for article: ArticleDTO) -> some View {
         NavigationLink(destination: DetailView(
@@ -89,7 +91,7 @@ extension BookmarkView {
             creator: article.creator,
             description: article.description,
             category: article.category,
-            isFavorite: article.isFavorite,
+            isFavorite: viewModel.bookmarks.contains(article),
             imageUrl: article.imageUrl,
             action: {}
         )) {

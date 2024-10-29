@@ -33,7 +33,7 @@ struct SearchNewsView: View {
                             creator: news.creator,
                             description: news.description,
                             category: news.category,
-                            isFavorite: news.isFavorite,
+                            isFavorite: true,
                             imageUrl: news.imageUrl,
                             action: {}
                         )

@@ -128,7 +128,7 @@ struct DetailView: View {
                     } label: {
                         Image(systemName: "bookmark")
                             .resizable()
-                            .foregroundColor(isFavorite ? .white : .gray)
+                            .foregroundColor(isFavorite ? .red : .gray)
                             .frame(width: 17, height: 24)
                             .padding(.trailing, 12)
                     }

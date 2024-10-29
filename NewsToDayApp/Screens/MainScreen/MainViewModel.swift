@@ -44,6 +44,8 @@ final class MainViewModel: ObservableObject {
     @Published var recomendedNewsPhase: DataFetchPhase<[ArticleDTO]> = .empty
     @Published var searshNewsResultsPhase: DataFetchPhase<[ArticleDTO]> = .empty
     
+    @Published var bookmarks: [ArticleDTO] = []
+    
     @Published var fetchTaskToken: FetchTaskToken
     @Published var errorMessage: String? = nil
     @Published var selectedOrder: DisplayOrderType = .alphabetical
@@ -64,6 +66,8 @@ final class MainViewModel: ObservableObject {
     private let timeIntervalForUpdateCache: TimeInterval = 7 * 24 * 60 * 60
     private let cache: DiskCache<[ArticleDTO]>
     private let country: Country = .gb
+    
+    
     private var lastSortedOrder: DisplayOrderType?
     private var lastSortedArticles: [ArticleDTO]?
     
@@ -75,8 +79,10 @@ final class MainViewModel: ObservableObject {
         }
         let sorted = articles.sorted {
             switch selectedOrder {
-            case .alphabetical: return $0.title < $1.title
-            case .favoriteFirst: return $0.isFavorite && !$1.isFavorite
+            case .alphabetical:
+                return $0.title < $1.title
+            case .favoriteFirst:
+                return $0.title < $1.title
             }
         }
         lastSortedOrder = selectedOrder
@@ -85,8 +91,8 @@ final class MainViewModel: ObservableObject {
     }
     
     private var filteredArticles: [ArticleDTO] {
-        guard let articles = recomendedNewsPhase.value else { return []}
-       
+        guard let articles = recomendedNewsPhase.value else { return [] }
+        
         return articles
         
     }
@@ -117,6 +123,8 @@ final class MainViewModel: ObservableObject {
         
         self.selectedCategory = categories.first ?? .top
         
+        fetchBookmarks()
+        
         Task(priority: .high) {
             try? await cache.loadFromDisk()
         }
@@ -130,23 +138,18 @@ final class MainViewModel: ObservableObject {
     }
     
     // MARK: - Bookmark Methods
+    private func fetchBookmarks() {
+         let bookmarkList = bookmarkManager.fetchBookmarks()
+         self.bookmarks = bookmarkList.map { ArticleDTO(from: $0)}
+     }
+    
     func toggleBookmark(for article: ArticleDTO) {
-        if article.isFavorite {
+        if bookmarks.contains(article) {
             deleteBookmark(article)
         } else {
             addBookmark(article)
         }
     }
-    
-    func updateFavoriteStatus(for article: inout [ArticleDTO]) {
-        let bookmarkt = bookmarkManager.fetchBookmarks()
-        let bookmarkIDs = Set(bookmarkt.map { $0.id })
-        
-        for i in article.indices {
-            article[i].isFavorite = bookmarkIDs.contains(article[i].id)
-        }
-    }
-    
     
     // MARK: - API Methods
     func getCategoryNews() -> [ArticleDTO] { sortedArticles }
@@ -163,17 +166,15 @@ final class MainViewModel: ObservableObject {
     func fetchCategoryNews(ignoreCache: Bool = false) async {
         categoryNewsPhase = .empty
         do {
-            if var cachedArticles = await getCachedArticles(
+            if let cachedArticles = await getCachedArticles(
                 for: fetchTaskToken.articles,
                 ignoreCache: ignoreCache
             ) {
                 print("CACHE HIT")
-                updateFavoriteStatus(for: &cachedArticles)
                 categoryNewsPhase = .success(cachedArticles)
             } else {
-                var articlesFromAPI = try await fetchCategoryArticlesFromAPI()
+                let articlesFromAPI = try await fetchCategoryArticlesFromAPI()
                 print("CACHE MISSED")
-                updateFavoriteStatus(for: &articlesFromAPI)
                 categoryNewsPhase = .success(articlesFromAPI)
             }
         } catch {
@@ -259,9 +260,11 @@ final class MainViewModel: ObservableObject {
             isFavorite: true,
             userID: ""
         )
+        fetchBookmarks()
     }
     
     private func deleteBookmark(_ article: ArticleDTO) {
         bookmarkManager.deleteBookmark(id: article.id)
+        fetchBookmarks()
     }
 }
