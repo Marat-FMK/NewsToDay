@@ -20,10 +20,7 @@ struct CategoryNewsCell: View {
             RoundedRectangle(cornerRadius: 12)
                 .foregroundStyle(.black)
             
-            AsyncCachedImage(
-                url: URL(string: imageUrl ?? ""),
-                placeholder: Image(systemName: "photo.artframe")
-            )
+            AsyncCachedImage(url: URL(string: imageUrl ?? ""))
             .opacity(0.75)
             .frame(width: 256, height: 256)
             .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -34,7 +31,7 @@ struct CategoryNewsCell: View {
             Image(systemName: "bookmark")
                 .resizable()
                 .frame(width: 18, height: 24)
-                .foregroundStyle(isFavorite ? DS.Colors.purpleDark : DS.Colors.grayLight)
+                .foregroundStyle(isFavorite ? .red : DS.Colors.grayLight)
         }
         .offset(x: 90, y: -90)
         

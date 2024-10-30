@@ -11,7 +11,7 @@ enum Resources {
     enum Text {
         static let mainTitle = "Browse"
         static let mainSubTitle = "Discover things of this world"
-        static let bookmarksTitile = "Bookmarks"
+        static let bookmarksTitle = "Bookmarks"
         static let bookmarksSubTitle = "Saved articles to the library"
         static let profileTitle = "Profile"
         static let categoriesTitle = "Categories"
@@ -27,9 +27,13 @@ enum Resources {
         static let allRecommendedNews = "All recommended news"
         static let weHaveSelectedTheBestNewsForYou = "We have selected the best news for you"
         static let searchedNews = "Searched news"
+        static let noCategoryMessage = "No Category"
+        static let noAuthorMessage = "No Author"
+        static let resultsMessage = "Results"
     }
     
     enum Image {
         static let arrowLeft = "arrow.left"
+        static let placeholder = "newsplaceholder"
     }
 }

@@ -77,23 +77,14 @@ extension MainView {
                 if !viewModel.getCategoryNews().isEmpty {
                     ForEach(viewModel.getCategoryNews()) { article in
                         NavigationLink {
-                            DetailView(
-                                id: article.id,
-                                title: article.title,
-                                link: article.link,
-                                creator: article.creator,
-                                description: article.description,
-                                category: article.category,
-                                isFavorite: article.isFavorite,
-                                imageUrl: article.imageUrl,
-                                action: {}
-                            )
+                            DetailView(article)
+                            
                         } label: {
                             CategoryNewsCell(
                                 id: article.id,
                                 title: article.title,
                                 imageUrl: article.imageUrl,
-                                isFavorite: article.isFavorite,
+                                isFavorite: viewModel.bookmarks.contains { $0.id == article.id },
                                 category: article.category,
                                 action: {
                                     viewModel.toggleBookmark(for: article)
@@ -151,19 +142,7 @@ extension MainView {
             } else {
                 ForEach(viewModel.getRecomendedNews()) { article in
                     NavigationLink {
-                        DetailView(
-                            id: article.id,
-                            title: article.title,
-                            link: article.link,
-                            creator: article.creator,
-                            description: article.description,
-                            category: article.category,
-                            isFavorite: article.isFavorite,
-                            imageUrl: article.imageUrl,
-                            action: {
-                                viewModel.toggleBookmark(for: article)
-                            }
-                        )
+                        DetailView(article)
                     } label: {
                         RecommendedNewsView(
                             title: article.title,

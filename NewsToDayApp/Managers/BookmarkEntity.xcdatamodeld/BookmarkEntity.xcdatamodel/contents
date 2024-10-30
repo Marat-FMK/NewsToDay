@@ -6,7 +6,6 @@
         <attribute name="descriptionArticle" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="imageURL" optional="YES" attributeType="String"/>
-        <attribute name="isFavorite" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="link" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <attribute name="userId" optional="YES" attributeType="String"/>

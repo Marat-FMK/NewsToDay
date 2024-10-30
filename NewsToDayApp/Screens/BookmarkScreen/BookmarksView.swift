@@ -10,6 +10,15 @@ import SwiftUI
 struct BookmarkView: View {
     @StateObject private var viewModel = BookmarksViewModel()
 
+    // MARK: - Drawing Constants
+
+    private enum Drawing {
+        static let circleSize: CGFloat = 72
+        static let iconSize: CGFloat = 24
+        static let verticalPadding: CGFloat = 10
+        static let articleHeight: CGFloat = 96
+    }
+    
     var body: some View {
         VStack {
             setupToolbar()
@@ -17,7 +26,7 @@ struct BookmarkView: View {
                     Button {
                         viewModel.deleteAllBookmarks()
                     } label: {
-                        Text("delete all")
+                        Text("Delete All")
                     }
                 }
             Spacer()
@@ -39,63 +48,60 @@ struct BookmarkView: View {
 
 extension BookmarkView {
     
+    // MARK: Toolbar
     private func setupToolbar() -> some View {
         CustomToolBar(
-            title: Resources.Text.bookmarksTitile,
+            title: Resources.Text.bookmarksTitle,
             subTitle: Resources.Text.bookmarksSubTitle
         )
         .padding(.top, 0)
     }
     
+    // MARK: Empty State View
     private func emptyStateView() -> some View {
         VStack {
             ZStack {
                 Circle()
                     .fill(DS.Colors.purpleLighter)
-                    .frame(width: 72, height: 72)
+                    .frame(width: Drawing.circleSize, height: Drawing.circleSize)
                 
                 Image(systemName: "text.book.closed")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
+                    .frame(width: Drawing.iconSize, height: Drawing.iconSize)
             }
-      
         }
     }
     
+    // MARK: Bookmarks List View
     private func bookmarksListView() -> some View {
         List {
-            ForEach(viewModel.bookmarks) { article in
+            ForEach(Array(viewModel.bookmarks)) { article in
                 bookmarkNavigationLink(for: article)
             }
             .onDelete(perform: deleteBookmark)
         }
         .listStyle(PlainListStyle())
-        
     }
     
+    // MARK: Bookmark Deletion
     private func deleteBookmark(at offsets: IndexSet) {
-           for index in offsets {
-               let articleId = viewModel.bookmarks[index].id
-               viewModel.deleteBookmark(withId: articleId)
-           }
-       }
+        let bookmarksArray = Array(viewModel.bookmarks)
+        
+        for index in offsets {
+            let article = bookmarksArray[index]
+            viewModel.deleteBookmark(withId: article.id)
+        }
+    }
     
+    // MARK: Navigation Link for Each Bookmark
     private func bookmarkNavigationLink(for article: ArticleDTO) -> some View {
-        NavigationLink(destination: DetailView(
-            id: article.id,
-            title: article.title,
-            link: article.link,
-            creator: article.creator,
-            description: article.description,
-            category: article.category,
-            isFavorite: article.isFavorite,
-            imageUrl: article.imageUrl,
-            action: {}
-        )) {
+        NavigationLink(destination: DetailView(article)) {
             ArticleView(model: article)
-                .padding(.vertical, 10)
-                .frame(height: 96)
+                .padding(.vertical, Drawing.verticalPadding)
+                .frame(height: Drawing.articleHeight)
         }
     }
 }
+
+

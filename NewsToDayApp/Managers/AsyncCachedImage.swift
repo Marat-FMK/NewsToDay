@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AsyncCachedImage: View {
     let url: URL?
-    let placeholder: Image
+  
     @State private var uiImage: UIImage? = nil
     
     private let imageStore: IImageStore = ImageStoreImpl()
@@ -21,7 +21,7 @@ struct AsyncCachedImage: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
         } else {
-            placeholder
+            Image(Resources.Image.placeholder)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .task {

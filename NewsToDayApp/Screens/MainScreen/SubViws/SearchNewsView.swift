@@ -26,17 +26,7 @@ struct SearchNewsView: View {
             ScrollView(showsIndicators: false) {
                 ForEach(news) { news in
                     NavigationLink{
-                        DetailView(
-                            id: news.id,
-                            title: news.title,
-                            link: news.link,
-                            creator: news.creator,
-                            description: news.description,
-                            category: news.category,
-                            isFavorite: news.isFavorite,
-                            imageUrl: news.imageUrl,
-                            action: {}
-                        )
+                        DetailView(news)
                     } label: {
                         RecommendedNewsView(
                             title: news.title,
@@ -51,13 +41,11 @@ struct SearchNewsView: View {
         .padding(.bottom, 100)
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()
-        .onDisappear {
-            action()
-        }
         
         .toolbar {
             ToolbarItem( placement: .topBarLeading) {
                 Button {
+                    action()
                     dismiss()
                 } label: {
                     Image(systemName: Resources.Image.arrowLeft)
