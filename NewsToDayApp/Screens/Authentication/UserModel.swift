@@ -11,13 +11,15 @@ struct UserModel: Identifiable, Codable {
     let id: String
     let userName: String
     let email: String
+    var userPhoto: String?
     
     var initials: String {
-        let formater = PersonNameComponentsFormatter()
-        if let components = formater.personNameComponents(from: userName) {
-            formater.style = .abbreviated
-            return formater.string(from: components)
+        let formatter = PersonNameComponentsFormatter()
+        if let components = formatter.personNameComponents(from: userName) {
+            formatter.style = .abbreviated
+            return formatter.string(from: components) ?? ""
         }
         return ""
     }
 }
+

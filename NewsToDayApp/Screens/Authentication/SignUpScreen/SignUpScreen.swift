@@ -8,45 +8,62 @@
 import SwiftUI
 
 struct SignUpScreen: View {
-    @StateObject private var signInModel = SignInModel()
-   
+    @ObservedObject var viewModel: AuthViewModel
+    var onDismiss: () -> Void
+    
     var body: some View {
         VStack {
-            CustomToolBar(title: "Welcome Back 👋", subTitle: "I am happy to see you again. You can continue where you left off by logging in")
+            CustomToolBar(title: "Create Account", subTitle: "Please fill in your details")
             
-            CustomTextField(image: "person", placeHolder: "Email Adress", text: $signInModel.email)
+            CustomTextField(image: "person", placeHolder: "Username", text: $viewModel.userName)
                 .padding(.horizontal, 20)
                 .padding(.top, 32)
             
-            CustomTextField(image: "mail", placeHolder: "Password", text: $signInModel.password)
+            CustomTextField(image: "mail", placeHolder: "Email Address", text: $viewModel.email)
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
             
-            CustomTextField(image: "lock", placeHolder: "Password", text: $signInModel.password)
+            CustomTextField(image: "lock", placeHolder: "Password", text: $viewModel.password)
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
             
-            CustomTextField(image: "lock", placeHolder: "Password", text: $signInModel.password)
+            CustomTextField(image: "lock", placeHolder: "Repeat Password", text: $viewModel.reEnterPassword)
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
             
-            CustomButton(title: "Sign In", action: {
-                
-            }, buttonType: .mode, isSelected: true)
+            Button(action: {
+                print("pressed signUp")
+                viewModel.signUp()
+            }) {
+                Text("Sign Up")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(viewModel.signUpFormIsValid ? Color.blue : Color.gray)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
             .padding(.horizontal, 25)
             .padding(.top, 16)
-        
+            .disabled(!viewModel.signUpFormIsValid)
+
             Spacer()
             
+            AuthTextButton(title: "Already have an account?", sign: "Sign In", action: {
+                onDismiss()
+            })
+            .padding(.bottom, 44)
         }
         .navigationBarHidden(true)
-        .background(.background)
+        .background(Color(.systemBackground))
         .ignoresSafeArea()
+
     }
 }
 
 struct SignUp_Previews: PreviewProvider {
     static var previews: some View {
-      SignUpScreen()
+        let viewModel = AuthViewModel() // Создаем пример viewModel
+        SignUpScreen(viewModel: viewModel, onDismiss: { })
+                  .previewDevice("iPhone 14") 
     }
 }
