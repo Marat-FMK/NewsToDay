@@ -12,6 +12,13 @@ struct CategoriesView: View {
     
     @StateObject private var viewModel: CategoriesViewModel
     
+    @State var mode: Mode = .screen
+    
+    enum Mode {
+        case onboarding
+        case screen
+    }
+    
     // MARK: - Drawing Constants
     enum Drawing {
         static let columnsSpacing: CGFloat = 12
@@ -22,10 +29,12 @@ struct CategoriesView: View {
     }
     
     // MARK: - Initializer
-    init() {
+    init(mode: Mode, router: StartRouter) {
+        self.mode = mode
         self._viewModel = StateObject(
-            wrappedValue: CategoriesViewModel()
+            wrappedValue: CategoriesViewModel(router: router)
         )
+        
     }
     
     // MARK: - Body
@@ -99,6 +108,6 @@ struct CategoriesView: View {
 
 struct CategoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoriesView()
+        CategoriesView(mode: .screen, router: StartRouter())
     }
 }

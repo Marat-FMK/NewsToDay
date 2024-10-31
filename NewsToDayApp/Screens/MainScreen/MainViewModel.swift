@@ -105,7 +105,7 @@ final class MainViewModel: ObservableObject {
     }
     
     // MARK: - Initializer with Dependency Injection
-    init(newsAPIManager: INewsAPIManager,
+    init(_ newsAPIManager: INewsAPIManager,
          bookmardManager: IBookMarks = BookMarksManager.shared,
          storageManager: IUserDefaultManager = StorageManager.shared
     ) {

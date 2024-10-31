@@ -62,7 +62,7 @@ struct SignUpScreen: View {
 
 struct SignUp_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = AuthViewModel() // Создаем пример viewModel
+        let viewModel = AuthViewModel(router: StartRouter()) // Создаем пример viewModel
         SignUpScreen(viewModel: viewModel, onDismiss: { })
                   .previewDevice("iPhone 14") 
     }

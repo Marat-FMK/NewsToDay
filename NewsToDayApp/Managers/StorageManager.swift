@@ -19,9 +19,9 @@ final class StorageManager: IUserDefaultManager {
     private let userDefaults = UserDefaults.standard
     
     enum UserDefaultKeys {
+        static let hasSeenOnboarding = "hasSeenOnboarding"
         static let hasChooseCategory = "hasChooseCategory"
         static let chooseCategory = "chooseCategory"
-        static let checkFirstLoud = "firstLoud"
     }
     
     // MARK: - Initialization
@@ -41,8 +41,18 @@ final class StorageManager: IUserDefaultManager {
             .map { $0.compactMap(Categories.init) }
     }
     
-//    func checkFirstLoud() {
-//        UserDefaults.standard.set(true, forKey: UserDefaultKeys.checkFirstLoud)
-//    }
+    func hasChooseCategory() -> Bool {
+        let hasChooseCategory = userDefaults.bool(forKey: UserDefaultKeys.hasChooseCategory)
+        return hasChooseCategory
+    }
+    
+    // MARK: - Onboarding
+    func completeOnboarding() {
+        userDefaults.set(true, forKey: UserDefaultKeys.hasSeenOnboarding)
+    }
+    
+    func hasCompletedOnboarding() -> Bool {
+        userDefaults.bool(forKey: UserDefaultKeys.hasSeenOnboarding)
+    }
 
 }

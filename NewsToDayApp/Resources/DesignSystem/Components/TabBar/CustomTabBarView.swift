@@ -9,18 +9,23 @@ import SwiftUI
 
 struct CustomTabBarView: View {
     @State private var tabSelection = 1
+    private let router: StartRouter
+    private let newsAPIManager: NewsAPIManager
     
-    let mainViewModel: MainViewModel
+    init(router: StartRouter, newsAPIManager: NewsAPIManager) {
+        self.router = router
+        self.newsAPIManager = newsAPIManager
+    }
     
     var body: some View {
         ZStack(alignment: .bottom) {
             switch tabSelection {
             case 1:
                 NavigationView {
-                    MainView(viewModel: mainViewModel)
+                    MainView(newsAPIManager)
                 }
             case 2:
-                    CategoriesView()
+                CategoriesView(mode: .screen, router: router)
             case 3:
                 NavigationView {
                     BookmarkView()
