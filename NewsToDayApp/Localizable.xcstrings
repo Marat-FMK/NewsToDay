@@ -18,17 +18,177 @@
     "Are you sure you want to sign out?" : {
 
     },
+    "business" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "бизнес"
+          }
+        }
+      }
+    },
     "Cancel" : {
 
+    },
+    "Categories" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Категории"
+          }
+        }
+      }
+    },
+    "crime" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "криминал"
+          }
+        }
+      }
     },
     "Delete All" : {
 
     },
+    "domestic" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "домашние дела"
+          }
+        }
+      }
+    },
+    "education" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "образование"
+          }
+        }
+      }
+    },
+    "entertainment" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "развлечения"
+          }
+        }
+      }
+    },
+    "environment" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "окружающая среда"
+          }
+        }
+      }
+    },
+    "food" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "еда"
+          }
+        }
+      }
+    },
     "Get Started" : {
 
     },
+    "health" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "здоровье"
+          }
+        }
+      }
+    },
     "Hello, World!" : {
 
+    },
+    "lifestyle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "образ жизни"
+          }
+        }
+      }
+    },
+    "other" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "другое"
+          }
+        }
+      }
+    },
+    "politics" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "политика"
+          }
+        }
+      }
+    },
+    "Recommended for you" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recommended for you"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рекомендации"
+          }
+        }
+      }
+    },
+    "science" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "наука"
+          }
+        }
+      }
     },
     "See All" : {
 
@@ -38,6 +198,72 @@
     },
     "some title    " : {
 
+    },
+    "sport" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "спорт"
+          }
+        }
+      }
+    },
+    "technology" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "технологии"
+          }
+        }
+      }
+    },
+    "Thousands of articles in each category" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тысячи статей в каждой категории"
+          }
+        }
+      }
+    },
+    "top" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "популярное"
+          }
+        }
+      }
+    },
+    "tourism" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "туризм"
+          }
+        }
+      }
+    },
+    "world" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "мир"
+          }
+        }
+      }
     },
     "Yes" : {
 
