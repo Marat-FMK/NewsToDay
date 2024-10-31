@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CategoryNewsCell: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     let id: String
     let title: String
     let imageUrl: String?
@@ -37,10 +38,10 @@ struct CategoryNewsCell: View {
         
         // Тексты и категории
         VStack(alignment: .leading ) {
-            Text(category?.first?.uppercased() ?? "")
+            Text(category?.first?.localized(language).uppercased() ?? "")
                 .font(.interRegular(16))
                 .foregroundStyle(DS.Colors.grayLighter)
-            Text(title)
+            Text(title.localized(language))
                 .font(.interSemiBold(16))
                 .frame(width: 208, height: 48, alignment: .leading)
                 .lineLimit(2)
