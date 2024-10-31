@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ShimmerTextView: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text(Resources.Text.loading + " ...")
+            Text(Resources.Text.loading.localized(language) + " ...")
                 .foregroundStyle(DS.Colors.purplePrimary)
                 .frame(width: 224, height: 20, alignment: .leading)
                 .shimmering()
