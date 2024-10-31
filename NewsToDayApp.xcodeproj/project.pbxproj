@@ -11,7 +11,6 @@
 		370CD1E82CD280A500D29B0B /* FirebaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370CD1E72CD280A500D29B0B /* FirebaseError.swift */; };
 		3717CB002CC8B22A0074FCE4 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3717CAFF2CC8B22A0074FCE4 /* ArticleView.swift */; };
 		3717CB072CC917860074FCE4 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3717CB062CC917860074FCE4 /* ProfileHeaderView.swift */; };
-		3717CB0A2CC91E300074FCE4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3717CB092CC91E300074FCE4 /* Kingfisher */; };
 		3718E2152CCF828900768F4F /* LanguageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3718E2142CCF828900768F4F /* LanguageScreen.swift */; };
 		3718E2172CCF82B400768F4F /* TermsConditionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3718E2162CCF82B400768F4F /* TermsConditionsScreen.swift */; };
 		3718E21A2CCFA8F200768F4F /* ProfileTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3718E2192CCFA8F100768F4F /* ProfileTitle.swift */; };
@@ -41,15 +40,14 @@
 		377D839D2CD02AF90078AA5B /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D839C2CD02AF90078AA5B /* AuthViewModel.swift */; };
 		3791965B2CD24CBB0019DCBD /* AuthTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791965A2CD24CBB0019DCBD /* AuthTextButton.swift */; };
 		379196782CD2757F0019DCBD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 379196772CD2757C0019DCBD /* GoogleService-Info.plist */; };
-		37B08A342CD2920800F734C8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 37B08A332CD2920800F734C8 /* FirebaseAuth */; };
-		37B08A362CD2920800F734C8 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 37B08A352CD2920800F734C8 /* FirebaseDatabase */; };
-		37B08A382CD2920800F734C8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 37B08A372CD2920800F734C8 /* FirebaseFirestore */; };
 		6C0AF7192CCD5E4100414AB4 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0AF7182CCD5E4100414AB4 /* ShimmerView.swift */; };
 		6C0E91BE2CCE756700734C72 /* ShimmerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E91BD2CCE756700734C72 /* ShimmerTextView.swift */; };
 		6C0E91C02CCE8B5500734C72 /* AllRecomendedNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0E91BF2CCE8B5500734C72 /* AllRecomendedNewsView.swift */; };
 		6C3116EC2CCED56100FB3119 /* SearchNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3116EB2CCED56100FB3119 /* SearchNewsView.swift */; };
 		6CD530DB2CC935FA00214899 /* CategoryNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD530DA2CC935FA00214899 /* CategoryNewsCell.swift */; };
 		6CD530DD2CC9364300214899 /* RecommendedNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD530DC2CC9364300214899 /* RecommendedNewsView.swift */; };
+		E10EB2E02CD3F493005A7934 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E10EB2DF2CD3F493005A7934 /* FirebaseAuth */; };
+		E10EB2E22CD3F493005A7934 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E10EB2E12CD3F493005A7934 /* FirebaseFirestore */; };
 		E115205B2CD35B83007D7967 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115205A2CD35B83007D7967 /* LocalizationManager.swift */; };
 		E115205F2CD3894B007D7967 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E115205E2CD3894B007D7967 /* Localizable.xcstrings */; };
 		E11520612CD392C0007D7967 /* String + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11520602CD392C0007D7967 /* String + Ext.swift */; };
@@ -163,10 +161,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37B08A362CD2920800F734C8 /* FirebaseDatabase in Frameworks */,
-				37B08A382CD2920800F734C8 /* FirebaseFirestore in Frameworks */,
-				3717CB0A2CC91E300074FCE4 /* Kingfisher in Frameworks */,
-				37B08A342CD2920800F734C8 /* FirebaseAuth in Frameworks */,
+				E10EB2E02CD3F493005A7934 /* FirebaseAuth in Frameworks */,
+				E10EB2E22CD3F493005A7934 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,14 +478,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				3717CB0C2CC91E5B0074FCE4 /* PBXTargetDependency */,
 			);
 			name = NewsToDayApp;
 			packageProductDependencies = (
-				3717CB092CC91E300074FCE4 /* Kingfisher */,
-				37B08A332CD2920800F734C8 /* FirebaseAuth */,
-				37B08A352CD2920800F734C8 /* FirebaseDatabase */,
-				37B08A372CD2920800F734C8 /* FirebaseFirestore */,
+				E10EB2DF2CD3F493005A7934 /* FirebaseAuth */,
+				E10EB2E12CD3F493005A7934 /* FirebaseFirestore */,
 			);
 			productName = NewsToDayApp;
 			productReference = 3740948F2CC5306500723D32 /* NewsToDayApp.app */;
@@ -521,8 +514,7 @@
 			);
 			mainGroup = 374094862CC5306500723D32;
 			packageReferences = (
-				3717CB082CC91E300074FCE4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				37B08A322CD2920800F734C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				E10EB2DE2CD3F493005A7934 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 374094902CC5306500723D32 /* Products */;
 			projectDirPath = "";
@@ -622,13 +614,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3717CB0C2CC91E5B0074FCE4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 3717CB0B2CC91E5B0074FCE4 /* Kingfisher */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3740949B2CC5306B00723D32 /* Debug */ = {
@@ -844,48 +829,25 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3717CB082CC91E300074FCE4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.10.1;
-			};
-		};
-		37B08A322CD2920800F734C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		E10EB2DE2CD3F493005A7934 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 11.4.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3717CB092CC91E300074FCE4 /* Kingfisher */ = {
+		E10EB2DF2CD3F493005A7934 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3717CB082CC91E300074FCE4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-		3717CB0B2CC91E5B0074FCE4 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3717CB082CC91E300074FCE4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-		37B08A332CD2920800F734C8 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 37B08A322CD2920800F734C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = E10EB2DE2CD3F493005A7934 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		37B08A352CD2920800F734C8 /* FirebaseDatabase */ = {
+		E10EB2E12CD3F493005A7934 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 37B08A322CD2920800F734C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
-		};
-		37B08A372CD2920800F734C8 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 37B08A322CD2920800F734C8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = E10EB2DE2CD3F493005A7934 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
