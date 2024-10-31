@@ -10,6 +10,7 @@ import SwiftUI
 // https://github.com/markiv/SwiftUI-Shimmer/blob/main/README.md // about shimming
 
 public struct Shimmer: ViewModifier {
+    
     public enum Mode {
         case mask
         case overlay(blendMode: BlendMode = .sourceAtop)
@@ -108,7 +109,7 @@ public struct Shimmer: ViewModifier {
       }
 
 struct ShimmerView: View {
-    
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     let cef: Double
     
     var body: some View {
@@ -123,7 +124,7 @@ struct ShimmerView: View {
                         .foregroundStyle(DS.Colors.grayLighter)
                         .shimmering()
                     
-                    Text(Resources.Text.news.uppercased())
+                    Text(Resources.Text.news.localized(language).uppercased())
                         .font(.interSemiBold(20))
                         .foregroundStyle(DS.Colors.purplePrimary)
                         .shimmering()
