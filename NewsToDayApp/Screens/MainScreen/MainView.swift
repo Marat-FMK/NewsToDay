@@ -114,7 +114,7 @@ extension MainView {
     
     private func RecommendedNewsHeader() -> some View {
         HStack {
-            Text(Resources.Text.localizedKey(Resources.Text.recommendedForYou))
+            Text(Resources.Text.recommendedForYou)
                 .font(.interSemiBold(20))
                 .frame(width: 240, height: 24)
                 .foregroundStyle(DS.Colors.blackyPrimary)

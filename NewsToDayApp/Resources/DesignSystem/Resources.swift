@@ -30,11 +30,6 @@ enum Resources {
         static let noCategoryMessage = "No Category"
         static let noAuthorMessage = "No Author"
         static let resultsMessage = "Results"
-        
-        static func localizedKey(_ key: String) -> LocalizedStringKey {
-            LocalizedStringKey(key)
-        }
-        
     }
     
     enum Image {
