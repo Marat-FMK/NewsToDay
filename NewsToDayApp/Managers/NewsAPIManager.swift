@@ -21,7 +21,7 @@ final class NewsAPIManager: APIManager, INewsAPIManager {
         // Create middlewares
 #warning("apiKey")
 //        pub_5741650ae47f14ee901c90f834235c6a2f182
-        let authorizationMiddleware = AuthorizationMiddleware(apiKey: "pub_409949eef5f698378e70daecfb7b5d70e0994")
+        let authorizationMiddleware = AuthorizationMiddleware(apiKey: "pub_57416f1c586b36028a9af95ec8390930c5d4f")
         // Initialize API client with base URL and middleware
         let apiClient = APIClient(middlewares: [authorizationMiddleware])
         super.init(apiClient: apiClient)
