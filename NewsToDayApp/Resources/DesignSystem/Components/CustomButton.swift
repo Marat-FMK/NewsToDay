@@ -43,7 +43,7 @@ struct CustomButton: View {
                     if isSelected {
                         Image(systemName: "checkmark")
                     } else {
-                        Image(systemName: "")
+                        Text("")
                     }
                 }
             }

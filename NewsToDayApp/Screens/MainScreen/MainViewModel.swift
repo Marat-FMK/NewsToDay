@@ -55,7 +55,8 @@ final class MainViewModel: ObservableObject {
     @Published var selectedCategory: Categories = .top {
         didSet {
             Task {
-                await fetchCategoryNews()
+                print(selectedCategory)
+                await fetchCategoryNews(ignoreCache: true)
             }
         }
     }
@@ -67,7 +68,6 @@ final class MainViewModel: ObservableObject {
     private let timeIntervalForUpdateCache: TimeInterval = 7 * 24 * 60 * 60
     private let cache: DiskCache<[ArticleDTO]>
     private let country: Country = .gb
-    
     
     private var lastSortedOrder: DisplayOrderType?
     private var lastSortedArticles: [ArticleDTO]?
@@ -95,7 +95,6 @@ final class MainViewModel: ObservableObject {
         guard let articles = recomendedNewsPhase.value else { return [] }
         
         return articles
-        
     }
     
     var error: Error? {
@@ -122,13 +121,10 @@ final class MainViewModel: ObservableObject {
             expirationInterval: timeIntervalForUpdateCache
         )
         
-        self.selectedCategory = categories.first ?? .top
-        
-        fetchBookmarks()
-        
         Task(priority: .high) {
             try? await cache.loadFromDisk()
         }
+        fetchBookmarks()
     }
     
     /// Cancels the error alert and refreshes the data.

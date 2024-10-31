@@ -8,10 +8,6 @@
 
 import Foundation
 
-enum Language: String, CaseIterable {
-    case ru
-    case en
-}
 
 enum Categories: String, CaseIterable, Hashable, Identifiable {
     var id: String { rawValue }

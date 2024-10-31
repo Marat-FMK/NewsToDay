@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct LanguageScreen: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.currentLocale.identifier
     
-    @State private var isRussian: Bool = false
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -17,41 +17,32 @@ struct LanguageScreen: View {
         VStack {
             
             ProfileTitle(title: "Language", type: .withBackButton)
-                .padding(.top, 68) // Отступ сверху, если нужно
+                .padding(.top, 68)
                 .padding(.horizontal, 20)
-    
-            CustomButton(
-                title: "English",
-                imageName: "checkmark",
-                action: {
-                    changeLanguage()
-                }, buttonType: .language,
-                isSelected: isRussian == false)
-            .padding(.horizontal, 20)
-            .padding(.top, 0)
-        
-            CustomButton(
-                title: "Russian",
-                imageName: "checkmark",
-                action: {
-                    changeLanguage()
-                }, buttonType: .language,
-                isSelected: isRussian == true)
-            .padding(.horizontal, 20)
-            .padding(.top, 20)
+            // MARK: Language List
+            List(Language.allCases) { lang in
+                CustomButton(
+                    title: lang.displayName,
+                    action: {
+                        LocalizationManager.shared.setLanguage(lang.rawValue)
+                    },
+                    buttonType: .language,
+                    isSelected: language == lang.rawValue
+                )
+                .frame(height: 56)
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+            }
             
-            Spacer()
+            .listStyle(PlainListStyle())
+
         }
         .navigationBarHidden(true)
         .background(.background)
         .ignoresSafeArea()
     }
-    
-    private func changeLanguage() {
-        isRussian.toggle()
-    }
 }
-    
+
 struct Language_Previews: PreviewProvider {
     static var previews: some View {
         LanguageScreen()

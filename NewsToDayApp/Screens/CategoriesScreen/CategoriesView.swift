@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CategoriesView: View {
-    
+    @Environment(\.locale) var locale
     @StateObject private var viewModel: CategoriesViewModel
     
     // MARK: - Drawing Constants
