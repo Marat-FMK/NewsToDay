@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BookmarkView: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     @StateObject private var viewModel = BookmarksViewModel()
 
     // MARK: - Drawing Constants
@@ -51,8 +52,8 @@ extension BookmarkView {
     // MARK: Toolbar
     private func setupToolbar() -> some View {
         CustomToolBar(
-            title: Resources.Text.bookmarksTitle,
-            subTitle: Resources.Text.bookmarksSubTitle
+            title: Resources.Text.bookmarksTitle.localized(language),
+            subTitle: Resources.Text.bookmarksSubTitle.localized(language)
         )
         .padding(.top, 0)
     }
