@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct MainView: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
+    
     @StateObject var viewModel: MainViewModel
     
     var body: some View {
         if viewModel.getSearshResult().isEmpty {
             VStack {
-                CustomToolBar(title: Resources.Text.mainTitle,
-                              subTitle: Resources.Text.mainSubTitle)
+                CustomToolBar(title: Resources.Text.mainTitle.localized(language),
+                              subTitle: Resources.Text.mainSubTitle.localized(language))
                     .padding(.top, 0)
                 
                 ScrollView(showsIndicators: false) {
@@ -114,9 +116,9 @@ extension MainView {
     
     private func RecommendedNewsHeader() -> some View {
         HStack {
-            Text(Resources.Text.recommendedForYou)
+            Text(Resources.Text.recommendedForYou.localized(language))
                 .font(.interSemiBold(20))
-                .frame(width: 240, height: 24)
+                .frame(width: 240, height: 24, alignment: .leading)
                 .foregroundStyle(DS.Colors.blackyPrimary)
             
             Spacer()
@@ -124,7 +126,7 @@ extension MainView {
             NavigationLink {
                 AllRecomendedNewsView(news: viewModel.getRecomendedNews())
             } label: {
-                    Text("See All")
+                Text(Resources.Text.seeAll.localized(language))
                         .font(.interRegular(14))
                         .foregroundStyle(DS.Colors.grayPrimary)
             }
