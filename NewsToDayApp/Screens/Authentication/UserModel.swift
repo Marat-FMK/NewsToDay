@@ -17,7 +17,7 @@ struct UserModel: Identifiable, Codable {
         let formatter = PersonNameComponentsFormatter()
         if let components = formatter.personNameComponents(from: userName) {
             formatter.style = .abbreviated
-            return formatter.string(from: components) ?? ""
+            return formatter.string(from: components)
         }
         return ""
     }

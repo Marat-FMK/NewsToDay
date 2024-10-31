@@ -21,7 +21,7 @@ final class StorageManager: IUserDefaultManager {
     enum UserDefaultKeys {
         static let hasChooseCategory = "hasChooseCategory"
         static let chooseCategory = "chooseCategory"
-//        static let checkFirstLoud = "firstLoud"
+        static let checkFirstLoud = "firstLoud"
     }
     
     // MARK: - Initialization

@@ -126,9 +126,6 @@
         }
       }
     },
-    "Hello, World!" : {
-
-    },
     "lifestyle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -193,13 +190,16 @@
     "See All" : {
 
     },
+    "Sign Up" : {
+
+    },
     "some info" : {
 
     },
     "some title    " : {
 
     },
-    "sport" : {
+    "sports" : {
       "extractionState" : "manual",
       "localizations" : {
         "ru" : {
