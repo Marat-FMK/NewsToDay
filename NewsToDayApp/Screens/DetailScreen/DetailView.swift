@@ -11,6 +11,7 @@ import SwiftUI
 
 // MARK: - DetailView
 struct DetailView: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel: DetailViewModel
     
@@ -72,7 +73,7 @@ struct DetailView: View {
                 .offset(x: 355, y: -190)
                 
                 VStack(alignment: .leading) {
-                    Text(viewModel.detailArticle.category?.first ?? Resources.Text.noCategoryMessage)
+                    Text(viewModel.detailArticle.category?.first?.localized(language) ?? Resources.Text.noCategoryMessage.localized(language))
                         .font(.interRegular(Drawing.categoryFontSize))
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
@@ -81,19 +82,19 @@ struct DetailView: View {
                         .clipShape(Capsule())
                         .padding(.bottom, 10)
                     
-                    Text(viewModel.detailArticle.title)
+                    Text(viewModel.detailArticle.title.localized(language))
                         .frame(width: 336, height: 56, alignment: .leading)
                         .lineLimit(2)
                         .font(.interSemiBold(Drawing.titleFontSize))
                         .foregroundColor(.white)
                         .padding(.bottom, 30)
                     
-                    Text(viewModel.detailArticle.creator?.first ?? Resources.Text.noAuthorMessage)
+                    Text(viewModel.detailArticle.creator?.first?.localized(language) ?? Resources.Text.noAuthorMessage.localized(language))
                         .font(.interSemiBold(Drawing.authorFontSize))
                         .foregroundColor(.white)
                         .padding(.bottom, 8)
                     
-                    Text(Resources.Text.author)
+                    Text(Resources.Text.author.localized(language))
                         .foregroundColor(.white)
                         .font(.interMedium(14))
                 }
@@ -102,13 +103,13 @@ struct DetailView: View {
             }
             
             VStack(alignment: .leading) {
-                Text(Resources.Text.resultsMessage)
+                Text(Resources.Text.resultsMessage.localized(language))
                     .font(.interSemiBold(Drawing.resultsFontSize))
-                    .frame(width: 58, height: 24, alignment: .leading)
+                    .frame(/*width: 58,*/ height: 24, alignment: .leading)
                     .padding(.top, 24)
                 
                 ScrollView(showsIndicators: false) {
-                    Text(viewModel.detailArticle.description ?? "")
+                    Text(viewModel.detailArticle.description?.localized(language) ?? "")
                         .font(.interMedium(Drawing.descriptionFontSize))
                         .foregroundStyle(DS.Colors.grayDark)
                         .frame(width: 336, alignment: .leading)
