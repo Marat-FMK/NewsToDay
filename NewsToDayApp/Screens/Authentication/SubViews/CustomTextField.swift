@@ -20,9 +20,15 @@ struct CustomTextField: View {
                 .frame(width: 24, height: 24)
                 .foregroundColor(isFocused ? DS.Colors.grayPrimary : DS.Colors.purplePrimary) // Цвет иконки, можно заменить
             
-            TextField(placeHolder, text: $text)
-                .font(.system(size: 16, weight: .medium))
-                .frame(height: 56)
+            ZStack {
+                if placeHolder == "Password" || placeHolder == "Repeat Password"{
+                    SecureField(placeHolder, text: $text)
+                } else {
+                    TextField(placeHolder, text: $text)
+                        .font(.system(size: 16, weight: .medium))
+                        .frame(height: 56)
+                }
+            }
         }
         .padding(.horizontal, 16) // Внутренние отступы
         .frame(width: 336, height: 56) // Размер текстового поля
