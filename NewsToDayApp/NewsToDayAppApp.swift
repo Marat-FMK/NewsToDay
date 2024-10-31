@@ -21,5 +21,6 @@ struct NewsToDayAppApp: App {
 //                OnboardingView()
 //            }
         }
+        
     }
 }

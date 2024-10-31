@@ -13,7 +13,8 @@ struct MainView: View {
     var body: some View {
         if viewModel.getSearshResult().isEmpty {
             VStack {
-                CustomToolBar(title: Resources.Text.mainTitle, subTitle: Resources.Text.mainSubTitle)
+                CustomToolBar(title: Resources.Text.mainTitle,
+                              subTitle: Resources.Text.mainSubTitle)
                     .padding(.top, 0)
                 
                 ScrollView(showsIndicators: false) {
@@ -29,8 +30,8 @@ struct MainView: View {
             }
             .onAppear(perform: viewModel.loadCategories)
             .task {
-                await viewModel.fetchCategoryNews()
-                await viewModel.fetchRecomendedNews()
+                await viewModel.fetchCategoryNews(ignoreCache: true)
+                await viewModel.fetchRecomendedNews(ignoreCache: true)
             }
             .navigationBarHidden(true)
             .background(.background)
@@ -63,7 +64,10 @@ extension MainView {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(viewModel.categories, id: \.self) { category in
-                    CategoryCell(category: category, selected: $viewModel.selectedCategory)
+                    CategoryCell(
+                        category: category,
+                        selected: $viewModel.selectedCategory
+                    )
                         .frame(height: 40)
                 }
             }
@@ -110,7 +114,7 @@ extension MainView {
     
     private func RecommendedNewsHeader() -> some View {
         HStack {
-            Text(Resources.Text.recommendedForYou)
+            Text(Resources.Text.localizedKey(Resources.Text.recommendedForYou))
                 .font(.interSemiBold(20))
                 .frame(width: 240, height: 24)
                 .foregroundStyle(DS.Colors.blackyPrimary)

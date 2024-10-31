@@ -5,7 +5,7 @@
 //  Created by Evgeniy Kislitsin on 21.10.2024.
 //
 
-import Foundation
+import SwiftUI
 
 enum Resources {
     enum Text {
@@ -30,6 +30,11 @@ enum Resources {
         static let noCategoryMessage = "No Category"
         static let noAuthorMessage = "No Author"
         static let resultsMessage = "Results"
+        
+        static func localizedKey(_ key: String) -> LocalizedStringKey {
+            LocalizedStringKey(key)
+        }
+        
     }
     
     enum Image {

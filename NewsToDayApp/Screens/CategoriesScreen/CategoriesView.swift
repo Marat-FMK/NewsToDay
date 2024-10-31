@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CategoriesView: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     
     @StateObject private var viewModel: CategoriesViewModel
     
@@ -31,8 +32,8 @@ struct CategoriesView: View {
     var body: some View {
         VStack {
             CustomToolBar(
-                title: Resources.Text.categoriesTitle,
-                subTitle: Resources.Text.categoriesSubTitle
+                title: Resources.Text.categoriesTitle.localized(language),
+                subTitle: Resources.Text.categoriesSubTitle.localized(language)
             )
             .padding(.top, 0)
             
@@ -41,7 +42,7 @@ struct CategoriesView: View {
                 LazyVGrid(
                     columns: Array(
                         repeating: .init(.flexible(),
-                                         spacing: Drawing.columnsSpacing),
+                        spacing: Drawing.columnsSpacing),
                         count: Drawing.columnsCount
                     )
                 )
@@ -60,7 +61,8 @@ struct CategoriesView: View {
                             HStack(spacing: Drawing.horizontalSpacing) {
                                 Spacer()
                                 Text(category.image)
-                                Text(category.rawValue)
+                                Text(category.rawValue.localized(language))
+                                
                                 Spacer()
                             }
                             .foregroundStyle(
