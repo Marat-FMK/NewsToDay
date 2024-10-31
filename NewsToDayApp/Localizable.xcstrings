@@ -1,0 +1,47 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "All recommended news" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рекомендованные новости"
+          }
+        }
+      }
+    },
+    "Are you sure you want to sign out?" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Delete All" : {
+
+    },
+    "Get Started" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "See All" : {
+
+    },
+    "some info" : {
+
+    },
+    "some title    " : {
+
+    },
+    "Yes" : {
+
+    }
+  },
+  "version" : "1.0"
+}

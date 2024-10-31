@@ -23,7 +23,7 @@ struct ProfileView: View {
                 .padding(20)
             
             NavigationLink(destination: LanguageScreen(), isActive: $isShowingLanguageScreen) {
-                CustomButton(title: "Language", imageName: "",
+                CustomButton(title: "Language", imageName: nil,
                              action: {
                     isShowingLanguageScreen = true
                 },
@@ -37,20 +37,27 @@ struct ProfileView: View {
             Spacer()
             
             NavigationLink(destination: TermsConditionsScreen(), isActive: $isShowingTermsConditionsScreen) {
-                CustomButton(title: "Terms & Conditions", imageName: "",
-                             action: {
+                CustomButton(
+                    title: "Terms & Conditions",
+                    action: {
                     isShowingTermsConditionsScreen = true
                 },
                              buttonType: .profile,
-                             isSelected: false)
+                             isSelected: false
+                )
                 .padding(.horizontal, 20)
                 .padding(.bottom, 0)
             }
             
-            CustomButton(title: "Sign Out", imageName: "", action: {
+            CustomButton(
+                title: "Sign Out",
+                action: {
                 showAlert = true
                 // Действие при нажатии на кнопку "Sign out"
-            }, buttonType: .profile, isSelected: false)
+            },
+                buttonType: .profile,
+                isSelected: false
+            )
             .padding(20)
             
             Spacer()

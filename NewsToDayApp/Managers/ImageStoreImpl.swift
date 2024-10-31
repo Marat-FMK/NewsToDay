@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol ImageStore {
+protocol IImageStore {
     @discardableResult
     func save(_ image: CGImage, for url: URL) -> CGImage
     func getImage(for url: URL) -> CGImage?
 }
 
-final class ImageStoreImpl: ImageStore {
+final class ImageStoreImpl: IImageStore {
     
     private let cache = NSCache<NSURL, CGImage>()
     private let fileManager = FileManager.default

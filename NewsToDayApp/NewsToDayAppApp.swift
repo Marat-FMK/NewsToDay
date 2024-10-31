@@ -37,5 +37,6 @@ struct NewsToDayAppApp: App {
             let model = AuthViewModel()
             SignInScreen(viewModel: model)
         }
+        
     }
 }

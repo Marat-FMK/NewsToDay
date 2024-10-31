@@ -42,7 +42,10 @@ enum DisplayOrderType: CaseIterable {
 final class MainViewModel: ObservableObject {
     @Published var categoryNewsPhase: DataFetchPhase<[ArticleDTO]> = .empty
     @Published var recomendedNewsPhase: DataFetchPhase<[ArticleDTO]> = .empty
-    @Published var searshNewsResults: [ArticleDTO] = []
+    @Published var searshNewsResultsPhase: DataFetchPhase<[ArticleDTO]> = .empty
+    
+    @Published var bookmarks: [ArticleDTO] = []
+    @Published var isBookmarked: Bool = false
     
     @Published var fetchTaskToken: FetchTaskToken
     @Published var errorMessage: String? = nil
@@ -52,35 +55,46 @@ final class MainViewModel: ObservableObject {
     @Published var selectedCategory: Categories = .top {
         didSet {
             Task {
-                await fetchCategoryNews()
+                print(selectedCategory)
+                await fetchCategoryNews(ignoreCache: true)
             }
         }
     }
     
+    private let newsAPIManager: INewsAPIManager
+    private let bookmarkManager: IBookMarks
+    private let storageManager: IUserDefaultManager
     
     private let timeIntervalForUpdateCache: TimeInterval = 7 * 24 * 60 * 60
     private let cache: DiskCache<[ArticleDTO]>
     private let country: Country = .gb
-    private let newsAPIManager: INewsAPIManager
-    private let storageManager = StorageManager.shared
+    
+    private var lastSortedOrder: DisplayOrderType?
+    private var lastSortedArticles: [ArticleDTO]?
     
     // MARK: - Computed Properties
     private var sortedArticles: [ArticleDTO] {
         guard let articles = categoryNewsPhase.value else { return [] }
-        switch selectedOrder {
-        case .alphabetical:
-            
-            return articles.sorted(by: { $0.title < $1.title })
-        case .favoriteFirst:
-            return articles.sorted { $0.isFavorite && !$1.isFavorite }
+        if selectedOrder == lastSortedOrder, let lastSorted = lastSortedArticles {
+            return lastSorted
         }
+        let sorted = articles.sorted {
+            switch selectedOrder {
+            case .alphabetical:
+                return $0.title < $1.title
+            case .favoriteFirst:
+                return $0.title < $1.title
+            }
+        }
+        lastSortedOrder = selectedOrder
+        lastSortedArticles = sorted
+        return sorted
     }
     
     private var filteredArticles: [ArticleDTO] {
-        guard let articles = recomendedNewsPhase.value else { return []}
-        return articles.filter { article in
-            categories.contains { $0.rawValue == article.category?.first }
-        }
+        guard let articles = recomendedNewsPhase.value else { return [] }
+        
+        return articles
     }
     
     var error: Error? {
@@ -91,29 +105,27 @@ final class MainViewModel: ObservableObject {
     }
     
     // MARK: - Initializer with Dependency Injection
-    init(newsAPIManager: INewsAPIManager) {
+    init(newsAPIManager: INewsAPIManager,
+         bookmardManager: IBookMarks = BookMarksManager.shared,
+         storageManager: IUserDefaultManager = StorageManager.shared
+    ) {
         self.newsAPIManager = newsAPIManager
+        self.bookmarkManager = bookmardManager
+        self.storageManager = storageManager
         
         self.fetchTaskToken = FetchTaskToken(articles: "TopNews", token: Date())
+        self.fetchTaskToken = FetchTaskToken(articles: "recomendedNews", token: Date())
+        
         self.cache = DiskCache<[ArticleDTO]>(
-            filename: "xca_top_news",
+            filename: "xca_top_new",
             expirationInterval: timeIntervalForUpdateCache
         )
-        
-        self.selectedCategory = categories.first ?? .top
         
         Task(priority: .high) {
             try? await cache.loadFromDisk()
         }
-        
+        fetchBookmarks()
     }
-    
-    // MARK: - Methods
-    func getCategoryNews() -> [ArticleDTO] { sortedArticles }
-    
-    func getRecomendedNews() -> [ArticleDTO] { filteredArticles }
-    
-    
     
     /// Cancels the error alert and refreshes the data.
     func cancelErrorAlert() {
@@ -121,6 +133,26 @@ final class MainViewModel: ObservableObject {
             await fetchCategoryNews(ignoreCache: true)
         }
     }
+    
+    // MARK: - Bookmark Methods
+    private func fetchBookmarks() {
+         let bookmarkList = bookmarkManager.fetchBookmarks()
+         self.bookmarks = bookmarkList.map { ArticleDTO(from: $0)}
+     }
+    
+    func toggleBookmark(for article: ArticleDTO) {
+        if bookmarks.contains(article) {
+            deleteBookmark(article)
+        } else {
+            addBookmark(article)
+        }
+        objectWillChange.send()
+    }
+    
+    // MARK: - API Methods
+    func getCategoryNews() -> [ArticleDTO] { sortedArticles }
+    func getRecomendedNews() -> [ArticleDTO] { filteredArticles }
+    func getSearshResult() -> [ArticleDTO] { searshNewsResultsPhase.value ?? [] }
     
     /// Refreshes the cache and updates the fetch task token.
     func refreshTask() async {
@@ -132,8 +164,10 @@ final class MainViewModel: ObservableObject {
     func fetchCategoryNews(ignoreCache: Bool = false) async {
         categoryNewsPhase = .empty
         do {
-            if !ignoreCache,
-               let cachedArticles = await cache.value(forKey: fetchTaskToken.articles) {
+            if let cachedArticles = await getCachedArticles(
+                for: fetchTaskToken.articles,
+                ignoreCache: ignoreCache
+            ) {
                 print("CACHE HIT")
                 categoryNewsPhase = .success(cachedArticles)
             } else {
@@ -146,20 +180,17 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    private func fetchCategoryArticlesFromAPI() async throws -> [ArticleDTO] {
-        let articles = try await newsAPIManager.getNews(with: country.rawValue, selectedCategory.rawValue)?.results ?? []
-        await cache.setValue(articles, forKey: selectedCategory.rawValue)
-        try? await cache.saveToDisk()
-        return articles
-    }
-    
     //    MARK: - Recomended News
     func fetchRecomendedNews(ignoreCache: Bool = false) async {
         recomendedNewsPhase = .empty
         
         do {
             if !ignoreCache,
-               let cachedArticles = await cache.value(forKey: "recomendedNews") {
+               let cachedArticles = await getCachedArticles(
+                for: fetchTaskToken.articles,
+                ignoreCache: ignoreCache
+               )
+            {
                 recomendedNewsPhase = .success(cachedArticles)
             } else {
                 let articlesFromAPI = try await fetchAllArticlesFromAPI()
@@ -171,14 +202,6 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    private func fetchAllArticlesFromAPI() async throws -> [ArticleDTO] {
-        let allArticles = try await newsAPIManager.getTopNews(with: country.rawValue)?.results ?? []
-        await cache.setValue(allArticles, forKey: "recomendedNews")
-        try? await cache.saveToDisk()
-        return allArticles
-    }
-    
-    
     // MARK: - Load Categories
     func loadCategories() {
         self.categories = storageManager.loadCategories() ?? []
@@ -187,11 +210,58 @@ final class MainViewModel: ObservableObject {
         }
     }
     
-    
     // MARK: - Fetch News with Search
     func fetchSearchResults() {
         Task {
-            try await searshNewsResults = newsAPIManager.getSearchedNews(with: searchText)?.results ?? []
+            let searshNewsResults = try await newsAPIManager.getSearchedNews(with: searchText)?.results ?? []
+            searshNewsResultsPhase = .success(searshNewsResults)
         }
+    }
+    
+    func clearAfterSearch() {
+        searshNewsResultsPhase = .empty
+        searchText = ""
+    }
+    
+    // MARK: - Private Methods
+    private func getCachedArticles(for key: String, ignoreCache: Bool = false) async -> [ArticleDTO]? {
+        if ignoreCache {
+            await cache.removeValue(forKey: key)
+            return nil
+        }
+        return await cache.value(forKey: key)
+    }
+    
+    private func fetchCategoryArticlesFromAPI() async throws -> [ArticleDTO] {
+        let articles = try await newsAPIManager.getNews(with: country.rawValue, selectedCategory.rawValue)?.results ?? []
+        await cache.setValue(articles, forKey: selectedCategory.rawValue)
+        try? await cache.saveToDisk()
+        return articles
+    }
+    
+    private func fetchAllArticlesFromAPI() async throws -> [ArticleDTO] {
+        let allArticles = try await newsAPIManager.getTopNews(with: country.rawValue)?.results ?? []
+        await cache.setValue(allArticles, forKey: "recomendedNews")
+        try? await cache.saveToDisk()
+        return allArticles
+    }
+    
+    private func addBookmark(_ article: ArticleDTO) {
+        bookmarkManager.saveBookmark(
+            id: article.id,
+            title: article.title,
+            link: article.link ?? "",
+            imageURL: article.imageUrl ?? "" ,
+            category: article.category?.first ?? "",
+            creator: article.creator?.first ?? "",
+            descrition: article.description ?? "",
+            userID: ""
+        )
+        bookmarks.append(article)
+    }
+    
+    private func deleteBookmark(_ article: ArticleDTO) {
+        bookmarkManager.deleteBookmark(id: article.id)
+        bookmarks.removeAll { $0.id == article.id }
     }
 }

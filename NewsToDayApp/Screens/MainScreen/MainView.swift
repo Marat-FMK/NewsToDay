@@ -11,9 +11,10 @@ struct MainView: View {
     @StateObject var viewModel: MainViewModel
     
     var body: some View {
-        if viewModel.searshNewsResults.isEmpty {
+        if viewModel.getSearshResult().isEmpty {
             VStack {
-                CustomToolBar(title: Resources.Text.mainTitle, subTitle: Resources.Text.mainSubTitle)
+                CustomToolBar(title: Resources.Text.mainTitle,
+                              subTitle: Resources.Text.mainSubTitle)
                     .padding(.top, 0)
                 
                 ScrollView(showsIndicators: false) {
@@ -29,14 +30,18 @@ struct MainView: View {
             }
             .onAppear(perform: viewModel.loadCategories)
             .task {
-                await viewModel.fetchCategoryNews()
-                await viewModel.fetchRecomendedNews()
+                await viewModel.fetchCategoryNews(ignoreCache: true)
+                await viewModel.fetchRecomendedNews(ignoreCache: true)
             }
             .navigationBarHidden(true)
             .background(.background)
             .ignoresSafeArea()
         } else {
-            SearchNewsView(news: $viewModel.searshNewsResults, searchText: $viewModel.searchText)
+            SearchNewsView(
+                news: viewModel.getSearshResult(),
+                searchText: viewModel.searchText,
+                action: viewModel.clearAfterSearch
+            )
         }
     }
 }
@@ -59,7 +64,10 @@ extension MainView {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(viewModel.categories, id: \.self) { category in
-                    CategoryCell(category: category, selected: $viewModel.selectedCategory)
+                    CategoryCell(
+                        category: category,
+                        selected: $viewModel.selectedCategory
+                    )
                         .frame(height: 40)
                 }
             }
@@ -71,24 +79,20 @@ extension MainView {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 if !viewModel.getCategoryNews().isEmpty {
-                    ForEach(viewModel.getCategoryNews()) { news in
+                    ForEach(viewModel.getCategoryNews()) { article in
                         NavigationLink {
-                            DetailView(
-                                title: news.title,
-                                link: news.link,
-                                creator: news.creator,
-                                description: news.description,
-                                category: news.category,
-                                isFavorite: news.isFavorite,
-                                imageUrl: news.imageUrl,
-                                action: {}
-                            )
+                            DetailView(article)
+                            
                         } label: {
                             CategoryNewsCell(
-                                title: news.title,
-                                imageUrl: news.imageUrl,
-                                isFavorite: news.isFavorite,
-                                category: news.category
+                                id: article.id,
+                                title: article.title,
+                                imageUrl: article.imageUrl,
+                                isFavorite: viewModel.bookmarks.contains { $0.id == article.id },
+                                category: article.category,
+                                action: {
+                                    viewModel.toggleBookmark(for: article)
+                                }
                             )
                             
                             .frame(height: 256)
@@ -110,7 +114,7 @@ extension MainView {
     
     private func RecommendedNewsHeader() -> some View {
         HStack {
-            Text(Resources.Text.recommendedForYou)
+            Text(Resources.Text.localizedKey(Resources.Text.recommendedForYou))
                 .font(.interSemiBold(20))
                 .frame(width: 240, height: 24)
                 .foregroundStyle(DS.Colors.blackyPrimary)
@@ -142,26 +146,17 @@ extension MainView {
             } else {
                 ForEach(viewModel.getRecomendedNews()) { article in
                     NavigationLink {
-                        DetailView(
-                            title: article.title,
-                            link: article.link,
-                            creator: article.creator,
-                            description: article.description,
-                            category: article.category,
-                            isFavorite: article.isFavorite,
-                            imageUrl: article.imageUrl,
-                            action: {}
-                        )
+                        DetailView(article)
                     } label: {
                         RecommendedNewsView(
                             title: article.title,
                             imageUrl: article.imageUrl,
                             category: article.category
                         )
-                        .frame(height: 100)
+                        .frame(height: 96)
                     }
                 }
-                .padding(.bottom,150)
+                .padding(.bottom, 16)
             }
         }
         

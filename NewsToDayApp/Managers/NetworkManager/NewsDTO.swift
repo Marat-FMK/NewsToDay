@@ -56,7 +56,6 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
     let imageUrl: String?
     let category: [String]?
     let country: [String]?
-    var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case id = "article_id"
@@ -68,9 +67,34 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
         case imageUrl = "image_url"
         case category
         case country
-        case isFavorite
     }
     
+    // MARK: - Custom Initializer for Core Data BookmarkEntity
+    init(from bookmarkEntity: BookmarkEntity) {
+        self.id = bookmarkEntity.id ?? UUID().uuidString
+        self.title = bookmarkEntity.title ?? ""
+        self.link = bookmarkEntity.link
+        self.creator = bookmarkEntity.creator?.components(separatedBy: ", ")
+        self.description = bookmarkEntity.descriptionArticle
+        self.content = nil
+        self.imageUrl = bookmarkEntity.imageURL
+        self.category = bookmarkEntity.category?.components(separatedBy: ", ")
+        self.country = nil
+    }
+    
+    // MARK: - Default Initializer for ArticleDTO
+    init(id: String, title: String, link: String?, creator: [String]?, description: String?, content: String?, imageUrl: String?, category: [String]?, country: [String]?, isFavorite: Bool = false) {
+        self.id = id
+        self.title = title
+        self.link = link
+        self.creator = creator
+        self.description = description
+        self.content = content
+        self.imageUrl = imageUrl
+        self.category = category
+        self.country = country
+    }
+
     // MARK: - Custom Decoder for ArticleDTO
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -91,7 +115,6 @@ struct ArticleDTO: Sendable, Equatable, Codable, Hashable, Identifiable, Decodab
         self.imageUrl = try container.decodeIfPresent(String.self, forKey: .imageUrl)
         self.category = try container.decodeIfPresent([String].self, forKey: .category)
         self.country = try container.decodeIfPresent([String].self, forKey: .country)
-        self.isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
     }
 }
 
