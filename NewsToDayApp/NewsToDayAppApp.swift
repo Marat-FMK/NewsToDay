@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct NewsToDayAppApp: App {
-    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.currentLocale.identifier
     
     var body: some Scene {
         WindowGroup {
@@ -18,7 +17,6 @@ struct NewsToDayAppApp: App {
                 let mainViewModel = MainViewModel(newsAPIManager: newsAPIManager)
                 
                 CustomTabBarView(mainViewModel: mainViewModel)
-                    .environment(\.locale, Locale(identifier: language))
 //            } else {
 //                OnboardingView()
 //            }

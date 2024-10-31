@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LanguageScreen: View {
-    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.currentLocale.identifier
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     
     @Environment(\.dismiss) var dismiss
     
@@ -24,10 +24,10 @@ struct LanguageScreen: View {
                 CustomButton(
                     title: lang.displayName,
                     action: {
-                        LocalizationManager.shared.setLanguage(lang.rawValue)
+                        LocalizationManager.shared.language = lang
                     },
                     buttonType: .language,
-                    isSelected: language == lang.rawValue
+                    isSelected: language == lang
                 )
                 .frame(height: 56)
                 .listRowBackground(Color.clear)
