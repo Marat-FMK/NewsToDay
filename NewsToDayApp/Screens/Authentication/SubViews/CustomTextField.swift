@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CustomTextField: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     var image: String
     var placeHolder: String
     @Binding var text: String
@@ -24,7 +25,7 @@ struct CustomTextField: View {
                 if placeHolder == "Password" || placeHolder == "Repeat Password"{
                     SecureField(placeHolder, text: $text)
                 } else {
-                    TextField(placeHolder, text: $text)
+                    TextField(placeHolder.localized(language), text: $text)
                         .font(.system(size: 16, weight: .medium))
                         .frame(height: 56)
                 }
