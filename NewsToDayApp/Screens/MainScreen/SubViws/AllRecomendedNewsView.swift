@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct AllRecomendedNewsView: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     @Environment(\.dismiss) var dismiss
     let news: [ArticleDTO]
     
     var body: some View {
         
         VStack(alignment: .leading) {
-            CustomToolBar(title: Resources.Text.allRecommendedNews, subTitle: Resources.Text.weHaveSelectedTheBestNewsForYou)
+            CustomToolBar(title: Resources.Text.allRecommendedNews.localized(language), subTitle: Resources.Text.weHaveSelectedTheBestNewsForYou.localized(language))
                     .padding(.bottom,10)
                     .padding(.top,30)
             
