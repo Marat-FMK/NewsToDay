@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - ArticleView
 struct ArticleView: View {
-    
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     // MARK: - Properties
     let model: ArticleDTO
        
@@ -23,7 +23,7 @@ struct ArticleView: View {
         
             // MARK: - Text Content
             VStack(alignment: .leading) {
-                Text(model.title)
+                Text(model.title.localized(language))
                     .font(.interMedium(Drawing.titleFontSize))
                     .fontWeight(.semibold)
                     .foregroundColor(.black)
@@ -31,7 +31,7 @@ struct ArticleView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.vertical, Drawing.titleVerticalPadding)
                 
-                Text(model.category?.first ?? "")
+                Text(model.category?.first?.localized(language) ?? "")
                     .font(.system(size: Drawing.categoryFontSize, weight: .semibold))
                     .foregroundColor(.black)
                     .lineSpacing(Drawing.categoryLineSpacing)
