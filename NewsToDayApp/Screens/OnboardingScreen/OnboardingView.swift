@@ -21,29 +21,29 @@ struct PageNumber: View {
         
         if number == 0 {
             HStack {
-                    RoundedRectangle(cornerRadius: 12)
+                RoundedRectangle(cornerRadius: 12)
                     .foregroundStyle(DS.Colors.purplePrimary)
-                    Circle()
+                Circle()
                     .foregroundStyle(DS.Colors.grayLighter)
-                    Circle()
+                Circle()
                     .foregroundStyle(DS.Colors.grayLighter)
             }
         }
         if number == 1 {
             HStack {
-                    Circle()
+                Circle()
                     .foregroundStyle(DS.Colors.grayLighter)
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundStyle(DS.Colors.purplePrimary)
-                    Circle()
+                Circle()
                     .foregroundStyle(DS.Colors.grayLighter)
             }
         }
         if number == 2 {
             HStack {
-                    Circle()
+                Circle()
                     .foregroundStyle(DS.Colors.grayLighter)
-                    Circle()
+                Circle()
                     .foregroundStyle(DS.Colors.grayLighter)
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundStyle(DS.Colors.purplePrimary)
@@ -54,9 +54,14 @@ struct PageNumber: View {
 }
 
 struct OnboardingView: View {
+    @StateObject var viewModel: OnboardingViewModel
     
     @State private var currentIndex: Int = 0
     @State private var dragOffset: CGFloat = 0
+    
+    init(router: StartRouter) {
+        self._viewModel = StateObject(wrappedValue: OnboardingViewModel(router: router))
+    }
     
     let numberOfItems = 3
     let itemWidth: CGFloat = 300
@@ -96,13 +101,9 @@ struct OnboardingView: View {
                                 .font(.interRegular(18))
                                 .foregroundStyle(DS.Colors.grayPrimary)
                                 .offset(y: 290)
-                         
+                            
                             
                             if index == 2 {
-                                
-                                NavigationLink {
-                                    
-                                } label: {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 12)
                                             .frame(width: 235, height: 56)
@@ -111,7 +112,7 @@ struct OnboardingView: View {
                                             .font(.interSemiBold(16))
                                             .foregroundStyle(Color.white) // 71 90 215
                                     }
-                                }
+                               
                                 .offset(y: 480)
                             }
                         }
@@ -134,9 +135,9 @@ struct OnboardingView: View {
                     }
             )
         }
-//        .onAppear{
-//            StorageManager.shared.checkFirstLoud()
-//        }
+        .onDisappear {
+            viewModel.onboardingCompleted()
+        }
         .offset(y:100)
         
     }
@@ -169,6 +170,6 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
+        OnboardingView(router: StartRouter())
     }
 }

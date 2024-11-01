@@ -9,9 +9,16 @@ import SwiftUI
 
 struct ProfileView: View {
     @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
+    
+    @StateObject private var viewModel: ProfileViewModel
+    
     @State private var showAlert = false
     @State private var isShowingTermsConditionsScreen = false
     @State private var isShowingLanguageScreen = false
+    
+    init(router: StartRouter) {
+        self._viewModel = StateObject(wrappedValue: ProfileViewModel(router: router))
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -55,6 +62,7 @@ struct ProfileView: View {
                 title: "Sign Out".localized(language),
                 action: {
                 showAlert = true
+                    
                 // Действие при нажатии на кнопку "Sign out"
             },
                 buttonType: .profile,
@@ -84,7 +92,7 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ProfileView()
+            ProfileView(router: StartRouter())
         }
     }
 }

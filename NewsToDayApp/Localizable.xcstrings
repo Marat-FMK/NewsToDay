@@ -536,6 +536,9 @@
         }
       }
     },
+    "Select some of your favorite topics to let us suggest better news for you." : {
+      "extractionState" : "manual"
+    },
     "Sign Up" : {
       "extractionState" : "stale",
       "localizations" : {

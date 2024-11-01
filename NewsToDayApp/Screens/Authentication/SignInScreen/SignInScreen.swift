@@ -9,8 +9,16 @@ import SwiftUI
 
 struct SignInScreen: View {
     @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
-    @ObservedObject var viewModel: AuthViewModel
+
+    @StateObject var viewModel: AuthViewModel
+    
     @State private var showSignUp = false
+    
+    init(router: StartRouter) {
+        self._viewModel = StateObject(
+            wrappedValue: AuthViewModel(router: router)
+       )
+    }
     
     var body: some View {
         VStack {
@@ -64,8 +72,7 @@ struct SignInScreen: View {
 
 struct SignIn_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = AuthViewModel() // Создаем пример viewModel
-              SignInScreen(viewModel: viewModel)
+        SignInScreen(router: StartRouter())
                   .previewDevice("iPhone 14") // Указываем устройство для превью
     }
 }

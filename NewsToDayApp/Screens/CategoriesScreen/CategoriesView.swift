@@ -12,6 +12,13 @@ struct CategoriesView: View {
     
     @StateObject private var viewModel: CategoriesViewModel
     
+    @State var mode: Mode = .screen
+    
+    enum Mode {
+        case onboarding
+        case screen
+    }
+    
     // MARK: - Drawing Constants
     enum Drawing {
         static let columnsSpacing: CGFloat = 12
@@ -22,10 +29,12 @@ struct CategoriesView: View {
     }
     
     // MARK: - Initializer
-    init() {
+    init(mode: Mode, router: StartRouter) {
+        self.mode = mode
         self._viewModel = StateObject(
-            wrappedValue: CategoriesViewModel()
+            wrappedValue: CategoriesViewModel(router: router)
         )
+        
     }
     
     // MARK: - Body
@@ -33,7 +42,7 @@ struct CategoriesView: View {
         VStack {
             CustomToolBar(
                 title: Resources.Text.categoriesTitle.localized(language),
-                subTitle: Resources.Text.categoriesSubTitle.localized(language)
+                subTitle: changeText()
             )
             .padding(.top, 0)
             
@@ -85,7 +94,19 @@ struct CategoriesView: View {
                 }
                 .padding()
             }
-            
+            Spacer()
+            if mode == .onboarding {
+                CustomButton(
+                    title: "Choose".localized(language),
+                    action: {
+                        viewModel.categoryChosen()
+                    },
+                    buttonType: .mode,
+                    isSelected: true
+                    
+                )
+                .padding()
+            }
         }
         .onAppear {
             viewModel.loadCategories()
@@ -95,10 +116,16 @@ struct CategoriesView: View {
         .background(.background)
         .ignoresSafeArea()
     }
+    
+    private func changeText() -> String {
+        mode == .onboarding
+        ? Resources.Text.selectOnboardingCategories.localized(language)
+        : Resources.Text.selectCategories.localized(language)
+    }
 }
 
 struct CategoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoriesView()
+        CategoriesView(mode: .screen, router: StartRouter())
     }
 }

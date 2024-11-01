@@ -12,6 +12,13 @@ struct MainView: View {
     
     @StateObject var viewModel: MainViewModel
     
+    // MARK: - Initializer
+    init(_ newsAPIManager: INewsAPIManager) {
+        self._viewModel = StateObject(
+            wrappedValue: MainViewModel(newsAPIManager)
+        )
+    }
+    
     var body: some View {
         if viewModel.getSearshResult().isEmpty {
             VStack {
@@ -168,7 +175,7 @@ extension MainView {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MainView(viewModel: MainViewModel(newsAPIManager: NewsAPIManager()))
+            MainView(NewsAPIManager())
         }
     }
 }

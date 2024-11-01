@@ -34,6 +34,13 @@ class AuthViewModel: ObservableObject {
                !email.contains(" ")
     }
     
+    private let router: StartRouter
+    
+    // MARK: Initialization
+    init(router: StartRouter) {
+        self.router = router
+    }
+    
     func signIn() {
         guard formIsValid else {
             errorMessage = "Please fill all fields correctly."
@@ -45,6 +52,7 @@ class AuthViewModel: ObservableObject {
             self?.isLoading = false
             
             if error == nil {
+                self?.userAuthenticated()
                 print("Verification was successful")
             } else {
                 print(error!.localizedDescription)
@@ -90,5 +98,9 @@ class AuthViewModel: ObservableObject {
                 print("Error fetching user data: \(error)")
             }
         }
+    }
+    //MARK: - NavigationState
+    func userAuthenticated() {
+        router.updateRouterState(with: .userAuthorized)
     }
 }

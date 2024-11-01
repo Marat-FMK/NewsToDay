@@ -48,6 +48,8 @@
 		6CD530DD2CC9364300214899 /* RecommendedNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD530DC2CC9364300214899 /* RecommendedNewsView.swift */; };
 		E10EB2E02CD3F493005A7934 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E10EB2DF2CD3F493005A7934 /* FirebaseAuth */; };
 		E10EB2E22CD3F493005A7934 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E10EB2E12CD3F493005A7934 /* FirebaseFirestore */; };
+		E10EB2E42CD416B8005A7934 /* StartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10EB2E32CD416AD005A7934 /* StartRouter.swift */; };
+		E10EB2E62CD41B41005A7934 /* StartRouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10EB2E52CD41B41005A7934 /* StartRouterView.swift */; };
 		E115205B2CD35B83007D7967 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115205A2CD35B83007D7967 /* LocalizationManager.swift */; };
 		E115205F2CD3894B007D7967 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E115205E2CD3894B007D7967 /* Localizable.xcstrings */; };
 		E11520612CD392C0007D7967 /* String + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11520602CD392C0007D7967 /* String + Ext.swift */; };
@@ -122,6 +124,8 @@
 		6C3116EB2CCED56100FB3119 /* SearchNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNewsView.swift; sourceTree = "<group>"; };
 		6CD530DA2CC935FA00214899 /* CategoryNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNewsCell.swift; sourceTree = "<group>"; };
 		6CD530DC2CC9364300214899 /* RecommendedNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedNewsView.swift; sourceTree = "<group>"; };
+		E10EB2E32CD416AD005A7934 /* StartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRouter.swift; sourceTree = "<group>"; };
+		E10EB2E52CD41B41005A7934 /* StartRouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRouterView.swift; sourceTree = "<group>"; };
 		E115205A2CD35B83007D7967 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
 		E115205E2CD3894B007D7967 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		E11520602CD392C0007D7967 /* String + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Ext.swift"; sourceTree = "<group>"; };
@@ -287,9 +291,11 @@
 		374094912CC5306600723D32 /* NewsToDayApp */ = {
 			isa = PBXGroup;
 			children = (
+				374094922CC5306600723D32 /* NewsToDayAppApp.swift */,
+				E10EB2E52CD41B41005A7934 /* StartRouterView.swift */,
+				E10EB2E32CD416AD005A7934 /* StartRouter.swift */,
 				E14788592CC8E6DE00752213 /* Info.plist */,
 				E115205E2CD3894B007D7967 /* Localizable.xcstrings */,
-				374094922CC5306600723D32 /* NewsToDayAppApp.swift */,
 				374094AF2CC5455E00723D32 /* Screens */,
 				3730B17F2CC67364006AA874 /* Managers */,
 				374094AE2CC5450D00723D32 /* Resources */,
@@ -557,12 +563,14 @@
 				370CD1E82CD280A500D29B0B /* FirebaseError.swift in Sources */,
 				E14788522CC8E43000752213 /* Font + Ext.swift in Sources */,
 				3717CB002CC8B22A0074FCE4 /* ArticleView.swift in Sources */,
+				E10EB2E62CD41B41005A7934 /* StartRouterView.swift in Sources */,
 				3730B1542CC56ACE006AA874 /* BookmarksView.swift in Sources */,
 				6C0AF7192CCD5E4100414AB4 /* ShimmerView.swift in Sources */,
 				E14788232CC6305B00752213 /* NewsDTO.swift in Sources */,
 				E14788272CC64E6300752213 /* APIClient.swift in Sources */,
 				3717CB072CC917860074FCE4 /* ProfileHeaderView.swift in Sources */,
 				E11520612CD392C0007D7967 /* String + Ext.swift in Sources */,
+				E10EB2E42CD416B8005A7934 /* StartRouter.swift in Sources */,
 				E14788352CC6752700752213 /* Color + Ext.swift in Sources */,
 				3730B1442CC5694B006AA874 /* MainViewModel.swift in Sources */,
 				E1C40DF62CCAC38B00DBEF75 /* CategoryCell.swift in Sources */,

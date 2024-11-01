@@ -13,6 +13,13 @@ final class CategoriesViewModel: ObservableObject {
     
     private let storageManager = StorageManager.shared
     
+    private let router: StartRouter
+    
+    // MARK: Initialization
+    init(router: StartRouter) {
+        self.router = router
+    }
+    
     // MARK: Methods
     func saveCategories() {
         storageManager.saveCategories(categories: categories)
@@ -21,4 +28,10 @@ final class CategoriesViewModel: ObservableObject {
     func loadCategories() {
         self.categories = storageManager.loadCategories() ?? []
     }
+    
+    // MARK: - NavigationState
+    func categoryChosen() {
+        router.updateRouterState(with: .categoriesSelected)
+    }
+    
 }
