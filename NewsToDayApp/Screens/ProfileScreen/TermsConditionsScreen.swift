@@ -13,29 +13,18 @@ struct TermsConditionsScreen: View {
         
     var textTermsConditions: String =
      """
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-
-    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-
-    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+      Use for personal, non-commercial purposes. It is prohibited to offer services related to the use of the application to other users in order to make a profit.
+      Intellectual property. The User acknowledges that the application, its interface and content are protected by copyright, trademarks, patents and other rights that belong to the developer or other legitimate copyright holders.
+      The responsibility of the user. The user is solely responsible for his actions in using the application, including actions for posting and transmitting information, comments, images and other materials to other users using the application.
+      Violations and consequences. For violations committed by the user, the developer has the right to refuse further provision of services or restrict such provision in whole or in part with or without notification to the user.
     """
-    
-    #warning("Переписать условия :)) ")
     
     var textTermsConditionsRUS: String =
     """
-    Бред какой то ;))) 
-    История о том, как мы должны сидеть сложа руки, о том, как мы относимся к элите, как мы относимся к временным происшествиям, труду и великой долоре. Мы делаем все возможное, чтобы свести к минимуму последствия, которые могут возникнуть в результате наших усилий. Из-за этого я испытываю острую боль в порицании, и в сладострастии чувствую, что страдаю от этого, но избегаю этого.
-    За исключением случаев, когда купидон не является сотрудником, виновный в том, что он дезертировал с работы.
-
-    Когда мы видим, что все сущее - это естественная ошибка, мы испытываем сладострастие, обвиняем, скорбим, восхваляем, все, что осталось, - это то, что нужно для верного изобретателя и квазиархитектуры, чтобы описать биографию без объяснения причин.
-
-    Немо понимает, что такое сладострастие, когда сладострастие становится естественным, когда оно исчезает, когда оно становится следствием великой долорес, и что такое естественное сладострастие, когда оно исчезает.
-
-    Никогда не забывай, что есть, что такое скорбь, и что такое страдание, когда ты сидишь рядом, консекрет, адипиши велит, чтобы не было никаких других временных происшествий, связанных с трудом и великой скорбью, вызванной сладострастием.
+  Использование в личных некоммерческих целях. Запрещается предлагать услуги, связанные с использованием приложения, другим пользователям в целях извлечения прибыли.
+  Интеллектуальная собственность. Пользователь признаёт, что приложение, его интерфейс и содержание защищены авторским правом, товарными знаками, патентами и иными правами, которые принадлежат разработчику или иным законным правообладателям.
+  Ответственность пользователя. Пользователь самостоятельно несёт ответственность за свои действия по использованию приложения, в том числе за действия по размещению и передаче информации, комментариев, изображений и иных материалов другим пользователям с помощью приложения.
+  Нарушения и последствия. За нарушения, допущенные пользователем, разработчик вправе отказать ему в дальнейшем предоставлении услуг или ограничить такое предоставление полностью или частично с уведомлением пользователя или без такового.
 """
     
     var body: some View {
