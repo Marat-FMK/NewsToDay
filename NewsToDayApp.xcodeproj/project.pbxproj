@@ -214,6 +214,7 @@
 				E147882A2CC6500400752213 /* NewsAPIManager.swift */,
 				E1CB51E92CCE29ED006FDECE /* BookMarksManager.swift */,
 				E1CB51E62CCE27CE006FDECE /* BookmarkEntity.xcdatamodeld */,
+				370CD1E62CD2806500D29B0B /* FirebaseManager */,
 				3730B1652CC61E69006AA874 /* NetworkManager */,
 				3730B1802CC6736B006AA874 /* CacheManager */,
 			);
@@ -375,7 +376,6 @@
 		374094AC2CC5442600723D32 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				370CD1E62CD2806500D29B0B /* FirebaseManager */,
 				377D83952CD01A0A0078AA5B /* SubViews */,
 				377D83932CD018200078AA5B /* SignInScreen */,
 				377D83942CD018810078AA5B /* SignUpScreen */,

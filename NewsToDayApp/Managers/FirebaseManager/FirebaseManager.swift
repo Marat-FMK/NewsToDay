@@ -10,7 +10,22 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-class FirebaseManager: ObservableObject {
+final class FirebaseManager {
+    
+    static let shared = FirebaseManager()
+    
+    private init() {}
+    
+    
+    func isAuthenticated() -> Bool {
+        return Auth.auth().currentUser?.uid != nil
+    }
+    
+    func signOut() async throws {
+        try Auth.auth().signOut()
+    }
+    
+    
     func getUserData(userId: String) async throws -> UserModel {
         let document = try await Firestore.firestore()
             .collection("users")
@@ -78,4 +93,5 @@ class FirebaseManager: ObservableObject {
                 }
             }
     }
+    
 }
