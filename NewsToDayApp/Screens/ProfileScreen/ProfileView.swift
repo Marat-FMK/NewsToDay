@@ -62,8 +62,9 @@ struct ProfileView: View {
                 title: "Sign Out".localized(language),
                 action: {
                 showAlert = true
-                    
-                // Действие при нажатии на кнопку "Sign out"
+                    Task {
+                        await viewModel.logOut()
+                    }
             },
                 buttonType: .profile,
                 isSelected: false

@@ -104,15 +104,16 @@ struct OnboardingView: View {
                             
                             
                             if index == 2 {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .frame(width: 235, height: 56)
-                                            .foregroundStyle(Color.purple)
-                                        Text("Get Started")
-                                            .font(.interSemiBold(16))
-                                            .foregroundStyle(Color.white) // 71 90 215
-                                    }
-                               
+                                Button(action: viewModel.onboardingCompleted) {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .frame(width: 235, height: 56)
+                                        .foregroundStyle(Color.purple)
+                                    Text("Get Started")
+                                        .font(.interSemiBold(16))
+                                        .foregroundStyle(Color.white) // 71 90 215
+                                }
+                            }
                                 .offset(y: 480)
                             }
                         }
@@ -129,15 +130,15 @@ struct OnboardingView: View {
                     }
                     .onEnded { value in
                         withAnimation(.interactiveSpring()) {
+                            
                             finalizePosition(dragValue: value)
                             dragOffset = 0
+                           
                         }
                     }
             )
         }
-        .onDisappear {
-            viewModel.onboardingCompleted()
-        }
+
         .offset(y:100)
         
     }

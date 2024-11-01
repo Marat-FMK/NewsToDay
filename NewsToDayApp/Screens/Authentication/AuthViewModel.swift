@@ -17,8 +17,9 @@ class AuthViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var isSignedIn: Bool = false
     @Published var errorMessage: String?
-
-    private let firebaseManager = FirebaseManager()
+    
+    private let router: StartRouter
+    private let firebaseManager = FirebaseManager.shared
     
     var formIsValid: Bool {
         return !email.isEmpty && !password.isEmpty && password.count >= 6 && !password.contains(" ")
@@ -34,7 +35,7 @@ class AuthViewModel: ObservableObject {
                !email.contains(" ")
     }
     
-    private let router: StartRouter
+
     
     // MARK: Initialization
     init(router: StartRouter) {
