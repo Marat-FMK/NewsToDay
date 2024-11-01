@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CategoryCell: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     
     // MARK: - Constants
     private enum Drawing {
@@ -24,7 +25,7 @@ struct CategoryCell: View {
     
     // MARK: - Body
     var body: some View {
-        Text(category.rawValue)
+        Text(category.rawValue.localized(language))
             .foregroundStyle(foregroundColor(for: category))
             .padding(.vertical, Drawing.verticalPadding)
             .padding(.horizontal, Drawing.horizontalPadding)

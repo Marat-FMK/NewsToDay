@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - CustomButton View
 struct CustomButton: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     // MARK: - ButtonType Enum
     // Defines the types of buttons that can be created.
     enum ButtonType {
@@ -33,7 +34,7 @@ struct CustomButton: View {
         Button(action: action) {
             HStack {
                 // MARK: - Button Title
-                Text(title)
+                Text(title.localized(language))
                 Spacer()
                 
                 // MARK: - Button Image Handling

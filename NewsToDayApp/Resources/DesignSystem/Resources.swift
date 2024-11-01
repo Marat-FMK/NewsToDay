@@ -30,6 +30,7 @@ enum Resources {
         static let noCategoryMessage = "No Category"
         static let noAuthorMessage = "No Author"
         static let resultsMessage = "Results"
+        static let seeAll = "See all"
     }
     
     enum Image {

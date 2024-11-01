@@ -26,16 +26,16 @@ struct NewsToDayAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if UserDefaults.standard.bool(forKey: StorageManager.UserDefaultKeys.checkFirstLoud) {
+//            if UserDefaults.standard.bool(forKey: StorageManager.UserDefaultKeys.checkFirstLoud) {
                 let newsAPIManager = NewsAPIManager()
                 let mainViewModel = MainViewModel(newsAPIManager: newsAPIManager)
 
                 CustomTabBarView(mainViewModel: mainViewModel)
-            } else {
-                OnboardingView()
-            }
-            let model = AuthViewModel()
-            SignInScreen(viewModel: model)
+//            } else {
+//                OnboardingView()
+//            }
+//            let model = AuthViewModel()
+//            SignInScreen(viewModel: model)
         }
         
     }

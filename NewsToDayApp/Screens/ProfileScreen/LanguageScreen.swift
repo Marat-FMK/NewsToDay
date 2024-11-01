@@ -16,7 +16,7 @@ struct LanguageScreen: View {
         
         VStack {
             
-            ProfileTitle(title: "Language", type: .withBackButton)
+            ProfileTitle(title: "Language".localized(language), type: .withBackButton)
                 .padding(.top, 68)
                 .padding(.horizontal, 20)
             // MARK: Language List
