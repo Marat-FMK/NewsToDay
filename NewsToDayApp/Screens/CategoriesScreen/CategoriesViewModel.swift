@@ -28,4 +28,10 @@ final class CategoriesViewModel: ObservableObject {
     func loadCategories() {
         self.categories = storageManager.loadCategories() ?? []
     }
+    
+    // MARK: - NavigationState
+    func categoryChosen() {
+        router.updateRouterState(with: .categoriesSelected)
+    }
+    
 }

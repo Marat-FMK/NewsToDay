@@ -32,10 +32,10 @@ struct CustomTabBarView: View {
                 }
             case 4:
                 NavigationView {
-                    ProfileView()
+                    ProfileView(router: router)
                 }
             default:
-                ProfileView()
+                ProfileView(router: router)
             }
             CustomTabBar(tabSelection: $tabSelection)
         }

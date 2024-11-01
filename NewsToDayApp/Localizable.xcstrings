@@ -43,6 +43,17 @@
         }
       }
     },
+    "Choose" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбирай"
+          }
+        }
+      }
+    },
     "crime" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -126,6 +137,9 @@
         }
       }
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "lifestyle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -189,6 +203,9 @@
     },
     "See All" : {
 
+    },
+    "Select some of your favorite topics to let us suggest better news for you." : {
+      "extractionState" : "manual"
     },
     "Sign Up" : {
 

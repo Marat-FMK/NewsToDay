@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+final class ProfileViewModel: ObservableObject {
+    
+    private let router: StartRouter
+    
+    // MARK: Initialization
+    init(router: StartRouter) {
+        self.router = router
+    }
+    
+    //MARK: - NavigationState
+    func openApp() {
+        router.updateRouterState(with: .userLoggedOut)
+    }
+}

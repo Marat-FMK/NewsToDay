@@ -42,7 +42,7 @@ struct CategoriesView: View {
         VStack {
             CustomToolBar(
                 title: Resources.Text.categoriesTitle.localized(language),
-                subTitle: Resources.Text.categoriesSubTitle.localized(language)
+                subTitle: changeText()
             )
             .padding(.top, 0)
             
@@ -94,7 +94,19 @@ struct CategoriesView: View {
                 }
                 .padding()
             }
-            
+            Spacer()
+            if mode == .onboarding {
+                CustomButton(
+                    title: "Choose".localized(language),
+                    action: {
+                        viewModel.categoryChosen()
+                    },
+                    buttonType: .mode,
+                    isSelected: true
+                    
+                )
+                .padding()
+            }
         }
         .onAppear {
             viewModel.loadCategories()
@@ -103,6 +115,12 @@ struct CategoriesView: View {
         .navigationBarHidden(true)
         .background(.background)
         .ignoresSafeArea()
+    }
+    
+    private func changeText() -> String {
+        mode == .onboarding
+        ? Resources.Text.selectOnboardingCategories.localized(language)
+        : Resources.Text.selectCategories.localized(language)
     }
 }
 

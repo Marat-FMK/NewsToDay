@@ -30,6 +30,9 @@ enum Resources {
         static let noCategoryMessage = "No Category"
         static let noAuthorMessage = "No Author"
         static let resultsMessage = "Results"
+        static let choose = "Choose"
+        static let selectCategories = "Thousands of articles in each category"
+        static let selectOnboardingCategories = "Select some of your favorite topics to let us suggest better news for you."
     }
     
     enum Image {
