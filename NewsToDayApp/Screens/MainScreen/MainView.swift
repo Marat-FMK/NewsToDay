@@ -62,9 +62,6 @@ extension MainView {
     private func SearchBarView() -> some View {
         SearchBar(action: {
             viewModel.fetchSearchResults()
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//                viewModel.searchText = ""
-//            }
         }, text: $viewModel.searchText)
             .padding(.bottom, 16)
     }
