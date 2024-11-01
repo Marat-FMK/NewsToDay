@@ -8,26 +8,27 @@
 import SwiftUI
 
 struct SignUpScreen: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     @ObservedObject var viewModel: AuthViewModel
     var onDismiss: () -> Void
     
     var body: some View {
         VStack {
-            CustomToolBar(title: "Create Account", subTitle: "Please fill in your details")
+            CustomToolBar(title: "Create Account".localized(language), subTitle: "Please fill in your details".localized(language))
             
-            CustomTextField(image: "person", placeHolder: "Username", text: $viewModel.userName)
+            CustomTextField(image: "person", placeHolder: "Username".localized(language), text: $viewModel.userName)
                 .padding(.horizontal, 20)
                 .padding(.top, 32)
             
-            CustomTextField(image: "mail", placeHolder: "Email Address", text: $viewModel.email)
+            CustomTextField(image: "mail", placeHolder: "Email Address".localized(language), text: $viewModel.email)
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
             
-            CustomTextField(image: "lock", placeHolder: "Password", text: $viewModel.password)
+            CustomTextField(image: "lock", placeHolder: "Password".localized(language), text: $viewModel.password)
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
             
-            CustomTextField(image: "lock", placeHolder: "Repeat Password", text: $viewModel.reEnterPassword)
+            CustomTextField(image: "lock", placeHolder: "Repeat Password".localized(language), text: $viewModel.reEnterPassword)
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
             
@@ -35,7 +36,7 @@ struct SignUpScreen: View {
                 print("pressed signUp")
                 viewModel.signUp()
             }) {
-                Text("Sign Up")
+                Text("Sign Up".localized(language))
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(viewModel.signUpFormIsValid ? Color.blue : Color.gray)
@@ -48,7 +49,7 @@ struct SignUpScreen: View {
 
             Spacer()
             
-            AuthTextButton(title: "Already have an account?", sign: "Sign In", action: {
+            AuthTextButton(title: "Already have an account?".localized(language), sign: "Sign In".localized(language), action: {
                 onDismiss()
             })
             .padding(.bottom, 44)

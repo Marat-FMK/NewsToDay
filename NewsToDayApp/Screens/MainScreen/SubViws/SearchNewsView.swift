@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchNewsView: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     @Environment(\.dismiss) var dismiss
     
     let news: [ArticleDTO]
@@ -17,8 +18,8 @@ struct SearchNewsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             CustomToolBar(
-                title: Resources.Text.searchedNews,
-                subTitle: Resources.Text.search + ": \(searchText)"
+                title: Resources.Text.searchedNews.localized(language),
+                subTitle: Resources.Text.search.localized(language) + ": \(searchText)"
             )
                     .padding(.bottom,10)
                     .padding(.top,30)

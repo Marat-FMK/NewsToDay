@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct CustomToolBar: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     let title: String
     let subTitle: String
     
     var body: some View {
         
         VStack(alignment: .leading) {
-            Text(title)
+            Text(title.localized(language))
                 .foregroundStyle(DS.Colors.blackyPrimary)
                 .font(.interSemiBold(24))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             
-            Text(subTitle)
+            Text(subTitle.localized(language))
                 .foregroundStyle(DS.Colors.grayPrimary)
                 .font(.interSemiBold(16))
                 .frame(maxWidth: .infinity, alignment: .leading)

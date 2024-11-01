@@ -15,8 +15,60 @@
         }
       }
     },
+    "Already have an account?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "У вас уже есть учетная запись?"
+          }
+        }
+      }
+    },
     "Are you sure you want to sign out?" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подтвердите выход"
+          }
+        }
+      }
+    },
+    "Author" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Автор"
+          }
+        }
+      }
+    },
+    "Bookmarks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Избранное"
+          }
+        }
+      }
+    },
+    "Browse" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новости"
+          }
+        }
+      }
     },
     "business" : {
       "extractionState" : "manual",
@@ -30,7 +82,15 @@
       }
     },
     "Cancel" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
+          }
+        }
+      }
     },
     "Categories" : {
       "extractionState" : "manual",
@@ -43,13 +103,13 @@
         }
       }
     },
-    "Choose" : {
+    "Create Account" : {
       "extractionState" : "manual",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Выбирай"
+            "value" : "Создать аккаунт"
           }
         }
       }
@@ -66,7 +126,25 @@
       }
     },
     "Delete All" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить все"
+          }
+        }
+      }
+    },
+    "Discover things of this world" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все, что произошло сегодня"
+          }
+        }
+      }
     },
     "domestic" : {
       "extractionState" : "manual",
@@ -79,6 +157,17 @@
         }
       }
     },
+    "Don't have an account?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не имеете аккаунта?"
+          }
+        }
+      }
+    },
     "education" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -86,6 +175,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "образование"
+          }
+        }
+      }
+    },
+    "Email Address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Емайл адрес"
           }
         }
       }
@@ -124,7 +224,14 @@
       }
     },
     "Get Started" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начать"
+          }
+        }
+      }
     },
     "health" : {
       "extractionState" : "manual",
@@ -137,8 +244,27 @@
         }
       }
     },
-    "Key" : {
-      "extractionState" : "manual"
+    "I am happy to see you again. You can continue where you left off by logging in." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рады видеть вас снова. Войдя в систему вы начнете с того места, где остановились."
+          }
+        }
+      }
+    },
+    "Language" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Язык"
+          }
+        }
+      }
     },
     "lifestyle" : {
       "extractionState" : "manual",
@@ -147,6 +273,83 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "образ жизни"
+          }
+        }
+      }
+    },
+    "Loading news" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Загрузка новостей "
+          }
+        }
+      }
+    },
+    "mail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "почта"
+          }
+        }
+      }
+    },
+    "News" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новости"
+          }
+        }
+      }
+    },
+    "No author" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет автора"
+          }
+        }
+      }
+    },
+    "No Author" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет автора"
+          }
+        }
+      }
+    },
+    "No category" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Без категории"
+          }
+        }
+      }
+    },
+    "No Category" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Без категории"
           }
         }
       }
@@ -162,6 +365,39 @@
         }
       }
     },
+    "Password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароль"
+          }
+        }
+      }
+    },
+    "person" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "пользователь"
+          }
+        }
+      }
+    },
+    "Please fill in your details" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пожалуйста, введите данные"
+          }
+        }
+      }
+    },
     "politics" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -169,6 +405,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "политика"
+          }
+        }
+      }
+    },
+    "Profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профиль"
           }
         }
       }
@@ -185,7 +432,40 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Рекомендации"
+            "value" : "Рекомендуемое"
+          }
+        }
+      }
+    },
+    "Repeat Password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Повторите пароль"
+          }
+        }
+      }
+    },
+    "Results" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Описание"
+          }
+        }
+      }
+    },
+    "Saved articles to the library" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новости с закладками"
           }
         }
       }
@@ -201,20 +481,94 @@
         }
       }
     },
-    "See All" : {
-
+    "Search" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск"
+          }
+        }
+      }
+    },
+    "Searched news" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Найденные новости"
+          }
+        }
+      }
+    },
+    "See all" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Посмотреть все"
+          }
+        }
+      }
+    },
+    "Sign In" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вход"
+          }
+        }
+      }
+    },
+    "Sign Out" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выйти из профиля"
+          }
+        }
+      }
     },
     "Select some of your favorite topics to let us suggest better news for you." : {
       "extractionState" : "manual"
     },
     "Sign Up" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Авторизироваться"
+          }
+        }
+      }
     },
     "some info" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "————"
+          }
+        }
+      }
     },
     "some title    " : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "————-"
+          }
+        }
+      }
     },
     "sports" : {
       "extractionState" : "manual",
@@ -234,6 +588,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "технологии"
+          }
+        }
+      }
+    },
+    "Terms & Conditions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Правила и условия"
           }
         }
       }
@@ -260,6 +625,17 @@
         }
       }
     },
+    "TOP" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ТОП"
+          }
+        }
+      }
+    },
     "tourism" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -267,6 +643,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "туризм"
+          }
+        }
+      }
+    },
+    "Username" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Имя"
+          }
+        }
+      }
+    },
+    "We have selected the best news for you" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мы подобрали для вас лучшие новости"
+          }
+        }
+      }
+    },
+    "Welcome Back" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Успешный вход"
           }
         }
       }
@@ -283,7 +692,15 @@
       }
     },
     "Yes" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подтвердить"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

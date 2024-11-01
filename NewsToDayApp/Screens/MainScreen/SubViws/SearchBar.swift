@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchBar: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     let action: ()->Void
     @Binding var text: String
     
@@ -29,7 +30,7 @@ struct SearchBar: View {
                     .padding(Drawing.iconPadding)
             }
             
-            TextField(Resources.Text.search, text: $text)
+            TextField(Resources.Text.search.localized(language), text: $text)
                 .foregroundStyle(DS.Colors.grayDark)
                 .onSubmit {
                     action()

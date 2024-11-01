@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SignInScreen: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
+
     @StateObject var viewModel: AuthViewModel
     
     @State private var showSignUp = false
@@ -20,13 +22,13 @@ struct SignInScreen: View {
     
     var body: some View {
         VStack {
-            CustomToolBar(title: "Welcome Back 👋", subTitle: "I am happy to see you again. You can continue where you left off by logging in.")
+            CustomToolBar(title: "Welcome Back".localized(language) + "👋", subTitle: "I am happy to see you again. You can continue where you left off by logging in.".localized(language))
             
-            CustomTextField(image: "mail", placeHolder: "Email Address", text: $viewModel.email)
+            CustomTextField(image: "mail", placeHolder: "Email Address".localized(language), text: $viewModel.email)
                 .padding(.horizontal, 20)
                 .padding(.top, 32)
             
-            CustomTextField(image: "lock", placeHolder: "Password", text: $viewModel.password)
+            CustomTextField(image: "lock", placeHolder: "Password".localized(language), text: $viewModel.password)
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
             
@@ -36,7 +38,7 @@ struct SignInScreen: View {
                     .padding()
             }
             
-            CustomButton(title: "Sign In", action: {
+            CustomButton(title: "Sign In".localized(language), action: {
                 print("pressed signIn")
                 viewModel.signIn()
             }, buttonType: .mode, isSelected: viewModel.formIsValid)
@@ -51,7 +53,7 @@ struct SignInScreen: View {
             
             Spacer()
             
-            AuthTextButton(title: "Don't have an account?", sign: "Sign Up", action: {
+            AuthTextButton(title: "Don't have an account?".localized(language), sign: "Sign Up".localized(language), action: {
                 showSignUp.toggle()
             })
             .padding(.bottom, 44)

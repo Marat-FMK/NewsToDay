@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     
     @StateObject private var viewModel: ProfileViewModel
     
@@ -22,12 +23,13 @@ struct ProfileView: View {
     var body: some View {
         VStack(alignment: .leading) {
             
-            ProfileTitle(title: "Profile", type: .withoutBackButton)
+            ProfileTitle(title: "Profile".localized(language), type: .withoutBackButton)
                 .padding(.top, 68)
                 .padding(.horizontal, 20)
             
-            ProfileHeaderView(avatar: Image("chinatown"), userName: "Dev P", email: "sdsdasdasd@mail")
+            ProfileHeaderView(avatar: Image("chinatown"), userName: "Dev P", email:  "sdsdasdasd@mail")
                 .padding(20)
+            //LocalizeLanguage
             
             NavigationLink(destination: LanguageScreen(), isActive: $isShowingLanguageScreen) {
                 CustomButton(title: "Language", imageName: nil,
@@ -45,7 +47,7 @@ struct ProfileView: View {
             
             NavigationLink(destination: TermsConditionsScreen(), isActive: $isShowingTermsConditionsScreen) {
                 CustomButton(
-                    title: "Terms & Conditions",
+                    title: "Terms & Conditions".localized(language),
                     action: {
                     isShowingTermsConditionsScreen = true
                 },
@@ -57,7 +59,7 @@ struct ProfileView: View {
             }
             
             CustomButton(
-                title: "Sign Out",
+                title: "Sign Out".localized(language),
                 action: {
                 showAlert = true
                     
@@ -73,11 +75,11 @@ struct ProfileView: View {
         .padding(.bottom, 20)
         .alert(isPresented: $showAlert) {
             Alert(
-                title: Text("Are you sure you want to sign out?"),
-                primaryButton: .destructive(Text("Yes")) {
+                title: Text("Are you sure you want to sign out?".localized(language)),
+                primaryButton: .destructive(Text("Yes".localized(language))) {
                     // Действие выхода
                 },
-                secondaryButton: .cancel(Text("Cancel"))
+                secondaryButton: .cancel(Text("Cancel".localized(language)))
             )
         }
         .navigationBarHidden(true)
