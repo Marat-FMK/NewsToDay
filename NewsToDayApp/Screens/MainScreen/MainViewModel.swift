@@ -75,9 +75,9 @@ final class MainViewModel: ObservableObject {
     // MARK: - Computed Properties
     private var sortedArticles: [ArticleDTO] {
         guard let articles = categoryNewsPhase.value else { return [] }
-        if selectedOrder == lastSortedOrder, let lastSorted = lastSortedArticles {
-            return lastSorted
-        }
+//        if selectedOrder == lastSortedOrder, let lastSorted = lastSortedArticles {
+//            return lastSorted
+//        } //fix logic
         let sorted = articles.sorted {
             switch selectedOrder {
             case .alphabetical:
@@ -150,7 +150,9 @@ final class MainViewModel: ObservableObject {
     }
     
     // MARK: - API Methods
-    func getCategoryNews() -> [ArticleDTO] { sortedArticles }
+    func getCategoryNews() -> [ArticleDTO] {
+        sortedArticles.filter{$0.category == [selectedCategory.rawValue]} 
+    }
     func getRecomendedNews() -> [ArticleDTO] { filteredArticles }
     func getSearshResult() -> [ArticleDTO] { searshNewsResultsPhase.value ?? [] }
     
