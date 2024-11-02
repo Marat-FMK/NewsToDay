@@ -33,7 +33,7 @@ struct CustomTabBar: View {
         ZStack {
             RoundedRectangle(cornerRadius: Drawing.tabBarCorner)
                 .frame(height: Drawing.tabBarHeight)
-                .foregroundColor(Color.white)
+                .foregroundColor(.newsBackground)
                 .overlay(
                     RoundedRectangle(cornerRadius: Drawing.tabBarCorner)
                         .stroke(DS.Colors.grayLight, lineWidth: 1)
@@ -51,6 +51,7 @@ struct CustomTabBar: View {
             }
             .frame(height: Drawing.tabBarHeight )
         }
+        
     }
     
     // MARK: - Private Methods

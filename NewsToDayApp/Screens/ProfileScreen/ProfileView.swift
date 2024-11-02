@@ -10,8 +10,9 @@ import SwiftUI
 struct ProfileView: View {
     
     // MARK: - Properties
-    
+    @EnvironmentObject var themeManager: ThemeManager
     @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
+    
     @StateObject private var viewModel: ProfileViewModel
     @State private var showAlert = false
     @State private var isChangeUserPhoto = false
@@ -46,7 +47,14 @@ struct ProfileView: View {
                     }
                 )
                 .padding(Drawing.headerPadding)
-                
+                // Theme Selection Segmented Control
+                Picker("", selection: $themeManager.userTheme) {
+                    Text("System").tag(ThemeMode.system)
+                    Text("Dark").tag(ThemeMode.dark)
+                    Text("Light").tag(ThemeMode.light)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal, Drawing.horizontalPadding)
                 NavigationLink(destination: LanguageScreen(), isActive: $isShowingLanguageScreen) {
                     CustomButton(
                         title: "Language",
@@ -132,7 +140,6 @@ struct ProfileView: View {
         static let changePhotoViewHeight: CGFloat = 300
     }
 }
-
 
 
 // MARK: - Preview

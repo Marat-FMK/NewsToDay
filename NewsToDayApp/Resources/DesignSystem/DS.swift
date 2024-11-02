@@ -6,9 +6,17 @@
 //
 import SwiftUI
 
+
+
+enum ThemeMode: String {
+    case system, light, dark
+}
+
 // MARK: - DS (Design System)
 enum DS {
     enum Colors {
+        static let backgroundLight = Color(hex: "#FFFFFF")
+        static let backgroundDark = Color(hex: "#1C1C1E")
         static let purpleDark = Color(hex: "#2536A7")
         static let purplePrimary = Color(hex: "#475AD7")
         static let purpleLight = Color(hex: "#8A96E5")

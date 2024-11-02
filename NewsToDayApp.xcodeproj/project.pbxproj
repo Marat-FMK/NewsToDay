@@ -78,6 +78,7 @@
 		E14788582CC8E56000752213 /* Inter-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E14788532CC8E56000752213 /* Inter-SemiBold.otf */; };
 		E147885B2CC8F00100752213 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147885A2CC8F00100752213 /* APIManager.swift */; };
 		E147885D2CC99B3600752213 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147885C2CC99B3600752213 /* SearchBar.swift */; };
+		E15A2B792CD69878003BA735 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15A2B782CD69878003BA735 /* ThemeManager.swift */; };
 		E1C40DF62CCAC38B00DBEF75 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C40DF52CCAC38B00DBEF75 /* CategoryCell.swift */; };
 		E1C40DF92CCAC69A00DBEF75 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C40DF82CCAC69A00DBEF75 /* StorageManager.swift */; };
 		E1C40DFB2CCD858000DBEF75 /* ImageStoreImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C40DFA2CCD858000DBEF75 /* ImageStoreImpl.swift */; };
@@ -157,6 +158,7 @@
 		E14788592CC8E6DE00752213 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E147885A2CC8F00100752213 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		E147885C2CC99B3600752213 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		E15A2B782CD69878003BA735 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		E1C40DF52CCAC38B00DBEF75 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		E1C40DF82CCAC69A00DBEF75 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		E1C40DFA2CCD858000DBEF75 /* ImageStoreImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStoreImpl.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		3730B17F2CC67364006AA874 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				E15A2B782CD69878003BA735 /* ThemeManager.swift */,
 				E115205A2CD35B83007D7967 /* LocalizationManager.swift */,
 				E1C40DFC2CCD890800DBEF75 /* AsyncCachedImage.swift */,
 				E1C40DFA2CCD858000DBEF75 /* ImageStoreImpl.swift */,
@@ -597,6 +600,7 @@
 				3730B14E2CC56A0C006AA874 /* DetailViewModel.swift in Sources */,
 				3730B1522CC56A7C006AA874 /* CustomTabBar.swift in Sources */,
 				3730B15A2CC56B68006AA874 /* CategoriesViewModel.swift in Sources */,
+				E15A2B792CD69878003BA735 /* ThemeManager.swift in Sources */,
 				3718E2172CCF82B400768F4F /* TermsConditionsScreen.swift in Sources */,
 				E1CB51E82CCE27CE006FDECE /* BookmarkEntity.xcdatamodeld in Sources */,
 				6CD530DB2CC935FA00214899 /* CategoryNewsCell.swift in Sources */,
