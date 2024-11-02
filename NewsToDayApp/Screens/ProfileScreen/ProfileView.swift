@@ -8,20 +8,23 @@
 import SwiftUI
 
 struct ProfileView: View {
+    
+    // MARK: - Properties
+    
     @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
-    
     @StateObject private var viewModel: ProfileViewModel
-    
     @State private var showAlert = false
     @State private var isChangeUserPhoto = false
     @State private var isShowingTermsConditionsScreen = false
     @State private var isShowingLanguageScreen = false
     
-
+    // MARK: - Initialization
     
     init(router: StartRouter) {
         self._viewModel = StateObject(wrappedValue: ProfileViewModel(router: router))
     }
+    
+    // MARK: - Body
     
     var body: some View {
         ZStack {
@@ -31,8 +34,8 @@ struct ProfileView: View {
                     title: "Profile".localized(language),
                     type: .withoutBackButton
                 )
-                .padding(.top, 68)
-                .padding(.horizontal, 20)
+                .padding(.top, Drawing.titleTopPadding)
+                .padding(.horizontal, Drawing.horizontalPadding)
                 
                 ProfileHeaderView(
                     avatar: Image(viewModel.selectedAvatar),
@@ -42,9 +45,7 @@ struct ProfileView: View {
                         isChangeUserPhoto.toggle()
                     }
                 )
-                .padding(20)
-                
-                
+                .padding(Drawing.headerPadding)
                 
                 NavigationLink(destination: LanguageScreen(), isActive: $isShowingLanguageScreen) {
                     CustomButton(
@@ -54,7 +55,7 @@ struct ProfileView: View {
                         buttonType: .language,
                         isSelected: false
                     )
-                    .padding(20)
+                    .padding(Drawing.horizontalPadding)
                 }
                 
                 Spacer()
@@ -68,8 +69,8 @@ struct ProfileView: View {
                         buttonType: .profile,
                         isSelected: false
                     )
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 0)
+                    .padding(.horizontal, Drawing.horizontalPadding)
+                    .padding(.bottom, Drawing.bottomPadding)
                 }
                 
                 CustomButton(
@@ -80,14 +81,14 @@ struct ProfileView: View {
                     buttonType: .profile,
                     isSelected: false
                 )
-                .padding(20)
+                .padding(Drawing.horizontalPadding)
                 
                 Spacer()
             }
             .task {
                 viewModel.fetchUserData()
             }
-            .padding(.bottom, 20)
+            .padding(.bottom, Drawing.bottomPadding)
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Are you sure you want to sign out?".localized(language)),
@@ -101,21 +102,40 @@ struct ProfileView: View {
             }
             
             .navigationBarHidden(true)
-            .background(.background)
-            .blur(radius: isChangeUserPhoto ? 5 : 0)
+            .background(Color.white)
+            .blur(radius: isChangeUserPhoto ? Drawing.blurRadius : 0)
             .ignoresSafeArea()
+            
             if isChangeUserPhoto {
+                // Tapping outside ChangePhotoView will toggle isChangeUserPhoto
+                Color.clear
+                    .contentShape(Rectangle()) // Enables taps outside the view area
+                    .onTapGesture {
+                        isChangeUserPhoto = false
+                    }
+                
                 ChangePhotoView(onAvatarSelected: { avatar in
-                    viewModel.selectedAvatar = avatar
+                    viewModel.setUserAvatar(avatar)
                     isChangeUserPhoto = false
                 })
-                .frame(height: 300)
+                .frame(height: Drawing.changePhotoViewHeight)
             }
         }
-        
     }
-    
+    // MARK: - Constants
+    private enum Drawing {
+        static let titleTopPadding: CGFloat = 68
+        static let horizontalPadding: CGFloat = 20
+        static let headerPadding: CGFloat = 20
+        static let bottomPadding: CGFloat = 20
+        static let blurRadius: CGFloat = 5
+        static let changePhotoViewHeight: CGFloat = 300
+    }
 }
+
+
+
+// MARK: - Preview
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
