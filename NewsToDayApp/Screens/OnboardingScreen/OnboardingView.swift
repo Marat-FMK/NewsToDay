@@ -69,10 +69,12 @@ struct OnboardingView: View {
     private let peekAmount:CGFloat = -10
     private let dragThreshhold: CGFloat = 100
     
-    let items: [Item] = [Item(image: Image("chinatown"), title: "First to know", discription: "All news is one place, be the first to know last news"), Item(image: Image("handLuggage"), title: "Second to know ;)", discription: "Choose the right category and watch what you like!"), Item(image: Image("timesquare"), title: "Third and go...", discription: "Search for the news you are interested in using the search bar.")]
+    let items: [Item] = [Item(image: Image("chinatown"), title: "First to know", discription: "All news is one place, be the first to know last news"), Item(image: Image("handLuggage"), title: "Categories", discription: "Choose the right category and watch what you like!"), Item(image: Image("timesquare"), title: "Search", discription: "Search for the news you are interested in using the search bar.")]
     
     
     let itemsRus = ["Все новости в одном месте, будьте первыми, кто узнает последние новости.", "Выберите нужную категорию и смотри то, что тебе нравится !", "Ищите интересующие вас новости через поисковую строку."]
+    
+    let itemsRusTitle = ["Свежие новости", "Категории", "Поиск"]
     
     var body: some View {
         
@@ -96,7 +98,7 @@ struct OnboardingView: View {
                             
                             // // //
                             
-                            Text( language == .en ?  items[index].title : itemsRus[index])
+                            Text( language == .en ?  items[index].title : itemsRusTitle[index])
                                 .font(.interSemiBold(24))
                                 .offset(y:220)
                             
