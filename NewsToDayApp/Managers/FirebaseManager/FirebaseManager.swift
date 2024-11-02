@@ -18,7 +18,7 @@ final class FirebaseManager {
     
     // MARK: - Properties
     private let storage = Storage.storage()
-    private let currentUser: User?
+    private var currentUser: User?
     
     private init() {
         currentUser = Auth.auth().currentUser
@@ -29,15 +29,32 @@ final class FirebaseManager {
         return currentUser?.uid != nil
     }
     
-    @discardableResult
+    func signInUser(email: String, password: String) async throws -> AuthDataResultModel {
+        let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
+        currentUser = authDataResult.user
+        return AuthDataResultModel(user: authDataResult.user)
+    }
+
     func createUser(email: String, password: String) async throws -> AuthDataResultModel {
         let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
         try await authDataResult.user.sendEmailVerification()
+        currentUser = authDataResult.user
         return AuthDataResultModel(user: authDataResult.user)
+    }
+    
+    func createAndSaveUser(email: String, password: String, userName: String) async throws -> AuthDataResultModel {
+        let authResult = try await createUser(email: email, password: password)
+        
+        // Save user data to Firestore
+        let user = UserModel(id: authResult.uid, userName: userName, email: email)
+        try await saveUserData(userId: user.id, name: user.userName, email: user.email, userImageName: nil)
+        
+        return authResult
     }
     
     func signOut() async throws {
         try Auth.auth().signOut()
+        currentUser = nil
     }
     
     // MARK: - User Data Methods
