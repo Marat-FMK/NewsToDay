@@ -30,7 +30,7 @@ Welcome to the NewsToDay project! This project is a simple implementation of a n
 ## Technologies:
 - Architecture based on the MVVM pattern
 - Interface created with SwiftUI
-- Data storage handled using UserDefaults
+- Data storage handled using CoreData
 - Network requests managed with URLSession
 - Authentication implemented with Firebase
 
