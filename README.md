@@ -1,9 +1,9 @@
 # NewsToDay:
 
- ![iOS](https://img.shields.io/badge/iOS-15.0-lightblue)  
-     ![Swift](https://img.shields.io/badge/Swift-blue)  
-     ![UIKit](https://img.shields.io/badge/SwiftUI-mediumpurple) 
-     ![MVC](https://img.shields.io/badge/MVVM-hotpink)
+![iOS](https://img.shields.io/badge/iOS-15.0-lightblue)  
+    ![Swift](https://img.shields.io/badge/Swift-blue)  
+    ![UIKit](https://img.shields.io/badge/SwiftUI-mediumpurple) 
+    ![MVC](https://img.shields.io/badge/MVVM-hotpink)
 
  <img src="NewsToDayApp/Resources/Assets.xcassets/newsToDayImage.png" weight=50>
 </kbd>
