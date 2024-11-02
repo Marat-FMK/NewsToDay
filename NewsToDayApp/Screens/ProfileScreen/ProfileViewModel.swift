@@ -10,13 +10,7 @@ import Foundation
 @MainActor
 final class ProfileViewModel: ObservableObject {
     @Published var user: UserModel? = nil
-    @Published var selectedAvatar = "chinatown" {
-        didSet {
-            Task {
-                await updateUserImage()
-            }
-        }
-    }
+    @Published var selectedAvatar = "chinatown"
     
     var userName: String {
         guard let user else { return ""}
@@ -40,6 +34,7 @@ final class ProfileViewModel: ObservableObject {
         Task {
             do {
                 user = try await authManager.getUserData()
+                selectedAvatar = user?.userImage ?? "chinatown"
             } catch {
                 print("Error fetching user data: \(error)")
             }
@@ -47,7 +42,18 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func updateUserImage() async {
-       try? await authManager.saveUserImageName(userImageName: selectedAvatar)
+        do {
+            try await authManager.saveUserImageName(userImageName: selectedAvatar)
+        } catch {
+            print("Error updating user image: \(error)")
+        }
+    }
+    
+    func setUserAvatar(_ avatar: String) {
+        selectedAvatar = avatar
+        Task {
+            await updateUserImage()
+        }
     }
     
     func logOut() async {
