@@ -143,7 +143,7 @@ final class AuthViewModel: ObservableObject {
     
     private func saveUserData(userModel: UserModel) async {
         do {
-            try await firebaseManager.saveUserData(userId: userModel.id, name: userModel.userName, email: userModel.email, avatar: nil)
+            try await firebaseManager.saveUserData(userId: userModel.id, name: userModel.userName, email: userModel.email, userImageName: nil)
         } catch {
             authError = .customError(message: error.localizedDescription)
         }

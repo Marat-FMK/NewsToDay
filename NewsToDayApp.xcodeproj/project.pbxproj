@@ -52,6 +52,7 @@
 		E10EB2E62CD41B41005A7934 /* StartRouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10EB2E52CD41B41005A7934 /* StartRouterView.swift */; };
 		E10EB2E92CD600E8005A7934 /* AuthDataResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10EB2E82CD600E8005A7934 /* AuthDataResultModel.swift */; };
 		E10EB2EC2CD63D7A005A7934 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E10EB2EB2CD63D7A005A7934 /* FirebaseStorage */; };
+		E10EB2EE2CD643D7005A7934 /* ChangePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10EB2ED2CD643BC005A7934 /* ChangePhotoView.swift */; };
 		E115205B2CD35B83007D7967 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E115205A2CD35B83007D7967 /* LocalizationManager.swift */; };
 		E115205F2CD3894B007D7967 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E115205E2CD3894B007D7967 /* Localizable.xcstrings */; };
 		E11520612CD392C0007D7967 /* String + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11520602CD392C0007D7967 /* String + Ext.swift */; };
@@ -129,6 +130,7 @@
 		E10EB2E32CD416AD005A7934 /* StartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRouter.swift; sourceTree = "<group>"; };
 		E10EB2E52CD41B41005A7934 /* StartRouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRouterView.swift; sourceTree = "<group>"; };
 		E10EB2E82CD600E8005A7934 /* AuthDataResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataResultModel.swift; sourceTree = "<group>"; };
+		E10EB2ED2CD643BC005A7934 /* ChangePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhotoView.swift; sourceTree = "<group>"; };
 		E115205A2CD35B83007D7967 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
 		E115205E2CD3894B007D7967 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		E11520602CD392C0007D7967 /* String + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Ext.swift"; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 		3718E2182CCFA81600768F4F /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				E10EB2ED2CD643BC005A7934 /* ChangePhotoView.swift */,
 				3718E2192CCFA8F100768F4F /* ProfileTitle.swift */,
 				3717CB062CC917860074FCE4 /* ProfileHeaderView.swift */,
 			);
@@ -575,6 +578,7 @@
 				377D839D2CD02AF90078AA5B /* AuthViewModel.swift in Sources */,
 				E10EB2E92CD600E8005A7934 /* AuthDataResultModel.swift in Sources */,
 				E14788372CC6766500752213 /* CacheImplementation.swift in Sources */,
+				E10EB2EE2CD643D7005A7934 /* ChangePhotoView.swift in Sources */,
 				370CD1E82CD280A500D29B0B /* FirebaseError.swift in Sources */,
 				E14788522CC8E43000752213 /* Font + Ext.swift in Sources */,
 				3717CB002CC8B22A0074FCE4 /* ArticleView.swift in Sources */,

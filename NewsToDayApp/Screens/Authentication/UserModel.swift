@@ -11,17 +11,8 @@ struct UserModel: Identifiable, Codable {
     let id: String
     var userName: String
     var email: String
-    var userPhotoData: Data?
-    
-    // Создание SwiftUI Image из Data
-    var userPhoto: Image? {
-        guard let data = userPhotoData,
-              let uiImage = UIImage(data: data) else {
-            return nil
-        }
-        return Image(uiImage: uiImage)
-    }
-    
+    var userImage: String?
+ 
     // Получение инициалов пользователя
     var initials: String {
         let formatter = PersonNameComponentsFormatter()

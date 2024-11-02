@@ -18,12 +18,15 @@ final class FirebaseManager {
     
     // MARK: - Properties
     private let storage = Storage.storage()
+    private let currentUser: User?
     
-    private init() {}
+    private init() {
+        currentUser = Auth.auth().currentUser
+    }
     
     // MARK: - Authentication Methods
     func isAuthenticated() -> Bool {
-        return Auth.auth().currentUser?.uid != nil
+        return currentUser?.uid != nil
     }
     
     @discardableResult
@@ -39,7 +42,7 @@ final class FirebaseManager {
     
     // MARK: - User Data Methods
     func getUserData() async throws -> UserModel? {
-        guard let currentUser = Auth.auth().currentUser else { return nil}
+        guard let currentUser else { return nil }
         
         let document = try await Firestore.firestore()
             .collection("users")
@@ -58,52 +61,41 @@ final class FirebaseManager {
             throw FirebaseError.missingField(fieldName: "email")
         }
         
-        // Extract image URL from Firestore and download UIImage
-        var userPhotoData: Data? = nil
-        if let avatarURLString = data["avatar"] as? String,
-           let avatarURL = URL(string: avatarURLString) {
-            let userPhoto = try await downloadImage(from: avatarURL)
-            userPhotoData = userPhoto?.jpegData(compressionQuality: 0.8)
+        guard let userImageName = data["userImageName"] as? String else {
+            throw FirebaseError.missingField(fieldName: "userImageName")
         }
         
-        return UserModel(id: currentUser.uid, userName: name, email: email, userPhotoData: userPhotoData)
+        return UserModel(id: currentUser.uid, userName: name, email: email, userImage: userImageName)
     }
     
-    /// Saves user data including image if provided
-    func saveUserData(userId: String, name: String, email: String, avatar: UIImage?) async throws {
+    /// Saves user data
+    func saveUserData(userId: String, name: String, email: String, userImageName: String?) async throws {
         var userData: [String: Any] = [
             "userName": name,
             "email": email
         ]
         
-        // Upload avatar to Firebase Storage and save URL if image exists
-        if let avatar = avatar {
-            let avatarURL = try await uploadImage(avatar, for: userId)
-            userData["avatar"] = avatarURL.absoluteString
+        if let userImageName = userImageName {
+            userData["userImageName"] = userImageName
         }
         
         try await Firestore.firestore()
             .collection("users")
             .document(userId)
-            .setData(userData)
+            .setData(userData, merge: true)
     }
     
-    // MARK: - Image Upload & Download Methods
-    /// Uploads image to Firebase Storage and returns its URL
-    private func uploadImage(_ image: UIImage, for userId: String) async throws -> URL {
-        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
-            throw FirebaseError.invalidImageData
-        }
+    /// Saves only the userImageName to Firestore without affecting other user data fields
+    func saveUserImageName(userImageName: String) async throws {
+        guard let currentUser else { return }
+        let userImageData: [String: Any] = [
+            "userImageName": userImageName
+        ]
         
-        let storageRef = storage.reference().child("avatars/\(userId).jpg")
-        let _ = try await storageRef.putDataAsync(imageData)
-        return try await storageRef.downloadURL()
-    }
-    
-    /// Downloads UIImage from URL
-    private func downloadImage(from url: URL) async throws -> UIImage? {
-        let (data, _) = try await URLSession.shared.data(from: url)
-        return UIImage(data: data)
+        try await Firestore.firestore()
+            .collection("users")
+            .document(currentUser.uid)
+            .setData(userImageData, merge: true)
     }
     
     // MARK: - Category Methods
