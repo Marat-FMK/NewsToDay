@@ -1,9 +1,9 @@
 # NewsToDay:
 
- ![iOS](https://img.shields.io/badge/iOS-15.0-lightGreen)  
- ![Swift](https://img.shields.io/badge/Swift-blue)  
- ![SwiftUI](https://img.shields.io/badge/UIKit-mediumpurple)
- ![MVVM](https://img.shields.io/badge/MVC-hotpink)
+ ![iOS](https://img.shields.io/badge/iOS-15.0-lightblue)  
+     ![Swift](https://img.shields.io/badge/Swift-blue)  
+     ![UIKit](https://img.shields.io/badge/SwiftUI-mediumpurple) 
+     ![MVC](https://img.shields.io/badge/MVVM-hotpink)
 
 ## Team:
 <p align="left"> 
