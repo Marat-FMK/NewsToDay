@@ -67,6 +67,7 @@ enum Draw {
 }
 
 struct OnboardingView: View {
+    @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     @StateObject var viewModel: OnboardingViewModel
     
     @State private var indexDot = 0
@@ -82,13 +83,12 @@ struct OnboardingView: View {
     private let peekAmount:CGFloat = -10
     private let dragThreshhold: CGFloat = 100
     
-    let items: [Item] = [Item(image: Image("chinatown"), title: "First to know", discription: "All news is one place, be the first to know last news"), Item(image: Image("handLuggage"), title: "Second to know ;)", discription: "Choose the right category and watch what you like!"), Item(image: Image("timesquare"), title: "Third and go...", discription: "The developers have tried to make you satisfied with this application:)")]
+    let items: [Item] = [Item(image: Image("chinatown"), title: "First to know", discription: "All news is one place, be the first to know last news"), Item(image: Image("handLuggage"), title: "Categories", discription: "Choose the right category and watch what you like!"), Item(image: Image("timesquare"), title: "Search", discription: "Search for the news you are interested in using the search bar.")]
     
-    // Russian :  1.Все новости в одном месте, будьте первыми, кто узнает последние новости
-    //2. Выберите нужную категорию и смотри то, что тебе нравится !
-    //3.Разработчики постарались, чтобы вы остались довольны этим приложением :)
     
-    // let images = [Image("chinatown"), Image("handLuggage"), Image("timesquare")]
+    let itemsRus = ["Все новости в одном месте, будьте первыми, кто узнает последние новости.", "Выберите нужную категорию и смотри то, что тебе нравится !", "Ищите интересующие вас новости через поисковую строку."]
+    
+    let itemsRusTitle = ["Свежие новости", "Категории", "Поиск"]
     
     var body: some View {
         
@@ -128,11 +128,17 @@ struct OnboardingView: View {
                             
                             // // /
                             
-                            Text(items[index].title)
+                            // // //
+                            
+                            // принять только перевод и все что с ним связано
+                            
+                            // // //
+                            
+                            Text( language == .en ?  items[index].title : itemsRusTitle[index])
                                 .font(.interSemiBold(24))
                                 .offset(y:220)
                             
-                            Text(items[index].discription)
+                            Text( language == .en ? items[index].discription : itemsRus[index])
                                 .frame(width: 216, height: 68, alignment:.center)
                                 .font(.interRegular(18))
                                 .foregroundStyle(DS.Colors.grayPrimary)
@@ -143,7 +149,7 @@ struct OnboardingView: View {
                                 Button(action: viewModel.onboardingCompleted) {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 12)
-                                        .frame(width: 225, height: 56)
+                                        .frame(width: 220, height: 56)
                                         .foregroundStyle(Color.purple)
                                     Text("Get Started")
                                         .font(.interSemiBold(16))
