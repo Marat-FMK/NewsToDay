@@ -25,13 +25,13 @@ struct ProfileTitle: View {
                     dismiss() // Закрываем экран при нажатии кнопки
                 }) {
                     Image(systemName: Resources.Image.arrowLeft)
-                        .foregroundColor(DS.Colors.grayPrimary)
+                        .foregroundColor(Color.newsText)
                         .frame(width: 24, height: 24)
                 }
             }
             Text(title)
                 .font(.interSemiBold(24))
-                .foregroundColor(DS.Colors.blackyPrimary)
+                .foregroundColor(Color.newsText)
                 .lineSpacing(8)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, alignment: type == .withBackButton ? .center : .leading)

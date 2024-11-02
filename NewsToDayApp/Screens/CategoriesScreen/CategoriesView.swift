@@ -114,7 +114,7 @@ struct CategoriesView: View {
         }
         
         .navigationBarHidden(true)
-        .background(.background)
+        .background(Color.newsBackground)
         .ignoresSafeArea()
     }
     

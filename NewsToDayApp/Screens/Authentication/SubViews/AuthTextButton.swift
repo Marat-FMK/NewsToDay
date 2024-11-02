@@ -11,7 +11,7 @@ struct AuthTextButton: View {
     private enum Drawing {
         static let fontSize: CGFloat = 16
         static let title = DS.Colors.blackLighter
-        static let sign = DS.Colors.blackyPrimary
+        static let sign = Color.newsText
   
         
     }

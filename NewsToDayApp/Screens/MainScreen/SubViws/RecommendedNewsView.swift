@@ -29,7 +29,7 @@ struct RecommendedNewsView: View {
                 Text(title.localized(language))
                     .frame(width: 223, height: 48, alignment: .leading)
                     .font(.interSemiBold(16))
-                    .foregroundStyle(DS.Colors.blackyPrimary)
+                    .foregroundStyle(Color.newsText)
                     .lineLimit(2)
             }
             .padding(.leading,16)

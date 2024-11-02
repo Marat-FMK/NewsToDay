@@ -72,7 +72,7 @@ struct CustomTabBar: View {
                     .offset(y: -Drawing.tabBarTitleOffset)
             }
             .foregroundColor(isSelected
-                             ? DS.Colors.purpleDark
+                             ? DS.Colors.purplePrimary
                              : DS.Colors.grayLight)
         }
     }
