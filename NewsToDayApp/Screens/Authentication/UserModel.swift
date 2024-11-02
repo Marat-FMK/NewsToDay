@@ -5,14 +5,24 @@
 //  Created by Evgeniy on 20.10.2024.
 //
 
-import Foundation
+import SwiftUI
 
 struct UserModel: Identifiable, Codable {
     let id: String
-    let userName: String
-    let email: String
-    var userPhoto: String?
+    var userName: String
+    var email: String
+    var userPhotoData: Data?
     
+    // Создание SwiftUI Image из Data
+    var userPhoto: Image? {
+        guard let data = userPhotoData,
+              let uiImage = UIImage(data: data) else {
+            return nil
+        }
+        return Image(uiImage: uiImage)
+    }
+    
+    // Получение инициалов пользователя
     var initials: String {
         let formatter = PersonNameComponentsFormatter()
         if let components = formatter.personNameComponents(from: userName) {
@@ -22,4 +32,3 @@ struct UserModel: Identifiable, Codable {
         return ""
     }
 }
-

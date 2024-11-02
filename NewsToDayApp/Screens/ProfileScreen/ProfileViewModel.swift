@@ -7,7 +7,20 @@
 
 import Foundation
 
+@MainActor
 final class ProfileViewModel: ObservableObject {
+    @Published var user: UserModel? = nil
+    
+    
+    var userName: String {
+        guard let user else { return ""}
+        return user.userName
+    }
+    
+    var userEmail: String {
+        guard let user else { return ""}
+        return user.email
+    }
     
     private let router: StartRouter
     private let authManager = FirebaseManager.shared
@@ -17,6 +30,15 @@ final class ProfileViewModel: ObservableObject {
         self.router = router
     }
     
+    func fetchUserData() {
+        Task {
+            do {
+                user = try await authManager.getUserData()
+            } catch {
+                print("Error fetching user data: \(error)")
+            }
+        }
+    }
     
     func logOut() async {
         do {

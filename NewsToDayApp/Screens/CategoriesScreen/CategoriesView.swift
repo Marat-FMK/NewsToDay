@@ -106,6 +106,7 @@ struct CategoriesView: View {
                     
                 )
                 .padding()
+                Spacer()
             }
         }
         .onAppear {
@@ -126,6 +127,6 @@ struct CategoriesView: View {
 
 struct CategoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoriesView(mode: .screen, router: StartRouter())
+        CategoriesView(mode: .onboarding, router: StartRouter())
     }
 }

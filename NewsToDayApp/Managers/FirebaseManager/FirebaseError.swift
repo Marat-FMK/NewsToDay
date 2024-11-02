@@ -12,6 +12,7 @@ enum FirebaseError: LocalizedError {
     case missingDocument
     case missingField(fieldName: String)
     case unspecifiedError(description: String = "Произошла неизвестная ошибка.")
+    case invalidImageData
     
     var errorDescription: String? {
         switch self {
@@ -23,6 +24,8 @@ enum FirebaseError: LocalizedError {
             return "Поле '\(nameField)' отсутствует в документе."
         case .unspecifiedError(let description):
             return description
+        case .invalidImageData:
+            return "invalid Image Data"
         }
     }
 }
