@@ -150,6 +150,7 @@ extension MainView {
                     }
                 }
             } else {
+                VStack{
                 ForEach(viewModel.getRecomendedNews()) { article in
                     NavigationLink {
                         DetailView(article)
@@ -164,7 +165,10 @@ extension MainView {
                 }
                 .padding(.bottom, 16)
             }
+                .padding(.bottom,110)
+            }
         }
+        
         
     }
 }

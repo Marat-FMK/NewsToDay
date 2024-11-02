@@ -23,13 +23,13 @@ struct BookmarkView: View {
     var body: some View {
         VStack {
             setupToolbar()
-                .overlay {
-                    Button {
-                        viewModel.deleteAllBookmarks()
-                    } label: {
-                        Text("Delete All")
-                    }
-                }
+//                .overlay {
+//                    Button {
+//                        viewModel.deleteAllBookmarks()
+//                    } label: {
+//                        Text("Delete All")
+//                    }
+//                }
             Spacer()
             if viewModel.bookmarks.isEmpty {
                 emptyStateView()
@@ -38,6 +38,7 @@ struct BookmarkView: View {
             }
             Spacer()
         }
+        .padding(.bottom,110)
         .onAppear(perform: viewModel.fetchBookmarks)
         .navigationBarHidden(true)
         .background(Color.newsBackground)

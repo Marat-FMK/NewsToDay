@@ -26,7 +26,7 @@ struct ArticleView: View {
                 Text(model.title.localized(language))
                     .font(.interMedium(Drawing.titleFontSize))
                     .fontWeight(.semibold)
-                    .foregroundColor(.black)
+                    .foregroundColor(DS.Colors.grayPrimary)
                     .lineSpacing(Drawing.titleLineSpacing)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.vertical, Drawing.titleVerticalPadding)
