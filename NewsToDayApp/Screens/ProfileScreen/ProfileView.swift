@@ -13,87 +13,106 @@ struct ProfileView: View {
     @StateObject private var viewModel: ProfileViewModel
     
     @State private var showAlert = false
+    @State private var isChangeUserPhoto = false
     @State private var isShowingTermsConditionsScreen = false
     @State private var isShowingLanguageScreen = false
+    
+
     
     init(router: StartRouter) {
         self._viewModel = StateObject(wrappedValue: ProfileViewModel(router: router))
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            
-            ProfileTitle(
-                title: "Profile".localized(language),
-                type: .withoutBackButton
-            )
+        ZStack {
+            VStack(alignment: .leading) {
+                
+                ProfileTitle(
+                    title: "Profile".localized(language),
+                    type: .withoutBackButton
+                )
                 .padding(.top, 68)
                 .padding(.horizontal, 20)
-            
-            ProfileHeaderView(
-                avatar: Image("chinatown"),
-                userName: viewModel.userName,
-                email: viewModel.userEmail
-            )
+                
+                ProfileHeaderView(
+                    avatar: Image(viewModel.selectedAvatar),
+                    userName: viewModel.userName,
+                    email: viewModel.userEmail,
+                    changeAvatar: {
+                        isChangeUserPhoto.toggle()
+                    }
+                )
                 .padding(20)
-       
-            
-            NavigationLink(destination: LanguageScreen(), isActive: $isShowingLanguageScreen) {
+                
+                
+                
+                NavigationLink(destination: LanguageScreen(), isActive: $isShowingLanguageScreen) {
+                    CustomButton(
+                        title: "Language",
+                        imageName: nil,
+                        action: { isShowingLanguageScreen = true },
+                        buttonType: .language,
+                        isSelected: false
+                    )
+                    .padding(20)
+                }
+                
+                Spacer()
+                
+                NavigationLink(destination: TermsConditionsScreen(), isActive: $isShowingTermsConditionsScreen) {
+                    CustomButton(
+                        title: "Terms & Conditions".localized(language),
+                        action: {
+                            isShowingTermsConditionsScreen = true
+                        },
+                        buttonType: .profile,
+                        isSelected: false
+                    )
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 0)
+                }
+                
                 CustomButton(
-                    title: "Language",
-                    imageName: nil,
-                    action: { isShowingLanguageScreen = true },
-                    buttonType: .language,
+                    title: "Sign Out".localized(language),
+                    action: {
+                        showAlert = true
+                    },
+                    buttonType: .profile,
                     isSelected: false
                 )
                 .padding(20)
+                
+                Spacer()
             }
-            
-            Spacer()
-            
-            NavigationLink(destination: TermsConditionsScreen(), isActive: $isShowingTermsConditionsScreen) {
-                CustomButton(
-                    title: "Terms & Conditions".localized(language),
-                    action: {
-                    isShowingTermsConditionsScreen = true
-                },
-                             buttonType: .profile,
-                             isSelected: false
+            .task {
+                viewModel.fetchUserData()
+            }
+            .padding(.bottom, 20)
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Are you sure you want to sign out?".localized(language)),
+                    primaryButton: .destructive(Text("Yes".localized(language))) {
+                        Task {
+                            await viewModel.logOut()
+                        }
+                    },
+                    secondaryButton: .cancel(Text("Cancel".localized(language)))
                 )
-                .padding(.horizontal, 20)
-                .padding(.bottom, 0)
             }
             
-            CustomButton(
-                title: "Sign Out".localized(language),
-                action: {
-                showAlert = true
-            },
-                buttonType: .profile,
-                isSelected: false
-            )
-            .padding(20)
-            
-            Spacer()
+            .navigationBarHidden(true)
+            .background(.background)
+            .blur(radius: isChangeUserPhoto ? 5 : 0)
+            .ignoresSafeArea()
+            if isChangeUserPhoto {
+                ChangePhotoView(onAvatarSelected: { avatar in
+                    viewModel.selectedAvatar = avatar
+                    isChangeUserPhoto = false
+                })
+                .frame(height: 300)
+            }
         }
-        .task {
-            viewModel.fetchUserData()
-        }
-        .padding(.bottom, 20)
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text("Are you sure you want to sign out?".localized(language)),
-                primaryButton: .destructive(Text("Yes".localized(language))) {
-                    Task {
-                        await viewModel.logOut()
-                    }
-                },
-                secondaryButton: .cancel(Text("Cancel".localized(language)))
-            )
-        }
-        .navigationBarHidden(true)
-        .background(.background)
-        .ignoresSafeArea()
+        
     }
     
 }

@@ -10,7 +10,13 @@ import Foundation
 @MainActor
 final class ProfileViewModel: ObservableObject {
     @Published var user: UserModel? = nil
-    
+    @Published var selectedAvatar = "chinatown" {
+        didSet {
+            Task {
+                await updateUserImage()
+            }
+        }
+    }
     
     var userName: String {
         guard let user else { return ""}
@@ -38,6 +44,10 @@ final class ProfileViewModel: ObservableObject {
                 print("Error fetching user data: \(error)")
             }
         }
+    }
+    
+    func updateUserImage() async {
+       try? await authManager.saveUserImageName(userImageName: selectedAvatar)
     }
     
     func logOut() async {

@@ -11,6 +11,7 @@ struct ProfileHeaderView: View {
     var avatar: Image
     var userName: String
     var email: String
+    var changeAvatar: () -> Void
 
     private enum Drawing {
         static let frameImage: CGFloat = 72
@@ -24,6 +25,9 @@ struct ProfileHeaderView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 72, height: 72)
                 .clipShape(Circle())
+                .onTapGesture {
+                    changeAvatar()
+                }
 
             VStack(alignment: .leading, spacing: 5) {
                 Text(userName)
