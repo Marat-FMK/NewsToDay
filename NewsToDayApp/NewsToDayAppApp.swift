@@ -10,6 +10,7 @@ import FirebaseCore
 
 @main
 struct NewsToDayAppApp: App {
+    @StateObject private var themeManager = ThemeManager()
     
     init () {
         FirebaseApp.configure()
@@ -18,6 +19,7 @@ struct NewsToDayAppApp: App {
     var body: some Scene {
         WindowGroup {
             StartRouterView()
+                .environmentObject(themeManager)
         }
     }
 }
