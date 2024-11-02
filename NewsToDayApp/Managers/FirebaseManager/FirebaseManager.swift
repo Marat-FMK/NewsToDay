@@ -29,6 +29,7 @@ final class FirebaseManager {
         return currentUser?.uid != nil
     }
     
+    @discardableResult
     func signInUser(email: String, password: String) async throws -> AuthDataResultModel {
         let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
         currentUser = authDataResult.user

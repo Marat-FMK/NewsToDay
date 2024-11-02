@@ -23,17 +23,17 @@ struct ArticleView: View {
         
             // MARK: - Text Content
             VStack(alignment: .leading) {
-                Text(model.title.localized(language))
+                Text(model.category?.first?.capitalized.localized(language) ?? "")
                     .font(.interMedium(Drawing.titleFontSize))
-                    .fontWeight(.semibold)
-                    .foregroundColor(.black)
+                    .fontWeight(.medium)
+                    .foregroundColor(Color.newsText)
                     .lineSpacing(Drawing.titleLineSpacing)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.vertical, Drawing.titleVerticalPadding)
                 
-                Text(model.category?.first?.localized(language) ?? "")
+                Text(model.title.localized(language))
                     .font(.system(size: Drawing.categoryFontSize, weight: .semibold))
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.newsSystemBackground)
                     .lineSpacing(Drawing.categoryLineSpacing)
                     .frame(height: Drawing.categoryFrameHeight, alignment: .top)
                     .padding(.bottom, Drawing.categoryBottomPadding)
@@ -41,6 +41,7 @@ struct ArticleView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.leading, Drawing.textPaddingLeading)
+            .background(.newsBackground)
         }
     }
 }

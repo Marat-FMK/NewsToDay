@@ -126,9 +126,18 @@
       }
     },
     "Dark" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Темная"
+          }
+        }
+      }
     },
     "Delete All" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -216,7 +225,14 @@
       }
     },
     "Error" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка"
+          }
+        }
+      }
     },
     "food" : {
       "extractionState" : "manual",
@@ -261,6 +277,9 @@
         }
       }
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "Language" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -284,7 +303,15 @@
       }
     },
     "Light" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Светлая"
+          }
+        }
+      }
     },
     "Loading news" : {
       "extractionState" : "manual",
@@ -552,7 +579,7 @@
       }
     },
     "Sign Up" : {
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -597,7 +624,15 @@
 
     },
     "System" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Системная"
+          }
+        }
+      }
     },
     "technology" : {
       "extractionState" : "manual",
@@ -710,12 +745,23 @@
       }
     },
     "Yes" : {
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Подтвердить"
+          }
+        }
+      }
+    },
+    "You haven't saved any articles yet. Start reading and bookmarking them now" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы еще не сохранили ни одной статьи. Начните читать и добавляйте их в закладки прямо сейчас"
           }
         }
       }

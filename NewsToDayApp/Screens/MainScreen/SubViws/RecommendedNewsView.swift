@@ -34,5 +34,6 @@ struct RecommendedNewsView: View {
             }
             .padding(.leading,16)
         }
+        .background(.newsBackground)
     }
 }

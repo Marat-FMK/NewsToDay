@@ -21,8 +21,8 @@ struct SearchNewsView: View {
                 title: Resources.Text.searchedNews.localized(language),
                 subTitle: Resources.Text.search.localized(language) + ": \(searchText)"
             )
-                    .padding(.bottom,10)
-                    .padding(.top,30)
+            .padding(.bottom,10)
+            .padding(.top,30)
             
             ScrollView(showsIndicators: false) {
                 ForEach(news) { news in
@@ -36,12 +36,13 @@ struct SearchNewsView: View {
                         )
                     }
                 }
+            }
+            .padding()
         }
-                .padding()
-    }
         .padding(.bottom, 100)
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()
+        .background(.newsBackground)
         
         .toolbar {
             ToolbarItem( placement: .topBarLeading) {
@@ -59,5 +60,5 @@ struct SearchNewsView: View {
 }
 
 //#Preview {
-//    SearchNewsView()
+//    SearchNewsView(news: [], searchText: "String", action: {})
 //}

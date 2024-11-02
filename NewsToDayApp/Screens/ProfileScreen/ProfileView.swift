@@ -50,9 +50,9 @@ struct ProfileView: View {
                 .padding(Drawing.headerPadding)
                 // Theme Selection Segmented Control
                 Picker("", selection: $themeManager.userTheme) {
-                    Text("System").tag(ThemeMode.system)
-                    Text("Dark").tag(ThemeMode.dark)
-                    Text("Light").tag(ThemeMode.light)
+                    Text("System".localized(language)).tag(ThemeMode.system)
+                    Text("Dark".localized(language)).tag(ThemeMode.dark)
+                    Text("Light".localized(language)).tag(ThemeMode.light)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal, Drawing.horizontalPadding)
