@@ -5,6 +5,9 @@
      ![UIKit](https://img.shields.io/badge/SwiftUI-mediumpurple) 
      ![MVC](https://img.shields.io/badge/MVVM-hotpink)
 
+ <img src="NewsToDayApp/Resources/Assets.xcassets/newsToDayImage.png" weight=50>
+</kbd>
+
 ## Team:
 <p align="left"> 
 <a href="https://github.com/KellerDmitriy">
