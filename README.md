@@ -10,7 +10,7 @@
 <a href="https://github.com/KellerDmitriy">
 <img src="https://img.shields.io/badge/KellerDmitriy-36BA98"/></a>
 <a href="https://github.com/Marat-FMK">
-<img src="https://img.shields.io/badge/MaratFMK-#0000FF"/></a>
+<img src="https://img.shields.io/badge/MaratFMK-0000FF"/></a>
 <a href="https://github.com/JogaDevelop">
 <img src="https://img.shields.io/badge/JogaDevelop-DAA520"/></a>
 </p>
