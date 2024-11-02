@@ -81,17 +81,6 @@
         }
       }
     },
-    "Cancel" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Отмена"
-          }
-        }
-      }
-    },
     "Categories" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -99,6 +88,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Категории"
+          }
+        }
+      }
+    },
+    "Choose" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбирай"
           }
         }
       }
@@ -211,6 +211,9 @@
           }
         }
       }
+    },
+    "Error" : {
+
     },
     "food" : {
       "extractionState" : "manual",
@@ -353,6 +356,9 @@
           }
         }
       }
+    },
+    "OK" : {
+
     },
     "other" : {
       "extractionState" : "manual",
@@ -514,6 +520,9 @@
         }
       }
     },
+    "Select some of your favorite topics to let us suggest better news for you." : {
+      "extractionState" : "manual"
+    },
     "Sign In" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -535,9 +544,6 @@
           }
         }
       }
-    },
-    "Select some of your favorite topics to let us suggest better news for you." : {
-      "extractionState" : "manual"
     },
     "Sign Up" : {
       "extractionState" : "stale",
@@ -580,6 +586,9 @@
           }
         }
       }
+    },
+    "Success" : {
+
     },
     "technology" : {
       "extractionState" : "manual",

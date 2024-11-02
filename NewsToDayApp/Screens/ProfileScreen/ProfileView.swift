@@ -23,26 +23,32 @@ struct ProfileView: View {
     var body: some View {
         VStack(alignment: .leading) {
             
-            ProfileTitle(title: "Profile".localized(language), type: .withoutBackButton)
+            ProfileTitle(
+                title: "Profile".localized(language),
+                type: .withoutBackButton
+            )
                 .padding(.top, 68)
                 .padding(.horizontal, 20)
             
-            ProfileHeaderView(avatar: Image("chinatown"), userName: "Dev P", email:  "sdsdasdasd@mail")
+            ProfileHeaderView(
+                avatar: Image("chinatown"),
+                userName: viewModel.userName,
+                email: viewModel.userEmail
+            )
                 .padding(20)
-            //LocalizeLanguage
+       
             
             NavigationLink(destination: LanguageScreen(), isActive: $isShowingLanguageScreen) {
-                CustomButton(title: "Language", imageName: nil,
-                             action: {
-                    isShowingLanguageScreen = true
-                },
-                             buttonType: .language,
-                             isSelected: false)
+                CustomButton(
+                    title: "Language",
+                    imageName: nil,
+                    action: { isShowingLanguageScreen = true },
+                    buttonType: .language,
+                    isSelected: false
+                )
                 .padding(20)
             }
             
-            Spacer()
-            Spacer()
             Spacer()
             
             NavigationLink(destination: TermsConditionsScreen(), isActive: $isShowingTermsConditionsScreen) {
@@ -62,9 +68,6 @@ struct ProfileView: View {
                 title: "Sign Out".localized(language),
                 action: {
                 showAlert = true
-                    Task {
-                        await viewModel.logOut()
-                    }
             },
                 buttonType: .profile,
                 isSelected: false
@@ -73,12 +76,17 @@ struct ProfileView: View {
             
             Spacer()
         }
+        .task {
+            viewModel.fetchUserData()
+        }
         .padding(.bottom, 20)
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Are you sure you want to sign out?".localized(language)),
                 primaryButton: .destructive(Text("Yes".localized(language))) {
-                    // Действие выхода
+                    Task {
+                        await viewModel.logOut()
+                    }
                 },
                 secondaryButton: .cancel(Text("Cancel".localized(language)))
             )

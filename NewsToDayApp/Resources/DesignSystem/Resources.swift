@@ -9,6 +9,8 @@ import SwiftUI
 
 enum Resources {
     enum Text {
+        static let ok = "Ok"
+        static let error = "Error"
         static let mainTitle = "Browse"
         static let mainSubTitle = "Discover things of this world"
         static let bookmarksTitle = "Bookmarks"
