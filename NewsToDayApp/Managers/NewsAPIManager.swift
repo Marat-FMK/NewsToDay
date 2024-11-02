@@ -20,8 +20,10 @@ final class NewsAPIManager: APIManager, INewsAPIManager {
     init() {
         // Create middlewares
 #warning("apiKey")
-//        pub_5741650ae47f14ee901c90f834235c6a2f182
-        let authorizationMiddleware = AuthorizationMiddleware(apiKey: "pub_57416f1c586b36028a9af95ec8390930c5d4f")
+        //  pub_5741650ae47f14ee901c90f834235c6a2f182
+        //  pub_574168ff1f2d2b6e272e59d6ee218422ef240
+        //  pub_57416e380f67834167d95e6601e5202454965
+        let authorizationMiddleware = AuthorizationMiddleware(apiKey: "pub_57416e380f67834167d95e6601e5202454965")
         // Initialize API client with base URL and middleware
         let apiClient = APIClient(middlewares: [authorizationMiddleware])
         super.init(apiClient: apiClient)
@@ -31,6 +33,9 @@ final class NewsAPIManager: APIManager, INewsAPIManager {
         let apiSpec: NewsAPISpec = .getCategoryNews(country: country, category: category)
         do {
             let news = try await apiClient?.sendRequest(apiSpec)
+            
+            let newsArticlResult = news as! NewsApiResponseDTO
+            
             return news as? NewsApiResponseDTO
         } catch {
             print(error)
