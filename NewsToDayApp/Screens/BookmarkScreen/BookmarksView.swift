@@ -38,6 +38,7 @@ struct BookmarkView: View {
             }
             Spacer()
         }
+        .padding(.bottom,110)
         .onAppear(perform: viewModel.fetchBookmarks)
         .navigationBarHidden(true)
 //        .background(Color.background)
