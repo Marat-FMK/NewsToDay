@@ -24,8 +24,10 @@ struct CustomTextField: View {
             ZStack {
                 if placeHolder == "Password" || placeHolder == "Repeat Password"{
                     SecureField(placeHolder, text: $text)
+                        .foregroundStyle(Color.newsText)
                 } else {
                     TextField(placeHolder.localized(language), text: $text)
+                        .foregroundStyle(Color.newsText)
                         .font(.system(size: 16, weight: .medium))
                         .frame(height: 56)
                 }

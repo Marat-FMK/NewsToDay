@@ -76,7 +76,7 @@ struct SignUpScreen: View {
             .padding(.bottom, 44)
         }
         .navigationBarHidden(true)
-        .background(Color(.systemBackground))
+        .background(Color.newsBackground)
         .ignoresSafeArea()
         .alert(isPresented: isPresentedAlert()) {
             Alert(

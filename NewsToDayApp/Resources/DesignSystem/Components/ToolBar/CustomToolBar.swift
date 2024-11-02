@@ -16,7 +16,7 @@ struct CustomToolBar: View {
         
         VStack(alignment: .leading) {
             Text(title.localized(language))
-                .foregroundStyle(DS.Colors.blackyPrimary)
+                .foregroundStyle(Color.newsText)
                 .font(.interSemiBold(24))
                 .frame(maxWidth: .infinity, alignment: .leading)
             

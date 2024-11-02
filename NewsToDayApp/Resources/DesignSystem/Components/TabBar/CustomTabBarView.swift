@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CustomTabBarView: View {
-    @EnvironmentObject var themeManager: ThemeManager
     @State private var tabSelection = 1
     private let router: StartRouter
     private let newsAPIManager: NewsAPIManager
@@ -34,7 +33,6 @@ struct CustomTabBarView: View {
             case 4:
                 NavigationView {
                     ProfileView(router: router)
-                        .environmentObject(themeManager)
                 }
             default:
                 ProfileView(router: router)

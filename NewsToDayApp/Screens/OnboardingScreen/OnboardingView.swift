@@ -155,6 +155,7 @@ struct OnboardingView: View {
                         }
                         .scaleEffect(self.scaleValueForItem(at: index, in: geometry))
                 }
+                
             }
             .offset(x: calculeteOffset() + dragOffset + 55)
             .gesture(

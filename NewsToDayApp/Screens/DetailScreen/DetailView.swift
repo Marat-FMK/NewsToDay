@@ -148,6 +148,7 @@ struct DetailView: View {
                 }
             }
         }
+        .background(Color.newsBackground)
         .navigationBarBackButtonHidden(true)
     }
     

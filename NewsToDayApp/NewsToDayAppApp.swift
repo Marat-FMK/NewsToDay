@@ -19,7 +19,7 @@ struct NewsToDayAppApp: App {
     var body: some Scene {
         WindowGroup {
             StartRouterView()
-                .environmentObject(themeManager)
+                .preferredColorScheme(themeManager.userTheme.colorScheme)
         }
     }
 }

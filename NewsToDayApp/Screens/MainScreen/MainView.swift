@@ -123,7 +123,7 @@ extension MainView {
             Text(Resources.Text.recommendedForYou.localized(language))
                 .font(.interSemiBold(20))
                 .frame(width: 240, height: 24, alignment: .leading)
-                .foregroundStyle(DS.Colors.blackyPrimary)
+                .foregroundStyle(Color.newsText)
             
             Spacer()
             

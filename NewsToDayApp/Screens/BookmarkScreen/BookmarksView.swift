@@ -40,7 +40,7 @@ struct BookmarkView: View {
         }
         .onAppear(perform: viewModel.fetchBookmarks)
         .navigationBarHidden(true)
-//        .background(Color.background)
+        .background(Color.newsBackground)
         .ignoresSafeArea()
     }
 }

@@ -47,7 +47,7 @@ struct TermsConditionsScreen: View {
             .padding(.bottom, 20)
         }
         .navigationBarHidden(true)
-        .background(.background)
+        .background(Color.newsBackground)
         .ignoresSafeArea()
         
     }
