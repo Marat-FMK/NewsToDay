@@ -30,17 +30,20 @@ struct AllRecomendedNewsView: View {
                     }
                 }
             } else {
-                ForEach(news) { article in
-                    NavigationLink {
-                        DetailView(article)
-                    } label: {
-                        RecommendedNewsView(
-                            title: article.title,
-                            imageUrl: article.imageUrl,
-                            category: article.category
-                        )
+                VStack {
+                    ForEach(news) { article in
+                        NavigationLink {
+                            DetailView(article)
+                        } label: {
+                            RecommendedNewsView(
+                                title: article.title,
+                                imageUrl: article.imageUrl,
+                                category: article.category
+                            )
+                        }
                     }
                 }
+                .padding(.bottom,110)
             }
         }
                 .padding()
