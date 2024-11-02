@@ -41,7 +41,7 @@ struct BookmarkView: View {
         .padding(.bottom,110)
         .onAppear(perform: viewModel.fetchBookmarks)
         .navigationBarHidden(true)
-//        .background(Color.background)
+        .background(Color.newsBackground)
         .ignoresSafeArea()
     }
 }

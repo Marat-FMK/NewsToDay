@@ -53,10 +53,24 @@ struct PageNumber: View {
     }
 }
 
+enum Draw {
+    static let imageWidth: CGFloat = 0.7
+    static let imageHeight: CGFloat = 0.4
+    static let imageCornerRadius: CGFloat = 12
+    static let dotSize: CGFloat = 10
+    static let rectSize: CGFloat = 20
+    static let dotSpacing: CGFloat = 10
+    static let buttonCornerRadius: CGFloat = 15
+    static let buttonPadding: CGFloat = 16
+    static let indigoAccentColor = Color.indigo
+    static let grayColor = Color.gray
+}
+
 struct OnboardingView: View {
     @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     @StateObject var viewModel: OnboardingViewModel
     
+    @State private var indexDot = 0
     @State private var currentIndex: Int = 0
     @State private var dragOffset: CGFloat = 0
     
@@ -92,6 +106,28 @@ struct OnboardingView: View {
 //                                .frame(width: 56, height: 8)
 //                                .offset(y:190)
                             
+                            // // /
+                            
+                            HStack {
+                                ForEach(0..<3, id: \.self) { index in
+                                    if index == currentIndex {
+                                        Rectangle()
+                                            .frame(width: Draw.rectSize, height: Draw.dotSize)
+                                            .cornerRadius(Draw.dotSize / 2)
+                                            .foregroundColor(Draw.indigoAccentColor)
+                                    } else {
+                                        Circle()
+                                            .frame(width: Draw.dotSize, height: Draw.dotSize)
+                                            .foregroundColor(Draw.grayColor)
+                                    }
+                                }
+                            }
+                            .offset(y: 190)
+                            .frame(height: Draw.dotSize)
+                            .padding(Draw.dotSpacing)
+                            
+                            // // /
+                            
                             // // //
                             
                             // принять только перевод и все что с ним связано
@@ -125,8 +161,9 @@ struct OnboardingView: View {
                         }
                         .scaleEffect(self.scaleValueForItem(at: index, in: geometry))
                 }
+                
             }
-            .offset(x: calculeteOffset() + dragOffset + 50)
+            .offset(x: calculeteOffset() + dragOffset + 55)
             .gesture(
                 DragGesture(coordinateSpace: .global)
                     .onChanged { value in

@@ -49,6 +49,7 @@ struct AllRecomendedNewsView: View {
                 .padding()
     }
         .ignoresSafeArea()
+        .background(.newsBackground)
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem( placement: .topBarLeading) {
@@ -57,7 +58,7 @@ struct AllRecomendedNewsView: View {
                 } label: {
                     Image(systemName: Resources.Image.arrowLeft)
                         .frame(width: 24, height: 24)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(Color.newsText)
                 }
             }
         }

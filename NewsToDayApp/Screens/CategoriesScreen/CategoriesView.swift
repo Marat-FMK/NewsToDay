@@ -76,7 +76,7 @@ struct CategoriesView: View {
                             }
                             .foregroundStyle(
                                 viewModel.categories.contains(category)
-                                ? Color.white
+                                ? Color.newsSystemBackground
                                 : Color.black.opacity(0.6)
                             )
                             .font(.headline.bold())
@@ -87,7 +87,7 @@ struct CategoriesView: View {
                             .background(
                                 viewModel.categories.contains(category)
                                 ? DS.Colors.purpleDark
-                                : DS.Colors.grayLighter)
+                                : Color.buttonBackground)
                             .cornerRadius(Drawing.cornerRadius)
                         }
                     }
@@ -114,7 +114,7 @@ struct CategoriesView: View {
         }
         
         .navigationBarHidden(true)
-        .background(.background)
+        .background(Color.newsBackground)
         .ignoresSafeArea()
     }
     

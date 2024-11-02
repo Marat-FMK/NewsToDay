@@ -129,6 +129,7 @@
 
     },
     "Delete All" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

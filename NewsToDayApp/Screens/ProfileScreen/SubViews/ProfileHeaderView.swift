@@ -32,7 +32,7 @@ struct ProfileHeaderView: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text(userName)
                     .font(.headline)
-
+                    .foregroundColor(Color.newsSystemBackground)
                 Text(email)
                     .font(.subheadline)
                     .foregroundColor(DS.Colors.grayPrimary)

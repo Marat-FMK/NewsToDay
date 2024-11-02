@@ -43,11 +43,11 @@ struct CategoryCell: View {
     private func background(for category: Categories) -> some View {
         if selected == category {
             RoundedRectangle(cornerRadius: Drawing.selectedCornerRadius)
-                .fill(DS.Colors.purpleDark)
+                .fill(DS.Colors.purplePrimary)
                 .matchedGeometryEffect(id: "categoryBackground", in: namespace)
         } else {
             RoundedRectangle(cornerRadius: Drawing.selectedCornerRadius)
-                .fill(DS.Colors.purpleLighter)
+                .fill(DS.Colors.grayLight)
                 .matchedGeometryEffect(id: "categoryBackground", in: namespace)
         }
     }

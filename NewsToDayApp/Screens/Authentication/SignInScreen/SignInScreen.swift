@@ -79,7 +79,7 @@ struct SignInScreen: View {
             )
         }
         .navigationBarHidden(true)
-        .background(Color(.systemBackground))
+        .background(Color.newsBackground)
         .ignoresSafeArea()
         .fullScreenCover(isPresented: $showSignUp) {
             SignUpScreen(viewModel: viewModel, onDismiss: {

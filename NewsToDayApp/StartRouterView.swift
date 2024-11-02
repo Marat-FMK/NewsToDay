@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct StartRouterView: View {
-    @EnvironmentObject var themeManager: ThemeManager
-    
     @StateObject var startRouter = StartRouter()
     let newsAPIManager = NewsAPIManager()
     
@@ -24,7 +22,6 @@ struct StartRouterView: View {
                 SignInScreen(router: startRouter)
             case .main:
                 CustomTabBarView(router: startRouter, newsAPIManager: newsAPIManager)
-                    .environmentObject(themeManager)
             }
         }
         .transition(.opacity)

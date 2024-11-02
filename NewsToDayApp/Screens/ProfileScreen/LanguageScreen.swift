@@ -38,7 +38,7 @@ struct LanguageScreen: View {
 
         }
         .navigationBarHidden(true)
-        .background(.background)
+        .background(Color.newsBackground)
         .ignoresSafeArea()
     }
 }

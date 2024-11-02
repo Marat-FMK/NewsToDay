@@ -10,7 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     
     // MARK: - Properties
-    @EnvironmentObject var themeManager: ThemeManager
+    @StateObject private var themeManager = ThemeManager() 
+    
     @AppStorage("selectedLanguage") private var language = LocalizationManager.shared.language
     
     @StateObject private var viewModel: ProfileViewModel
@@ -110,14 +111,13 @@ struct ProfileView: View {
             }
             
             .navigationBarHidden(true)
-            .background(Color.white)
+            .background(Color.newsBackground)
             .blur(radius: isChangeUserPhoto ? Drawing.blurRadius : 0)
             .ignoresSafeArea()
             
             if isChangeUserPhoto {
-                // Tapping outside ChangePhotoView will toggle isChangeUserPhoto
                 Color.clear
-                    .contentShape(Rectangle()) // Enables taps outside the view area
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         isChangeUserPhoto = false
                     }

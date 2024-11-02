@@ -52,11 +52,11 @@ struct CustomButton: View {
             // MARK: - Button Text and Background Color Handling
             .foregroundStyle(isSelected
                              ? DS.Colors.purpleLighter
-                             : DS.Colors.grayDark
+                             : Color.newsSystemBackground
             )
             .background(isSelected
                         ? DS.Colors.purplePrimary
-                        : DS.Colors.grayLighter
+                        : Color.buttonBackground
                         )
             .clipShape(RoundedRectangle(cornerRadius: Drawing.cornerRadius))
         }
