@@ -4,14 +4,13 @@
  ![Swift](https://img.shields.io/badge/Swift-blue)  
  ![SwiftUI](https://img.shields.io/badge/UIKit-mediumpurple)
  ![MVVM](https://img.shields.io/badge/MVC-hotpink)
-</kbd>
 
 ## Team:
 <p align="left"> 
 <a href="https://github.com/KellerDmitriy">
 <img src="https://img.shields.io/badge/KellerDmitriy-36BA98"/></a>
 <a href="https://github.com/Marat-FMK">
-<img src="https://img.shields.io/badge/Marat-FMK-mediumslateblue"/></a>
+<img src="https://img.shields.io/badge/MaratFMK-#0000FF"/></a>
 <a href="https://github.com/JogaDevelop">
 <img src="https://img.shields.io/badge/JogaDevelop-DAA520"/></a>
 </p>
