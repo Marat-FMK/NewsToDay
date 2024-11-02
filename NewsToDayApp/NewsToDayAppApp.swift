@@ -23,3 +23,4 @@ struct NewsToDayAppApp: App {
         }
     }
 }
+

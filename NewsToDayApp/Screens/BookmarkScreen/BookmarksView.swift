@@ -22,17 +22,21 @@ struct BookmarkView: View {
     
     var body: some View {
         VStack {
-            setupToolbar()
-//                .overlay {
-//                    Button {
-//                        viewModel.deleteAllBookmarks()
-//                    } label: {
-//                        Text("Delete All")
-//                    }
-//                }
+            ZStack {
+                setupToolbar()
+                
+                
+                Button {
+                    viewModel.deleteAllBookmarks()
+                } label: {
+                    Text("Delete All".localized(language))
+                }
+                .offset(x: 130, y: 30)
+            }
             Spacer()
             if viewModel.bookmarks.isEmpty {
                 emptyStateView()
+                
             } else {
                 bookmarksListView()
             }
@@ -71,8 +75,12 @@ extension BookmarkView {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: Drawing.iconSize, height: Drawing.iconSize)
+                
             }
+//            Text("You haven't saved any articles yet. Start reading and bookmarking them now".localized(language))
+//                frame(width: 256, height: 72)
         }
+        .background(.newsBackground)
     }
     
     // MARK: Bookmarks List View
@@ -82,8 +90,10 @@ extension BookmarkView {
                 bookmarkNavigationLink(for: article)
             }
             .onDelete(perform: deleteBookmark)
+            .listRowBackground(Color.newsBackground)
         }
         .listStyle(PlainListStyle())
+     
     }
     
     // MARK: Bookmark Deletion
