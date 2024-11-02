@@ -43,7 +43,7 @@ struct MainView: View {
                 await viewModel.fetchRecomendedNews(ignoreCache: true)
             }
             .navigationBarHidden(true)
-            .background(.background)
+            .background(.newsBackground)
             .ignoresSafeArea()
         } else {
             SearchNewsView(

@@ -23,7 +23,7 @@ final class ProfileViewModel: ObservableObject {
     }
     
     private let router: StartRouter
-    private let authManager = FirebaseManager.shared
+    private let firebaseManager = FirebaseManager.shared
     
     // MARK: Initialization
     init(router: StartRouter) {
@@ -33,7 +33,7 @@ final class ProfileViewModel: ObservableObject {
     func fetchUserData() {
         Task {
             do {
-                user = try await authManager.getUserData()
+                user = try await firebaseManager.getUserData()
                 selectedAvatar = user?.userImage ?? "chinatown"
             } catch {
                 print("Error fetching user data: \(error)")
@@ -43,7 +43,7 @@ final class ProfileViewModel: ObservableObject {
     
     func updateUserImage() async {
         do {
-            try await authManager.saveUserImageName(userImageName: selectedAvatar)
+            try await firebaseManager.saveUserImageName(userImageName: selectedAvatar)
         } catch {
             print("Error updating user image: \(error)")
         }
@@ -58,7 +58,7 @@ final class ProfileViewModel: ObservableObject {
     
     func logOut() async {
         do {
-            try await authManager.signOut()
+            try await firebaseManager.signOut()
             openApp()
         } catch {
             print(error)

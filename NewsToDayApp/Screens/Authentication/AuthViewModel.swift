@@ -18,20 +18,20 @@ enum AuthError: LocalizedError, Equatable {
     case customError(message: String)
     
     static func == (lhs: AuthError, rhs: AuthError) -> Bool {
-            switch (lhs, rhs) {
-            case (.validationError, .validationError),
-                 (.validationSignUpError, .validationSignUpError),
-                 (.signUpSuccess, .signUpSuccess):
-                return true
-            case (.signInError, .signInError),
-                 (.signUpError, .signUpError):
-                return true 
-            case (.customError(let lhsMessage), .customError(let rhsMessage)):
-                return lhsMessage == rhsMessage
-            default:
-                return false
-            }
+        switch (lhs, rhs) {
+        case (.validationError, .validationError),
+            (.validationSignUpError, .validationSignUpError),
+            (.signUpSuccess, .signUpSuccess):
+            return true
+        case (.signInError, .signInError),
+            (.signUpError, .signUpError):
+            return true
+        case (.customError(let lhsMessage), .customError(let rhsMessage)):
+            return lhsMessage == rhsMessage
+        default:
+            return false
         }
+    }
     
     var failureReason: String? {
         switch self {
@@ -84,18 +84,18 @@ final class AuthViewModel: ObservableObject {
     var formIsValid: Bool {
         return !email.isEmpty && !password.isEmpty && password.count >= 6 && !password.contains(" ")
     }
-
+    
     var signUpFormIsValid: Bool {
         return !email.isEmpty &&
-               !password.isEmpty &&
-               password.count >= 6 &&
-               password == reEnterPassword &&
-               !userName.isEmpty &&
-               !password.contains(" ") &&
-               !email.contains(" ")
+        !password.isEmpty &&
+        password.count >= 6 &&
+        password == reEnterPassword &&
+        !userName.isEmpty &&
+        !password.contains(" ") &&
+        !email.contains(" ")
     }
     
-
+    
     
     // MARK: Initialization
     init(router: StartRouter) {
@@ -112,14 +112,12 @@ final class AuthViewModel: ObservableObject {
             return
         }
         isLoading = true
-        
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
-            self?.isLoading = false
-            
-            if let error = error {
-                self?.authError = .signInError(error: error)
-            } else {
-                self?.userAuthenticated()
+        Task {
+            do {
+                try await firebaseManager.signInUser(email: email, password: password)
+                self.userAuthenticated()
+            } catch {
+                self.authError = .signInError(error: error)
             }
         }
     }
@@ -131,9 +129,7 @@ final class AuthViewModel: ObservableObject {
         }
         Task {
             do {
-                let authResult = try await firebaseManager.createUser(email: email, password: password)
-                let user = UserModel(id: authResult.uid, userName: userName, email: email)
-                await saveUserData(userModel: user)
+                let _ = try await firebaseManager.createAndSaveUser(email: email, password: password, userName: userName)
                 await MainActor.run { authError = .signUpSuccess }
             } catch {
                 await MainActor.run { authError = .signUpError(error: error) }
@@ -141,15 +137,7 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
-    private func saveUserData(userModel: UserModel) async {
-        do {
-            try await firebaseManager.saveUserData(userId: userModel.id, name: userModel.userName, email: userModel.email, userImageName: nil)
-        } catch {
-            authError = .customError(message: error.localizedDescription)
-        }
-    }
     
-
     //MARK: - NavigationState
     func userAuthenticated() {
         router.updateRouterState(with: .userAuthorized)

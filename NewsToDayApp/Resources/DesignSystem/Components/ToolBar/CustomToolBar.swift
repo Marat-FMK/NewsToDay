@@ -29,7 +29,7 @@ struct CustomToolBar: View {
         }
         .padding(.top, 72)
         .padding(.horizontal)
-        .background(.background)
+        .background(.newsBackground)
     }
 }
 

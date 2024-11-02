@@ -8,6 +8,19 @@
 import SwiftUI
 
 extension Color {
+    static func background(for mode: ThemeMode) -> Color {
+        switch mode {
+        case .light:
+            return DS.Colors.backgroundLight
+        case .dark:
+            return DS.Colors.backgroundDark
+        default:
+            return Color(UIColor.systemBackground)
+        }
+    }
+}
+
+extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0

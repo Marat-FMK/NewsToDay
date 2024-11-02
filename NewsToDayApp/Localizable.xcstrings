@@ -125,6 +125,9 @@
         }
       }
     },
+    "Dark" : {
+
+    },
     "Delete All" : {
       "localizations" : {
         "ru" : {
@@ -279,6 +282,9 @@
           }
         }
       }
+    },
+    "Light" : {
+
     },
     "Loading news" : {
       "extractionState" : "manual",
@@ -588,6 +594,9 @@
       }
     },
     "Success" : {
+
+    },
+    "System" : {
 
     },
     "technology" : {
