@@ -20,6 +20,7 @@ struct NewsToDayAppApp: App {
         WindowGroup {
             StartRouterView()
                 .preferredColorScheme(themeManager.userTheme.colorScheme)
+               
         }
     }
 }

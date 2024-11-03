@@ -24,8 +24,6 @@ struct BookmarkView: View {
         VStack {
             ZStack {
                 setupToolbar()
-                
-                
                 Button {
                     viewModel.deleteAllBookmarks()
                 } label: {

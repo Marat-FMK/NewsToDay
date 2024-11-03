@@ -6,15 +6,13 @@
 //
 import SwiftUI
 
-
-
 enum ThemeMode: String {
     case system, light, dark
     
     var colorScheme: ColorScheme? {
         switch self {
         case .system:
-            return nil
+            return .none
         case .light:
             return .light
         case .dark:
