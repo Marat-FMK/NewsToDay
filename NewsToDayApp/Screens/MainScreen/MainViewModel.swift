@@ -210,7 +210,9 @@ final class MainViewModel: ObservableObject {
     
     private func fetchAllArticlesFromAPI() async throws -> [ArticleDTO] {
         let countriesString = countries.map { $0.rawValue }.joined(separator: ",")
-        let allArticles = try await newsAPIManager.getTopNews(with: countriesString)?.results ?? []
+        let  categoriesString = categories.map { $0.rawValue }.joined(separator: ",")
+        
+        let allArticles = try await newsAPIManager.getTopNews(with: countriesString, categoriesString)?.results ?? []
         await cache.setValue(allArticles, forKey: "recomendedNews")
         try? await cache.saveToDisk()
         return allArticles

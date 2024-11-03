@@ -10,7 +10,7 @@ import Foundation
 // MARK: - NewsAPISpec Enum
 enum NewsAPISpec: APISpec {
     case getCategoryNews(country: String, category: String)
-    case getTopNewsFor(country: String)
+    case getTopNewsFor(country: String, category: String)
     case getNewsWith(searchText: String)
     
     // MARK: - Base URL Path
@@ -31,9 +31,10 @@ enum NewsAPISpec: APISpec {
                 URLQueryItem(name: "country", value: country),
                 URLQueryItem(name: "category", value: category)
             ]
-        case .getTopNewsFor(let country):
+        case .getTopNewsFor(let country, let category):
             return [
                 URLQueryItem(name: "country", value: country),
+                URLQueryItem(name: "category", value: category)
             ]
         case .getNewsWith(let searchText):
             return [

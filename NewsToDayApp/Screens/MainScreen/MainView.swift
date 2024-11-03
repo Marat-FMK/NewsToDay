@@ -39,8 +39,8 @@ struct MainView: View {
             }
             .onAppear(perform: viewModel.loadCategories)
             .task {
-                await viewModel.fetchCategoryNews()
-                await viewModel.fetchRecomendedNews()
+                await viewModel.fetchCategoryNews(ignoreCache: true)
+                await viewModel.fetchRecomendedNews(ignoreCache: true)
             }
             .navigationBarHidden(true)
             .background(.newsBackground)

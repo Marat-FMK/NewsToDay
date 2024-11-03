@@ -8,5 +8,12 @@
 		<string>Inter-Regular.otf</string>
 		<string>Inter-Medium.otf</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>LaunchScreenColor</string>
+		<key>UIImageName</key>
+		<string>LaunchScreen</string>
+	</dict>
 </dict>
 </plist>
