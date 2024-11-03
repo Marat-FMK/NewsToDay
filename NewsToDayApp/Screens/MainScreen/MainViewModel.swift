@@ -24,20 +24,6 @@ enum Country: String, CaseIterable {
     case au  // Австралия
 }
 
-enum DisplayOrderType: CaseIterable {
-    case alphabetical
-    case favoriteFirst
-    
-    var name: String {
-        switch self {
-        case .alphabetical:
-            return "Alphabetical"
-        case .favoriteFirst:
-            return "Favorite First"
-        }
-    }
-}
-
 @MainActor
 final class MainViewModel: ObservableObject {
     @Published var categoryNewsPhase: DataFetchPhase<[ArticleDTO]> = .empty
@@ -49,9 +35,9 @@ final class MainViewModel: ObservableObject {
     
     @Published var fetchTaskToken: FetchTaskToken
     @Published var errorMessage: String? = nil
-    @Published var selectedOrder: DisplayOrderType = .alphabetical
     @Published var searchText: String = ""
     @Published var categories: [Categories] = []
+    
     @Published var selectedCategory: Categories = .top {
         didSet {
             Task {
@@ -67,30 +53,11 @@ final class MainViewModel: ObservableObject {
     
     private let timeIntervalForUpdateCache: TimeInterval = 7 * 24 * 60 * 60
     private let cache: DiskCache<[ArticleDTO]>
-    private let country: Country = .gb
+    private let countries: [Country] = [.gb, .us, .ru, .fr, .cn]
     
-    private var lastSortedOrder: DisplayOrderType?
-    private var lastSortedArticles: [ArticleDTO]?
+
     
     // MARK: - Computed Properties
-    private var sortedArticles: [ArticleDTO] {
-        guard let articles = categoryNewsPhase.value else { return [] }
-//        if selectedOrder == lastSortedOrder, let lastSorted = lastSortedArticles {
-//            return lastSorted
-//        } //fix logic
-        let sorted = articles.sorted {
-            switch selectedOrder {
-            case .alphabetical:
-                return $0.title < $1.title
-            case .favoriteFirst:
-                return $0.title < $1.title
-            }
-        }
-        lastSortedOrder = selectedOrder
-        lastSortedArticles = sorted
-        return sorted
-    }
-    
     private var filteredArticles: [ArticleDTO] {
         guard let articles = recomendedNewsPhase.value else { return [] }
         
@@ -150,9 +117,8 @@ final class MainViewModel: ObservableObject {
     }
     
     // MARK: - API Methods
-    func getCategoryNews() -> [ArticleDTO] {
-        sortedArticles.filter{$0.category == [selectedCategory.rawValue]} 
-    }
+    func getCategoryNews() -> [ArticleDTO] { categoryNewsPhase.value ?? [] }
+    
     func getRecomendedNews() -> [ArticleDTO] { filteredArticles }
     func getSearshResult() -> [ArticleDTO] { searshNewsResultsPhase.value ?? [] }
     
@@ -235,14 +201,18 @@ final class MainViewModel: ObservableObject {
     }
     
     private func fetchCategoryArticlesFromAPI() async throws -> [ArticleDTO] {
-        let articles = try await newsAPIManager.getNews(with: country.rawValue, selectedCategory.rawValue)?.results ?? []
+        let countriesString = countries.map { $0.rawValue }.joined(separator: ",")
+        let articles = try await newsAPIManager.getNews(with: countriesString, selectedCategory.rawValue)?.results ?? []
         await cache.setValue(articles, forKey: selectedCategory.rawValue)
         try? await cache.saveToDisk()
         return articles
     }
     
     private func fetchAllArticlesFromAPI() async throws -> [ArticleDTO] {
-        let allArticles = try await newsAPIManager.getTopNews(with: country.rawValue)?.results ?? []
+        let countriesString = countries.map { $0.rawValue }.joined(separator: ",")
+        let  categoriesString = categories.map { $0.rawValue }.joined(separator: ",")
+        
+        let allArticles = try await newsAPIManager.getTopNews(with: countriesString, categoriesString)?.results ?? []
         await cache.setValue(allArticles, forKey: "recomendedNews")
         try? await cache.saveToDisk()
         return allArticles
