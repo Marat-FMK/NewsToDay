@@ -176,6 +176,7 @@ final class MainViewModel: ObservableObject {
         if categories.isEmpty {
             categories.append(.health)
         }
+        selectedCategory = categories.first ?? .health
     }
     
     // MARK: - Fetch News with Search
@@ -210,7 +211,8 @@ final class MainViewModel: ObservableObject {
     
     private func fetchAllArticlesFromAPI() async throws -> [ArticleDTO] {
         let countriesString = countries.map { $0.rawValue }.joined(separator: ",")
-        let  categoriesString = categories.map { $0.rawValue }.joined(separator: ",")
+        let maxCategoriesCount = 5
+        let categoriesString = categories.prefix(maxCategoriesCount).map { $0.rawValue }.joined(separator: ",")
         
         let allArticles = try await newsAPIManager.getTopNews(with: countriesString, categoriesString)?.results ?? []
         await cache.setValue(allArticles, forKey: "recomendedNews")

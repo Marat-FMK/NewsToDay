@@ -47,12 +47,12 @@ struct CategoryCell: View {
                 .matchedGeometryEffect(id: "categoryBackground", in: namespace)
         } else {
             RoundedRectangle(cornerRadius: Drawing.selectedCornerRadius)
-                .fill(DS.Colors.grayLight)
+                .fill(Color.buttonBackground)
                 .matchedGeometryEffect(id: "categoryBackground", in: namespace)
         }
     }
     
     private func foregroundColor(for category: Categories) -> Color {
-        selected == category ? DS.Colors.purpleLighter : DS.Colors.grayDark
+        selected == category ? DS.Colors.purpleLighter : Color.newsSystemBackground
     }
 }

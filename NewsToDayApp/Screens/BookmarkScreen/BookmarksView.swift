@@ -73,10 +73,15 @@ extension BookmarkView {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: Drawing.iconSize, height: Drawing.iconSize)
+                    .foregroundStyle(.newsText)
                 
             }
-//            Text("You haven't saved any articles yet. Start reading and bookmarking them now".localized(language))
-//                frame(width: 256, height: 72)
+            Text("You haven't saved any articles yet. Start reading and bookmarking them now".localized(language))
+                .multilineTextAlignment(.center)
+                .foregroundStyle(.newsText)
+                .font(.interSemiBold(16))
+                .padding(.horizontal, 30)
+
         }
         .background(.newsBackground)
     }
